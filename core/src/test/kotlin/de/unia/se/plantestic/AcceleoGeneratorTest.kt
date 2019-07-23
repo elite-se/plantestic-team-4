@@ -1,4 +1,4 @@
-package de.unia.se.mdd
+package de.unia.se.plantestic
 
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.google.common.io.Resources
@@ -75,7 +75,7 @@ class AcceleoGeneratorTest : StringSpec({
         printCode(outputFolder)
     }
 
-    "Acceleo generation produces valid Java code for complex hello" {
+    /*"Acceleo generation produces valid Java code for complex hello" {
         MetaModelSetup.doSetup()
 
         val pumlInputModelURI = URI.createFileURI(COMPLEX_HELLO_INPUT_PATH)
@@ -86,7 +86,7 @@ class AcceleoGeneratorTest : StringSpec({
 
         // Now compile the resulting code
         Reflect.compile("com.mdd.test.Test", File("$OUTPUT_PATH/complex_hello_puml.java").readText()).create(COMPLEX_HELLO_CONFIG_PATH)
-    }
+    }*/
 
     "Acceleo generation test receives request on mock server for the complex hello".config(enabled = false) {
         val body = """{
