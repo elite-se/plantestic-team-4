@@ -277,6 +277,13 @@ Example: ```(name1 : "/value/value1", name2 : "/value2")```
 ### Output expectation
 The generated test cases are in `<path/to/sequence/diagram/generatedCode/<diagramName>.java>`.
 
+## Limitations
+- When actor A sends actor B a request, Plantestic expects actor B to send actor A a response. 
+    Actors A and B must be different actors.
+- Plantestic neither supports options nor loops.
+- Plantestic can handle alternatives as long as they are not nested.
+- We only support authenticated requests with username and password.
+
 ## Credits
 ### Contributors 
 - [Stefan Grafberger](https://github.com/stefan-grafberger) *
