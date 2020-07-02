@@ -13,11 +13,11 @@ Farmer     Garden      Plant
 
 
 POST garden/plant/{plant_type} --> Response {plantid}
-POST framer/grown/{plantid} --> Response {ok}
+POST farmer/grown/{plantid} --> Response {ok}
 
 GET garden/seeds --> Response {number_of_seeds}
 GET plant/season/{plant_type} --> Response {season}
 GET plant/timetogrow/{plant_type} --> Response {timetogrow}
 
 -- Domain Knowledge
-GET framer/storage/{plant_type} --> Response {number_of_grown_plants}
+GET farmer/storage/{plant_type} --> Response {number_of_grown_plants}
