@@ -1,0 +1,38 @@
+@startuml
+
+participant "Farmer" as FA
+participant "Garden" as GA
+participant "Plant" as PL
+
+activate FA
+
+FA -> GA : POST "garden/plant/kaktus"
+activate GA
+GA -> FA : 200 - (plantId : "1")
+
+GA -> PL: GET "plant/timetogrow/kaktus"
+activate PL
+PL -> GA: 200 - (timetogrow: 90)
+deactivate PL
+
+FA -> GA : POST "garden/plant/palme"
+activate GA
+GA -> FA : 200 - (plantId : "2")
+
+GA -> PL: GET "plant/timetogrow/palme"
+activate PL
+PL -> GA: 200 - (timetogrow: 120)
+deactivate PL
+
+
+GA -> FA: POST "farmer/grown/kaktus"
+FA -> GA: 200
+deactivate GA
+
+GA -> FA: POST "farmer/grown/palme"
+FA -> GA: 200
+deactivate GA
+
+deactivate FA
+
+@enduml
