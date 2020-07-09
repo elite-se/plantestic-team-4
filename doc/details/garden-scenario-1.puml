@@ -1,0 +1,32 @@
+@startuml
+
+participant "Farmer" as FA
+participant "Garden" as GA
+participant "Plant" as PL
+
+activate FA
+
+FA -> GA : POST "garden/plant/${plantType}"
+activate GA
+GA -> FA : 200 - (plantId : "1")
+
+GA -> PL : GET "plant/season/{plantType}"
+activate PL
+PL -> GA : 200 - (season: "summer")
+deactivate PL
+
+FA -> GA: GET "garden/seeds/{plantType}"
+GA -> FA: 200 - (numberOfSeeds: 2)
+
+GA -> PL: GET "plant/timetogrow/{plantType}"
+activate PL
+PL -> GA: 200 - (timetogrow: 90)
+deactivate PL
+
+GA -> FA: POST "farmer/grown/{plantId}"
+FA -> GA: 200
+
+deactivate GA
+deactivate FA
+
+@enduml
