@@ -119,7 +119,7 @@ Take the following test case generation from a minimal sequence diagram as an ex
 
 ![./core/src/test/resources/minimal_hello.png](./core/src/test/resources/minimal_hello.png)
 
-2. In the Plantestic console, call `./gradlew run --args="--input=./core/src/test/resources/minimal_hello.puml"`.
+2. In the Plantestic console, call `./gradlew run --args="--input=./src/test/resources/minimal_hello.puml"`.
 This will generate test cases for the provided diagram.
 
 3. You will find the test case in the Plantestic project under `./core/build/resources/main/code-generation/generatedCode/minimal_hello_puml.java`:
