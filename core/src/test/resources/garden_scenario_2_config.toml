@@ -2,6 +2,12 @@ id = '123'
 testCondition = '"SomeValue"'
 plantType = '1'
 
+[ASYNC]
+	[1]
+		timeout = 500
+		request = 'GET /farmer/storage/${plantType}'
+		response = '200 - (plantId5: '/plantId')'
+
 [FA]
     username = 'Test'
     password = 'password'

@@ -6,7 +6,7 @@ participant "Plant" as PL
 
 activate FA
 
-FA -> GA : POST "garden/plant/0"
+FA -> GA : POST#1 "garden/plant/0"
 activate GA
 GA -> FA : 200 - (plantId1 : "plantId", plantType1 : "plantType")
 
@@ -15,7 +15,7 @@ activate PL
 PL -> GA : 200 - (timetogrow1 : "timetogrow")
 deactivate PL
 
-FA -> GA : POST "garden/plant/1"
+FA -> GA :  POST "garden/plant/1"
 activate GA
 GA -> FA : 200 - (plantId2 : "plantId", plantType2 : "plantType")
 
@@ -25,11 +25,11 @@ PL -> GA : 200 - (timetogrow2 : "timetogrow")
 deactivate PL
 
 
-GA -> FA : POST "farmer/grown/0"
+GA -> FA : ? POST "farmer/grown/0"
 FA -> GA : 200
 deactivate GA
 
-GA -> FA : POST "farmer/grown/1"
+GA -> FA : ? POST "farmer/grown/1"
 FA -> GA : 200
 deactivate GA
 
