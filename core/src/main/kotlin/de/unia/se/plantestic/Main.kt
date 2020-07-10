@@ -4,7 +4,10 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
+import edu.uoc.som.openapi2.io.OpenAPI2Importer
+import edu.uoc.som.openapi2.io.model.SerializationFormat
 import java.io.File
+import java.net.URL
 
 object Main {
 
@@ -73,7 +76,8 @@ object Main {
         |
         |This software is licensed under Apache 2.0 license and was developed by 
         |Andreas Zimmerer, Stefan Grafberger, Fiona Guerin, Daniela Neupert and Michelle Martin.
-        """.trimMargin()) {
+        """.trimMargin()
+    ) {
 
         private val input: String by option(help = "Path to the PlantUML file containing the API specification.")
             .required()
@@ -89,7 +93,12 @@ object Main {
                 return
             }
 
+            val api = OpenAPI2Importer().createOpenAPI2ModelFromURL(
+                "http://localhost:8080/swagger.json", SerializationFormat.JSON
+            )
+
             runTransformationPipeline(inputFile, outputFolder)
+
         }
     }
 

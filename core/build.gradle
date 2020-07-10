@@ -12,6 +12,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.19"
+        classpath "edu.uoc.som.openapi2:edu.uoc.som.openapi2.io:2.2.1-SNAPSHOT"
+        classpath "edu.uoc.som.openapi2:edu.uoc.som.openapi2.mm:2.2.1-SNAPSHOT"
     }
 }
 
@@ -73,6 +75,9 @@ dependencies {
     implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.15.0"
     implementation "com.google.guava:guava:28.0-jre"
     implementation "com.github.ajalt:clikt:2.2.0"
+    api "com.google.code.gson:gson:2.7"
+    api "commons-io:commons-io:2.6"
+    api "com.networknt:json-schema-validator:1.0.42"
 
     // Making qvt work without Eclipse
     implementation "org.eclipse.emf:org.eclipse.emf.common:2.15.0"
@@ -99,6 +104,7 @@ dependencies {
     implementation "org.eclipse.platform:org.eclipse.core.runtime:3.15.200"
     implementation "org.apache.ant:ant:1.8.2"
     implementation "edu.uoc.som.openapi2:edu.uoc.som.openapi2.io:2.2.1-SNAPSHOT"
+    implementation "edu.uoc.som.openapi2:edu.uoc.som.openapi2.mm:2.2.1-SNAPSHOT"
 
 
     implementation project(":plantuml")

@@ -68,6 +68,7 @@ You can find Java SE Development Kit 8 under the website [https://www.oracle.com
 4. Run `git submodule init` and `git submodule update` (or similar)
 5. Install maven (if not already installed)
 6. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.io` and run `mvn install`.
+7. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.mm` and run `mvn install`.
 7. Run `./gradlew build`.
 
 ## How to use
