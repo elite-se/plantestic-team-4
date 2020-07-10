@@ -3,6 +3,7 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        mavenLocal()
         google()
         gradlePluginPortal()
     }
@@ -47,6 +48,7 @@ repositories {
     jcenter()
     google()
     mavenCentral()
+    mavenLocal()
 
     // Most qvt-related packages are hosted on WSO2:
     maven { url "https://maven.wso2.org/nexus/content/groups/wso2-public/" }
@@ -96,6 +98,8 @@ dependencies {
     implementation "org.eclipse.acceleo:org.eclipse.acceleo.model:3.5.1.201409021433"
     implementation "org.eclipse.platform:org.eclipse.core.runtime:3.15.200"
     implementation "org.apache.ant:ant:1.8.2"
+    implementation "edu.uoc.som.openapi2:edu.uoc.som.openapi2.io:2.2.1-SNAPSHOT"
+
 
     implementation project(":plantuml")
 
