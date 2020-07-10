@@ -169,13 +169,22 @@ definitions:
     example:
       seeds: 42
   inline_response_200_1:
-    type: "object"
+    type: object
     properties:
       season:
-        type: "string"
-        example: "spring"
-    example:
-      season: "spring"
+        type: string
+        example: spring
+      foo:
+        #required:
+         # - bar
+        type: object
+        properties:
+          bar:
+            type: string
+            example: "bar"
+    required:
+      - season
+      - foo
   inline_response_200_2:
     type: "object"
     properties:
