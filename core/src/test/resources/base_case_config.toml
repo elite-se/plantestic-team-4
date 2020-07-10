@@ -1,0 +1,18 @@
+id = "123"
+eventId = "645"
+vin = "987"
+
+[VM]
+    username = "Test"
+    password = "password"
+    path = "/Voicemanager"
+
+[CRS]
+    username = "Test"
+    password = "password"
+    path = "/CRS"
+
+[CCC]
+    username = "Test"
+    password = "password"
+    path = "/CCC"

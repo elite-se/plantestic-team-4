@@ -2,20 +2,25 @@
 autonumber
 
 activate CCC
-CCC -> XCS: POST "/xcs/vin/${vin}" (CCCTarget: "${CCCTarget}", ServiceType: "BCALL")
-
+CCC -> XCS : POST "/xcs/vin/${vin}" (CCCTarget : "${CCCTarget}", ServiceType: "BCALL")
 activate XCS
-CCC <- XCS: 200 - (eventId: "/eventId")
+CCC <- XCS : 200 - (eventId : "/eventId")
 XCS -> SVDS: GET "svds/vehicle/internal/v2/${vin}"
-
 activate SVDS
-XCS <-- SVDS: 200 - (marketRegion: "/marketRegion")
 
-CCC <- XCS: POST "${CCCTarget}/xcs/v1/eventUpdated" (eventId : "${eventId}", xcs event data: "${xcsEventData}")
-deactivate CCC
-
-XCS -> SVDS: GET "svds/vehicle/internal/v2/${vin}"
-XCS <-- SVDS: 200 - (marketRegion: "/marketRegion")
+XCS <-- SVDS : 200 - (marketRegion : "/marketRegion")
 deactivate SVDS
 deactivate XCS
+
+CCC <- XCS : POST "${CCCTarget}/xcs/v1/eventUpdated" (eventId : "${eventId}", xcs event data : "${xcsEventData}")
+deactivate CCC
+activate XCS
+
+XCS -> SVDS : GET "svds/vehicle/internal/v2/${vin}"
+activate SVDS
+XCS <-- SVDS : 200 - (marketRegion : "/marketRegion")
+deactivate SVDS
+
+deactivate XCS
+deactivate CCC
 @enduml
