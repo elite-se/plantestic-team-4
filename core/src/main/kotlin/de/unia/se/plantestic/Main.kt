@@ -93,10 +93,6 @@ object Main {
                 return
             }
 
-            val api = OpenAPI2Importer().createOpenAPI2ModelFromURL(
-                "http://localhost:8080/swagger.json", SerializationFormat.JSON
-            )
-
             runTransformationPipeline(inputFile, outputFolder)
 
         }
@@ -106,12 +102,14 @@ object Main {
         MetaModelSetup.doSetup()
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
+        val openAPI = OpenAPIParser.generateModel(File.createTempFile("empty", "txt"))
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
         val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModel)
+        val popRestAssuredModel = M2MTransformer.mergeRestAssuredOpenApi(restAssuredModel, openAPI)
 
         println("Generating code into $outputFolder")
-        AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
+        AcceleoCodeGenerator.generateCode(popRestAssuredModel, outputFolder)
     }
 
     @JvmStatic

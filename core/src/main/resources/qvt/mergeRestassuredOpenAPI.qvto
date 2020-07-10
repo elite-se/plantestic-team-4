@@ -1,0 +1,67 @@
+modeltype restassured "strict" uses RestAssured('http://www.example.org/RestAssured');
+modeltype openapi "strict" uses openapi2('http://som.uoc.edu/openapi/2.0.0');
+
+transformation mergeRAOpenAPI(in input: restassured, in inputapi: openapi, out output: restassured);
+
+main() {
+log('Started populating Restassured with OpenAPI data');
+
+    assert fatal ( input.rootObjects()[TestScenario]->size() = 1 )
+                with log('Input does not contain exactly one TestScenario');
+
+    assert fatal ( inputapi.rootObjects()[API]->size() = 1 )
+                with log('Input does not contain exactly one API');
+                
+    var rootApi := inputapi.rootObjects()[API]->asSequence()->first();
+
+    input.rootObjects()[TestScenario].map populate(rootApi);
+}
+
+mapping TestScenario::populate(rootApi: API) : TestScenario {
+	log('Transforming Testscenario');
+	
+	testScenarioName := self.testScenarioName;
+	testroundtrip := self.testroundtrip -> map roundtrip2testRoundtrip(rootApi);
+	
+}
+
+ mapping TestRoundtrip::roundtrip2testRoundtrip(rootApi: API): TestRoundtrip {
+     log('Transforming Roundtrip to TestRoundtrip');
+
+     testRoundtripName := self.testRoundtripName;
+
+     if(self.precondition != null) then {
+             precondition := self.precondition;
+     } endif;
+
+     rootApi.paths->forEach(path) {
+        log(path.relativePath);
+     };
+
+     
+     var paths := rootApi.paths->select(p|p.relativePath = self.requestspecification.url);
+     var operation := paths.getOperationByHTTPMethod(self.requestspecification.method);
+     
+     assert fatal ( operation != null )
+                with log('Could not find operation ' + self.requestspecification.url + ' in Swagger Api');
+     
+     requestspecification := self.requestspecification; 
+     responsespecification := self.responsespecification; // .map populateresponseSpecification(self.requestspecification);
+}
+
+
+mapping ResponseSpecification::populateresponseSpecification(req: RequestSpecification): ResponseSpecification {
+     log('Transforming HTTPResponse to ResponseSpecification');
+
+     responsedatum := self.responsedatum;
+	 bodymatchergroup := self.bodymatchergroup .map populateBodyMatcherGroup();
+}
+
+mapping BodyMatcherGroup::populateBodyMatcherGroup() : BodyMatcherGroup {
+	self.bodymatcher->forEach(bodymatcher) {
+		bodymatcher.matcher
+	}
+}
+mapping BodyMatcher::populateBodyMatcher(): BodyMatcher {
+	
+}

@@ -12,11 +12,14 @@ object MetaModelSetup {
         URI.createURI(Resources.getResource("metamodels/reqrespairs/RequestResponsePairs.ecore").toExternalForm())
     private val REST_ASSURED_METAMODEL_URI =
         URI.createURI(Resources.getResource("metamodels/restassured/RestAssured.ecore").toExternalForm())
+    private val OPENAPI_METAMODEL_URI =
+        URI.createURI(Resources.getResource("metamodels/openapi/openapi2.ecore").toExternalForm())
 
     fun doSetup() {
         PumlStandaloneSetup.doSetup()
         registerMetamodelFromEcoreFile(REQUEST_RESPONSE_PAIRS_METAMODEL_URI)
         registerMetamodelFromEcoreFile(REST_ASSURED_METAMODEL_URI)
+        registerMetamodelFromEcoreFile(OPENAPI_METAMODEL_URI)
     }
 
     private fun registerMetamodelFromEcoreFile(uri: URI) {
