@@ -8,7 +8,7 @@ activate FA
 
 FA -> GA : POST "garden/plant/${plantType}"
 activate GA
-GA -> FA : 200 - (plantId : "1")
+GA -> FA : 200 - (plantId : $plantId)
 
 GA -> PL : GET "plant/season/{plantType}"
 activate PL
@@ -23,7 +23,7 @@ activate PL
 PL -> GA: 200 - (timetogrow: 90)
 deactivate PL
 
-GA -> FA: POST "farmer/grown/{plantId}"
+GA -> FA: POST "farmer/grown" (plantId: $plantId)
 FA -> GA: 200
 
 deactivate GA
