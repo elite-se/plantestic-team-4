@@ -344,30 +344,7 @@ class SequenceDiagramTest {
 		assertEquals("lol", ((heros.umlDiagrams.head as SequenceUml).umlElements.get(7) as UmlUse).userTwo.name)
 	}
 
-	@Test def void testComponent() {
-		val heros = '''
-			COMPONENT @startuml
-			[ABC] AS A
-			[DEF] AS B
-			(A KI) AS C
-			A <-[#blue]- B : abch acd
-			B -d- A : ?
-			C -[#blue]r-> A : xyz
-			@enduml
-		'''.parse
-		assertEquals("A", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(0) as Component).name)
-		assertEquals("KI", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(2) as Interface).nameExtension.get(0))
-		
-		assertEquals("abch", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(3) as Link).text.get(0));
-		assertEquals(2, ((heros.umlDiagrams.head as ComponentUml).umlElements.get(3) as Link).text.length);
-		assertEquals("A", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(3) as Link).linkOne.name);
-		assertEquals("B", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(3) as Link).linkTwo.name);
-		
-		assertEquals("C", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(5) as Link).linkOne.name);
-		assertEquals("A", ((heros.umlDiagrams.head as ComponentUml).umlElements.get(5) as Link).linkTwo.name);
-		assertEquals(1, ((heros.umlDiagrams.head as ComponentUml).umlElements.get(5) as Link).text.length);
-	}
-
+	
 	@Test def void testRequest() {
 	    val request = '''
 	        SEQUENCE @startuml

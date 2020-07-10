@@ -1,0 +1,202 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a demo server for MDD.\n"
+  version: "1.0.0"
+  title: "Demo Garden"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/"
+tags:
+- name: "plant"
+  description: "The good green stuff."
+- name: "garden"
+  description: "A time to sow, a time to reap."
+- name: "farmer"
+  description: "wants a wife, somehow."
+schemes:
+- "https"
+- "http"
+paths:
+  /garden/plant/{plant_type}:
+    post:
+      tags:
+      - "garden"
+      summary: "Add a new plant to the Garden"
+      operationId: "add_plant"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "plant_type"
+        in: "path"
+        description: "The plant type to query"
+        required: true
+        type: "integer"
+      responses:
+        "201":
+          description: "created"
+          schema:
+            $ref: "#/definitions/Plant"
+        "405":
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.garden_controller"
+  /garden/seeds:
+    get:
+      tags:
+      - "garden"
+      summary: "Returns the number of seeded Plants"
+      operationId: "get_seeds"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        "400":
+          description: "Invalid status value"
+      x-swagger-router-controller: "swagger_server.controllers.garden_controller"
+  /plant/season/{plant_type}:
+    get:
+      tags:
+      - "plant"
+      summary: "Find the season the plant grows in"
+      operationId: "get_season_of_plant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "plant_type"
+        in: "path"
+        description: "The plant type to query"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        "400":
+          description: "Invalid tag value"
+      x-swagger-router-controller: "swagger_server.controllers.plant_controller"
+  /plant/timetogrow/{plant_type}:
+    get:
+      tags:
+      - "plant"
+      summary: "Get the time (in days) the plant needs to grow"
+      operationId: "get_time_to_grow_of_plant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "plant_type"
+        in: "path"
+        description: "The plant type to query"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        "400":
+          description: "Invalid tag value"
+      x-swagger-router-controller: "swagger_server.controllers.plant_controller"
+  /farmer/grown:
+    post:
+      tags:
+      - "farmer"
+      summary: "Tells the farmer a plant is ready to reap."
+      operationId: "notify_farmer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "plantId"
+        description: "ID of plant that is ready"
+        required: false
+        schema:
+          $ref: "#/definitions/plantId"
+      responses:
+        "200":
+          description: "ok"
+      x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
+  /farmer/storage/{plant_type}:
+    get:
+      tags:
+      - "farmer"
+      summary: "Returns the numer of Plants of plant_type that were reaped."
+      operationId: "get_plant_storage"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "plant_type"
+        in: "path"
+        description: "The plant type to query"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+      x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
+definitions:
+  Plant:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      plant_type:
+        type: "integer"
+        format: "int64"
+    description: "The Plant."
+    example:
+      id: 0
+      plant_type: 6
+  inline_response_200:
+    type: "object"
+    properties:
+      seeds:
+        type: "integer"
+        example: 42
+    example:
+      seeds: 42
+  inline_response_200_1:
+    type: "object"
+    properties:
+      season:
+        type: "string"
+        example: "spring"
+    example:
+      season: "spring"
+  inline_response_200_2:
+    type: "object"
+    properties:
+      ttgrow:
+        type: "integer"
+        example: 42
+    example:
+      ttgrow: 42
+  plantId:
+    type: "object"
+    required:
+    - "plantID"
+    properties:
+      plantID:
+        type: "integer"
+        format: "int64"
+  inline_response_200_3:
+    type: "object"
+    properties:
+      stored:
+        type: "integer"
+        format: "int64"
+    example:
+      stored: 0
