@@ -1,0 +1,12 @@
+id = '123'
+testCondition = '"SomeValue"'
+
+[GA]
+    username = 'Garden'
+    password = 'password'
+    path = '/garden'
+
+[PL]
+    username = 'Plant'
+    password = 'password'
+    path = '/plant'

@@ -1,9 +1,11 @@
 SEQUENCE @startuml
 
-PARTICIPANT "Garden" as GA
-PARTICIPANT "Plant" as PL
+PARTICIPANT GA
+PARTICIPANT PL
 
 GA -> PL : GET "/plant/season/1"
-PL -> GA : 200 - (season: "spring")
+activate PL
+PL -> GA : 200 - (season : "/season")
+deactivate PL
 
 @enduml

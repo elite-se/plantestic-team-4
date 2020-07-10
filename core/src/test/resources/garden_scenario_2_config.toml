@@ -1,0 +1,19 @@
+id = '123'
+testCondition = '"SomeValue"'
+plantType = '1'
+
+[FA]
+    username = 'Test'
+    password = 'password'
+    path = '/farmer'
+
+
+[GA]
+    username = 'Test'
+    password = 'password'
+    path = '/garden'
+
+[PL]
+    username = 'Test'
+    password = 'password'
+    path = '/plant'
