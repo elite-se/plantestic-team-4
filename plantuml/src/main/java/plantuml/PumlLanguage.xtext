@@ -84,7 +84,7 @@ QualifiedName:
 	{QualifiedName}
 	PUMLID;
 
-RequestResponse:
+RequestResponse returns RelevantMessage:
     Request | Response;
 
 Request returns RequestResponse:
@@ -189,19 +189,26 @@ Skinparam:
 SkinElement:
 	name=PUMLID value=(PUMLID | HEXCODE);
 
+Ignore returns RelevantMessage: 
+	{Ignore};
+
+RelevantMessage:
+	Ignore | RequestResponse
+;
+
 UseLeft returns UmlUse:
 	{UseLeft}
 	(userOne=[Participant|PUMLID] | '[')
 	associationArrow=ARROW
 	// ('o<-' | '<-o' | 'o<-o' | '<-' | 'o<--' | '<--o' | 'o<--o' | '<--' | 'x<-' | '<-x' | 'x<-x' | 'x<--' | '<--x' | 'x<--x')
-	userTwo=[Participant|PUMLID] (':' (content=RequestResponse | text+=(PUMLID)*))?;
+	userTwo=[Participant|PUMLID] (':' ('?' content=Ignore | (content=RequestResponse | text+=(PUMLID)*)))?;
 
 UseRight returns UmlUse:
 	{UseRight}
 	(userOne=[Participant|PUMLID])
 	associationArrow=ARROW
 	//('o->' | '->o' | 'o->o' | '->' | 'o-->' | '-->o' | 'o-->o' | '-->' | 'x->' | '->x' | 'x->x' | 'x-->' | '-->x' | 'x-->x')
-	(userTwo=[Participant|PUMLID] | ']') (':' (content=RequestResponse | text+=(PUMLID)*))?;
+	userTwo=[Participant|PUMLID] (':' ('?' content=Ignore | (content=RequestResponse | text+=(PUMLID)*)))?;
 
 UmlElementsContainer:
 	{UmlElementsContainer}

@@ -26,6 +26,12 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
         var sequenceElement : SequenceElement := umlElements->at(umlElementsIndex);
         if (sequenceElement.oclIsTypeOf(UseLeft)) {
             var useLeft : UseLeft := sequenceElement.oclAsType(UseLeft);
+            
+            if (useLeft.isToBeIgnored()) {
+            	umlElementsIndex := umlElementsIndex + 2;
+            	continue;	
+            };
+            
             var request : Request := useLeft.useLeft2request();
             var httpRequestElement : HttpRequest := request.request2httpRequest();
             httpRequestElement.receiver := useLeft.userTwo.name;
@@ -74,6 +80,11 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
         elif (sequenceElement.oclIsTypeOf(Alternative)) {
             var alternative : Alternative := sequenceElement.oclAsType(Alternative);
             var useLeft : UseLeft := alternative.umlElements->at(1).oclAsType(UseLeft);
+            
+            if (useLeft.isToBeIgnored()) {
+            	continue;
+            };
+            
             var request : Request := useLeft.useLeft2request();
             var httpRequestElement : HttpRequest := request.request2httpRequest();
 
@@ -123,19 +134,29 @@ mapping Else::flattenElse():Else {
 helper UseLeft::useLeft2response():Response {
     assert fatal ( self.content != null )
         with log ( 'UseLeft needs to contain content');
-    var requestresponse : RequestResponse := self.content;
-    assert fatal ( requestresponse.oclIsTypeOf(Response) )
+    var contentType : RelevantMessage := self.content;
+    
+    assert fatal ( contentType.oclIsTypeOf(Response) )
         with log ( 'Requestresponse needs to be a response');
-    return requestresponse.oclAsType(Response);
+    return contentType.oclAsType(Response);
 }
 
 helper UseLeft::useLeft2request():Request {
     assert fatal ( self.content != null )
         with log ( 'UseLeft needs to contain content');
-    var requestresponse : RequestResponse := self.content;
-    assert fatal ( requestresponse.oclIsTypeOf(Request) )
+    var contentType : RelevantMessage := self.content;
+    
+    assert fatal ( contentType.oclIsTypeOf(Request) )
         with log ( 'Requestresponse needs to be a request');
-    return requestresponse.oclAsType(Request);
+    return contentType.oclAsType(Request);
+}
+
+helper UseLeft::isToBeIgnored():Boolean {
+    assert fatal ( self.content != null )
+        with log ( 'UseLeft needs to contain content');
+    var contentType : RelevantMessage := self.content;
+    	
+    return contentType.oclIsTypeOf(Ignore) ;
 }
 
 helper generateRoundtrip(roundtripId : Integer, httpRequest : HttpRequest, httpResponse : HttpResponse):Roundtrip {
