@@ -61,11 +61,98 @@ You can pass parameters to your sequence diagram if you wish to customize its fl
 For example, you no longer need to reveal security-critical information such as passwords in your sequence diagram.
 Plantestic evaluates the parameters using templating.
 
+## New Features
+
+### Swagger based demo Server
+
+To run the Examples we included a demo server. It can be found in the `demo-server` folder.  
+
+### Ignore Requests
+
+It is now Possible to ignore a Request-Response Pair. This is done by adding a `?` before the `GET/POST`.  
+This is shown in the example `garden_scenario_2.puml`
+
+For this to work we extended the xtext grammer such that those Pairs get parsed differently.
+
+### Asynchronous Request Response Pairs
+
+It is now possible to have Asynchronous Request-Response Pairs as answer to a Request-Response pair.
+To illustrate this imagine the Following:
+
+We have a Request
+```puml
+A -> B : ["1"] POST /kickoff
+B -> A 200 ok
+... // Some time passes 
+B -> A ? POST /update (result: "async_update")
+A -> B 200 ok
+```
+
+We now want to test that A actually recieved the asynchronous update from B triggered by the initial POST.
+To do this properly some domain knowledge is required.
+
+**FOR THIS TO WORK YOU NEED TO HAVE TESTROUTES THAT CAN CHECK WHETHER AN UPDATE ARRIVED OR NOT.**
+
+Lets say we have a route `A/check_update` that returns 200 if and only if the asynchronous update
+has arrived. 
+We will now provide a compile time configuartion (default name: "test_case_name_compile_config.toml") that
+looks like this:
+```toml
+[1] # Has to be the same as the id assigned in the puml (but without the `"`) 
+    timeout = 500 #This configures how long we will wait for the call
+    requestMethod = 'GET'
+    requestURL = '/check_update'
+    requestParameters = [] # You can configure request parameters here (like the response Parameters)
+    responseStatus = 200
+    responseParameter = [['usefulLater', 'result']] # If the call returns some parameters you can collect them here
+```  
+If this file has the default name and resides in the same directory as the `.puml` file it will be 
+automatically detected. If not you have to provide the argument `"--config=<path-to-config>"` in the gradlew run args
+(`./gradlew run --args="--input=<path-to-input> --config=<path-to-config>`).
+
+This is achieved by a *very awesome* QVTo Model to Model Transformation that merges the additional Async Pairs with the existing ones.
+Also the xtext grammer was once again extended to include parsing of the Pair ids
+
+### Fixed: JSON Body Paths now get tested!
+
+During the integration of new Features we encountered an issue with the check of the existens of certain json paths:
+There were none.
+We fixed this by adapting adding a new Matcher to the test, that will check for the Path in the JSON.
+A Note to take here: **The `/` in the JSON xPath in the Diagramm will be replaced by `.`**. The first Leading `/` will be trimmed.
+
+### Swagger Integration
+
+It is now possible to include a swagger API time into the Model. To do this just provide the path or url in the 
+compile config:
+
+```toml
+# in file "test_scenario_compile_config.toml
+# ... Async Config etc. 
+
+[SWAGGER]
+    url= "localhost:8080/swagger.json"
+    json-path= "path/to/swagger.json"
+    yaml-path= "path/to/swagger.yaml"
+```
+
+If multiple options are available than the order in the example above corresponds to the priority which option will be taken.
+Again, the config file with the Swagger info will automatically be loaded if it follows the default naming convention and resides
+in the same directory.
+
+This integration is achieved by a *really cool* QVTo Model Merge, that integrates sources of the openapi Model into the 
+RestAssured model.
+ 
+### Misc
+
++ The Puml xtext grammer is now trimmed to only parse Sequence Diagrams.
++ There are new examples all under our **brand new** garden model. If you like plants at all be sure to check them out.
+
+
 ## Installation
-1. Install Java SE Development Kit 8 or higher.
+1. Install Java SE Development Kit 8 or higher. (It was tested with JDK11 and JDK8)
 You can find Java SE Development Kit 8 under the website [https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 2. Clone the Plantestic repository.
-3. Run `git submodule init` and `git submodule update` (or similar)
+3. Run `git submodule init` and `git submodule update`
 4. Install maven (if not already installed)
 5. Go to `openapi-metamodel/openapi2` and run `mvn install`.
 6. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.io` and run `mvn install`.
@@ -218,7 +305,7 @@ public class Test_minimal_hello {
 - We only support authenticated requests with username and password.
 
 ## Credits
-### Contributors
+### Original Contributors
 - [Stefan Grafberger](https://github.com/stefan-grafberger) *
 - [Fiona Guerin](https://github.com/FionaGuerin) *
 - [Michelle Martin](https://github.com/MichelleMar) *
@@ -227,7 +314,20 @@ public class Test_minimal_hello {
 
 \* contributed equally
 
+### Contributors Async-Swagful-Plantestic
+- [Julia Maria Brenner](https://github.com/JuliaMariaBr) *
+- [Christina Karle](https://github.com/ckaarle) *
+- [Michael Markl](https://github.com/schedulaar) *
+- [Henrik Wachowitz](https://github.com/ricffb) *
+
+\* contributed equally to the updates
+
 ### Repositories
+
+#### openapi-metamodel
+This repository is contained as a submodule. It provides the ecore Metamodel as well as an import function 
+that allows for parsing the swagger file into an UML Model.
+
 #### plantuml-eclipse-xtext
 The repository [plantuml-eclipse-xtext](https://github.com/Cooperate-Project/plantuml-eclipse-xtext) defines the grammar of PlantUML.
 We pass this grammar to Xtext.
@@ -247,6 +347,7 @@ From the paper [Grammar-based Program Generation Based on Model Finding](http://
 
 ## License
 Copyright [2019] [Stefan Grafberger, Fiona Guerin, Michelle Martin, Daniela Neupert, Andreas Zimmerer]
+Copyright New Features [2020] [Julia Brenner, Christina Karle, Michael Markl, Henrik Wachowitz]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
