@@ -1,13 +1,13 @@
 [1]
 	timeout = 500
 	requestMethod = 'GET'
-	requestURL = '/farmer/storage/${plantType}'
+	requestURL = '/farmer/hasplant/${plantId1}'
 	responseStatus = 200
-	responseParameter = [['plantId5', '/plantId']]
-	
+	responseParameter = []
+
 [2]
 	timeout = 1
 	requestMethod = 'GET'
-	requestURL = '/farmer/storage/${plantType}'
+	requestURL = '/farmer/hasplant/${plantId2}'
 	responseStatus = 200
-	responseParameter = [['plantId5', '/plantId']]
+	responseParameter = []

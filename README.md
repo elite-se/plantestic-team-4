@@ -65,11 +65,12 @@ Plantestic evaluates the parameters using templating.
 1. Install Java SE Development Kit 8 or higher.
 You can find Java SE Development Kit 8 under the website [https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 2. Clone the Plantestic repository.
-4. Run `git submodule init` and `git submodule update` (or similar)
-5. Install maven (if not already installed)
+3. Run `git submodule init` and `git submodule update` (or similar)
+4. Install maven (if not already installed)
+5. Go to `openapi-metamodel/openapi2` and run `mvn install`.
 6. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.io` and run `mvn install`.
 7. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.mm` and run `mvn install`.
-7. Run `./gradlew build`.
+8. Run `./gradlew build`.
 
 ## How to use
 ### Input requirements
