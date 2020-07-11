@@ -36,6 +36,8 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 		}
 	}
 
+	private Throwable error;
+
     @Test
 	public void test() {
 	[for (testRoundtrip : TestRoundtrip | testScenario.testroundtrip) separator('\n\n') ]
@@ -46,7 +48,7 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 		}
 		[/if]
 		[if (not testRoundtrip.asyncTestRoundtrip.oclIsUndefined())]
-		new Thread(
+		Thread [testRoundtrip.asyncTestRoundtrip.testRoundtripName/] = new Thread(
 				() -> {
 					try {
 						Thread.sleep([testRoundtrip.asyncTestRoundtrip.timeout/]);
@@ -59,9 +61,18 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 						[/if]
 
 					} catch (InterruptedException e) {
+					} catch (Throwable e) {
+						error = e;
 					}
 				}
-				).start();
+				);
+		[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].start();
+
+		[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].join();
+
+		if (error != null) {
+			throw error;
+		}
 		[/if]		
 	[/for]
 
