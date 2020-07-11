@@ -102,9 +102,9 @@ An opening bracket is followed by the first response datum.
 This response datum is followed - comma-separated - by the second response datum, and so on.
 The last response datum is followed by a closing bracket.
 We specify the response datum as a `Name: XPath` pair:
-The name of the response datum is followed by a space, a colon, a space, and the xpath of the response datum as a string.
-In the xpath, slashes separate the path components. .
-Example: ```(name1 : "/value/value1", name2 : "/value2")```
+The name of the response datum is followed by a space, a colon, a space, and the jsonpath of the response datum as a string.
+In the jsonpath, dots separate the path components. .
+Example: ```(name1 : "value.value1", name2 : "value2")```
 
 ![./core/src/test/resources/rerouting.png](./core/src/test/resources/rerouting.png)
 
@@ -114,7 +114,7 @@ Example: ```(name1 : "/value/value1", name2 : "/value2")```
 3. Call the command `./gradlew run --args="--input=<path/to/sequence/diagram/diagram_name.puml>"`.
 
 ### Output expectation
-The generated test cases are in `<path/to/sequence/diagram/generatedCode/<diagramName>.java>`.
+The generated test cases are in `core/plantestic-test/`.
 
 ## Demo
 Take the following test case generation from a minimal sequence diagram as an example:
@@ -126,77 +126,83 @@ Take the following test case generation from a minimal sequence diagram as an ex
 2. In the Plantestic console, call `./gradlew run --args="--input=./src/test/resources/minimal_hello.puml"`.
 This will generate test cases for the provided diagram.
 
-3. You will find the test case in the Plantestic project under `./core/build/resources/main/code-generation/generatedCode/minimal_hello_puml.java`:
+3. You will find the test case in the Plantestic project under `./core/plantestic-test/Test_minimal_hello_puml.java`:
 
 ```
-package com.plantestic.test;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
+import com.jayway.jsonpath.matchers.JsonPathMatchers;
+import com.moandjiezana.toml.Toml;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.hamcrest.collection.IsIn;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.apache.commons.text.StringSubstitutor;
-import com.moandjiezana.toml.Toml;
+import org.hamcrest.collection.IsIn;
+import org.junit.jupiter.api.Test;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Test {
+public class Test_minimal_hello {
 
-	Map<String, Object> paramsMap = new HashMap();
+	Map<String, Object> paramsMap;
 	ScriptEngine engine;
 	StringSubstitutor substitutor;
-	private static final boolean IS_WINDOWS = System.getProperty( "os.name" ).contains( "indow" );
 
-	public Test(String configFile) throws Exception {
+	public Test_minimal_hello() {
 		try {
-			String osAppropriatePath = IS_WINDOWS ? configFile.substring(1) : configFile;
-			Path path = Paths.get(osAppropriatePath);
-			String paramsFileContent = new String(Files.readAllBytes(path));
-			paramsMap = unnestTomlMap(new Toml().read(paramsFileContent).toMap());
+			File config = new File("plantestic-test/minimal_hello_config.toml");
+			paramsMap = unnestTomlMap("", new Toml().read(config).toMap());
 			substitutor = new StringSubstitutor(paramsMap);
-			ScriptEngineManager factory = new ScriptEngineManager();
-			engine = factory.getEngineByName("JavaScript");
+			engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		} catch(Exception exception) {
 			System.out.println("An Error occured, possible during reading the TOML config file: " + exception);
 			throw exception;
 		}
 	}
 
-	public void test() throws Exception {
-		try {
-			Response roundtrip1 = RestAssured.given()
-					.auth().basic(substitutor.replace("${B.username}"), substitutor.replace("${B.password}"))
-				.when()
-					.get(substitutor.replace("${B.path}") + substitutor.replace("/hello"))
-				.then()
-					.assertThat()
-					    .statusCode(IsIn.isIn(Arrays.asList(200)));
-		} catch (Exception exception) {
-			System.out.println("An error occured during evaluating the communication with testReceiver: ");
-			exception.printStackTrace();
-			throw exception;
-		}
+    @Test
+	public void test() {
+		Response roundtrip1 = RestAssured.given()
+		        .auth().basic(subst("${B.username}"), subst("${B.password}"))
+		    .when()
+		        .get(subst("${B.path}") + subst("/hello"))
+		    .then()
+		        .assertThat()
+		            .statusCode(IsIn.isIn(Arrays.asList(200)))	.and().extract().response();
 	}
 
-	public static Map<String, Object> unnestTomlMap(Map<String, Object> tomlMap) {
-		Map<String, Object> resultMap = new HashMap<>();
-		for (Map.Entry<String, Object> entry : tomlMap.entrySet()){
-			if(entry.getValue() instanceof Map){
-				Map<String, Object> innerMap = (Map<String, Object>) entry.getValue();
-				for (Map.Entry<String, Object> nestedEntry : innerMap.entrySet()){
-					resultMap.put(entry.getKey() + "." + nestedEntry.getKey(), nestedEntry.getValue());
-				}
-			} else {
-				resultMap.put(entry.getKey(), entry.getValue());
-			}
-		}
-		return resultMap;
+    /// Helper method to make to templating in string variables above more clean.
+	private String subst(String source) {
+	    assert substitutor != null;
+	    return substitutor.replace(source);
+	}
+
+	/// Helper method to make evaluation of conditions more clean.
+	private boolean eval(String condition) throws ScriptException {
+	    assert engine != null;
+	    // First, run the templating engine over the condition.
+	    // This is the whole reason why we do this "evaluate a JS string at runtime" at all.
+	    String substCondition = subst(condition);
+	    // Second, we can simply pipe the string through the JavaScript engine and get a result.
+	    return (Boolean) engine.eval(substCondition);
+	}
+
+    /// Helper method to flatten the tree-like structure of a TOML file.
+    /// Here, we use the path of an item as the key and the item itself as the value.
+    /// The path of an item separated by dots, e.g. "A.B.item".
+	private static Map<String, Object> unnestTomlMap(String prefix, Map<String, Object> tree) {
+        Map<String, Object> resultMap = new HashMap<>();
+        for (Map.Entry<String, Object> entry : tree.entrySet()) {
+            String identifierPath = prefix + entry.getKey();
+            if(entry.getValue() instanceof Map){
+                resultMap.putAll(unnestTomlMap(identifierPath + ".", (Map<String, Object>)entry.getValue()));
+            } else {
+                resultMap.put(identifierPath, entry.getValue());
+            }
+        }
+        return resultMap;
 	}
 }
 ```
