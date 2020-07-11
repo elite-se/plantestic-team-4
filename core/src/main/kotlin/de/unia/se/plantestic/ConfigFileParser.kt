@@ -12,6 +12,8 @@ object ConfigFileParser {
 	fun loadConfig(configFile: File?): EObject {
 		
 		// TODO assert that config File is null only if there are no async requests
+		ConfigmetamodelPackageImpl.init()
+		ConfigmetamodelFactoryImpl.init()
 		var factory = ConfigmetamodelFactoryImpl()
 		var configList : ConfigList = factory.createConfigList()
 		

@@ -33,16 +33,16 @@ mapping Roundtrip::roundtrip2Roundtrip(configList: ConfigList): Roundtrip {
 		assert fatal ( configList != null ) 
 			with log (' Async request found but config is null');
 	
-		asyncRoundtrip := generateAsyncRoundtrip(self.asyncRoundtrip, configList);
+		asyncRoundtrip := generateAsyncRoundtrip(self.asyncRoundtrip, id, configList);
 	};
 }
 
-helper generateAsyncRoundtrip(asyncRoundtrip: Roundtrip, configList: ConfigList): Roundtrip {
+helper generateAsyncRoundtrip(asyncRoundtrip: Roundtrip, id: String, configList: ConfigList): Roundtrip {
 	log('Adding async roundtrip information');
 	
 	var roundtrip: Roundtrip := new Roundtrip();
 	
-	var c : AsyncRequestConfig := getConfigForId(configList, asyncRoundtrip.id);
+	var c : AsyncRequestConfig := getConfigForId(configList, id);
 	
 	roundtrip.httprequest := generateHttpRequest(c, asyncRoundtrip.httprequest.receiver);
 	roundtrip.httpresponse := generateHttpResponse(c);
