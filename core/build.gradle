@@ -123,8 +123,17 @@ dependencies {
     testRuntimeOnly "io.rest-assured:rest-assured:3.0.0"
     testRuntimeOnly "javax.xml.bind:jaxb-api:2.3.1"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"
+    testRuntimeOnly "com.jayway.jsonpath:json-path-assert:2.4.0"
 
     ktlint "com.github.shyiko:ktlint:0.29.0"
+
+    // Deps for Generated Test Intellisense
+    api "org.apache.commons:commons-text:1.7"
+    api "com.moandjiezana.toml:toml4j:0.7.2"
+    api "io.rest-assured:rest-assured:3.0.0"
+    api "javax.xml.bind:jaxb-api:2.3.1"
+    api "org.junit.jupiter:junit-jupiter-engine:5.3.1"
+    api "com.jayway.jsonpath:json-path-assert:2.4.0"
 }
 
 task ktlint(type: JavaExec, group: "verification") {

@@ -1,12 +1,8 @@
-id = '123'
-testCondition = '"SomeValue"'
-plantType = '1'
+plantType1 = '1'
+plantType2 = '2'
 
-[ASYNC]
-	[1]
-		timeout = 500
-		request = 'GET /farmer/storage/${plantType}'
-		response = '200 - (plantId5: '/plantId')'
+[SWAGGER]
+    url = 'http://localhost:8080/swagger.json'
 
 [FA]
     username = 'Test'

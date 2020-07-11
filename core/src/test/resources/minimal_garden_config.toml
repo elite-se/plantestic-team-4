@@ -7,9 +7,9 @@ testCondition = '"SomeValue"'
 [GA]
     username = 'Garden'
     password = 'password'
-    path = '/garden'
+    path = 'http://virtserver.swaggerhub.com/mdd-team4/Garden/1.0.0'
 
 [PL]
     username = 'Plant'
     password = 'password'
-    path = '/plant'
+    path = 'http://virtserver.swaggerhub.com/mdd-team4/Garden/1.0.0'

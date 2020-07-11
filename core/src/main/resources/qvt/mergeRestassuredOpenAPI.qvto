@@ -75,30 +75,28 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
 
 }
 
-helper getXPaths(basePath: String, schema: Schema): Sequence(String) {
+helper getXPaths(basePath: String, schema: Schema): Set(String) {
 
 	// Happens eg. for respones that just have a description
 	if (schema = null) {
-		return Sequence{};
+		return OrderedSet{};
 	};
 
 	if (schema.type.toString() != "object") {
 		log("Returning: " + basePath);
-		return basePath->asSequence()
+		return basePath->asSet()
 	};
 
 	// Is Object recurse
-	var coll: Sequence(String);
+	var coll: Set(String);
 	if (basePath != "") {
-		coll := basePath->asSequence();
+		coll := basePath->asSet();
 	};
 	schema.properties->forEach (prop) {
 		if (prop.required) {
 			coll := coll->union(getXPaths(basePath + "/" + prop.name, prop.schema))
 		}
 	};
-
-
 	return coll;
 }
 
@@ -127,16 +125,32 @@ mapping ResponseSpecification::populateresponseSpecification(resp: ResponseEntry
      log('Transforming HTTPResponse to ResponseSpecification');
 
      responsedatum := self.responsedatum;
-	 bodymatchergroup := self.bodymatchergroup;
 	 statusmatcher := self.statusmatcher;
 
-	 var xpaths = getXPaths("", resp.value.schema);
+
+	 var oldxPaths: Set(String) := self.bodymatchergroup.bodymatcher.matcher->select(m|m.oclIsKindOf(HasXPath))[HasXPath].xPath->asSet();
+	 var otherMatchers: Set(BodyMatcher) := self.bodymatchergroup.bodymatcher->select(m|not m.matcher.oclIsKindOf(HasXPath))->asSet();
+
+
+	 var xPathMatchers : OrderedSet(BodyMatcher);
+	 var xpaths = oldxPaths->union(getXPaths("", resp.value.schema));
 	 xpaths -> forEach(path) {
-	 log("Adding xPath " + path + " to BodyMatchers!");
-	 	var bodyMatcher : BodyMatcher;
-        bodyMatcher.matcher := object HasXPath {
+	 	log("Adding xPath " + path + " to BodyMatchers!");
+	 	var bodyMatcher := object BodyMatcher {
+	 		matcher := object HasXPath {
                                 xPath := path;
                               };
-        bodymatchergroup.bodymatcher += bodyMatcher;
+                     	};
+        xPathMatchers := xPathMatchers->append(bodyMatcher);
+	 };
+
+	 var bmg = object BodyMatcherGroup {
+	  	bodymatcher := otherMatchers->union(xPathMatchers);
+	 };
+     bodymatchergroup := bmg;
+
+
+	 bodymatchergroup.bodymatcher->forEach(bm) {
+	 	log("In Bodymatchers: " + bm.matcher.oclAsType(HasXPath).xPath)
 	 };
 }

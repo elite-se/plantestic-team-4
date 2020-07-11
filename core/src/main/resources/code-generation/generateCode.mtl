@@ -21,6 +21,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import org.junit.jupiter.api.Test;
+import com.jayway.jsonpath.matchers.JsonPathMatchers;
 
 public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 
@@ -93,9 +94,6 @@ public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 [/template]
 
 [template private generateTestRoundtrip(testRoundtrip : TestRoundtrip) post(trim())]
-	[if (testRoundtrip.requestspecification.requestdatum->notEmpty())]
-[testRoundtrip.requestspecification.generadeAddRequestParams()/]
-	[/if]
 Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
         [testRoundtrip.requestspecification.generateGivenPart()/]
     .when()
@@ -111,7 +109,7 @@ Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
 [template private generadeAddRequestParams(requestSpecification : RequestSpecification)]
 	[if (requestSpecification.requestdatum->notEmpty())]
 		[for (requestDatum : RequestDatum | requestSpecification.requestdatum)]
-paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
+paramsMap.put("[requestDatum.variableName/]", subst("[requestDatum.value/]"));
 		[/for]
 	[/if]
 [/template]
@@ -120,7 +118,7 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 .auth().basic(subst("${[requestSpecification.receiver/].username}"), subst("${[requestSpecification.receiver/].password}"))
 	[if (requestSpecification.requestdatum->notEmpty())]
 		[for (requestDatum : RequestDatum | requestSpecification.requestdatum)]
-.param("[requestDatum.variableName/]", subst("${[requestDatum.variableName/]}"))
+.param("[requestDatum.variableName/]", subst("[requestDatum.value/]"))
 		[/for]
 	[/if]
 [/template]
@@ -131,9 +129,8 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 
 [template private generateThenPart(responseSpecification : ResponseSpecification) post(trim())]
 	.assertThat()
-    [responseSpecification.generateExpectStatusCode()/][if (responseSpecification.bodymatchergroup->notEmpty())]
-        [responseSpecification.generateExpectations()/]
-    [/if]
+    [responseSpecification.generateExpectStatusCode()/][if (responseSpecification.bodymatchergroup.bodymatcher->notEmpty())]
+        [responseSpecification.generateExpectations()/][/if]
 	.and().extract().response()
 [/template]
 
@@ -147,19 +144,38 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 	[/if]
 [/template]
 
-[template private generateExpectations(responseSpecification : ResponseSpecification) post(trim())]
-	[for (matcher : BodyMatcher | responseSpecification.bodymatchergroup)]
-		[if (matcher.oclIsTypeOf(HasXPath))]
-			[let bodyXPath : HasXPath = matcher.oclAsType(HasXPath)].body(hasXPath([bodyXPath.xPath/]))[/let]
+[template private generateExpectations(responseSpecification : ResponseSpecification)]
+	[for (bodyMatcher : BodyMatcher | responseSpecification.bodymatchergroup.bodymatcher) before('\n')]
+		[let matcher : Matcher = bodyMatcher.matcher]
+			[if (matcher.oclIsTypeOf(HasXPath))]
+				[let bodyXPath : HasXPath = matcher.oclAsType(HasXPath)]
+				[if bodyXPath.xPath.startsWith('/')]
+				[let xp : String = bodyXPath.xPath.substring(2).substituteAll('/', '.') ] 
+		.body(JsonPathMatchers.hasJsonPath("[xp/]"))
+				[/let]
+				[else]
+				[let xp : String = bodyXPath.xPath.substituteAll('/', '.') ] 
+		.body(JsonPathMatchers.hasJsonPath("[xp/]"))
+				[/let]
+				[/if]
+		[/let]
 		[/if]
 		[if (matcher.oclIsTypeOf(IsIn))]
 			[let bodyIsIn : IsIn = matcher.oclAsType(IsIn)][/let]
-		[/if]
+		[/if][/let]
 	[/for]
 [/template]
 
 [template private generateExtractions(testRoundtrip : TestRoundtrip) post(trim())]
 	[for (responseDatum : ResponseDatum | testRoundtrip.responsespecification.responsedatum)]
-paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[responseDatum.xPath/]"));
+		[if responseDatum.xPath.startsWith('/')]
+				[let xp : String = responseDatum.xPath.substring(2).substituteAll('/', '.') ]
+paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[xp/]"));
+				[/let]
+		[else]
+				[let xp : String = responseDatum.xPath.substituteAll('/', '.') ]
+paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[xp/]"));
+				[/let]
+		[/if]
 	[/for]
 [/template]

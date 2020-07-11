@@ -11,7 +11,7 @@ class OpenAPIParser constructor(private val inputFile: File) {
 
     fun generateModel() : EObject? {
         val confname = inputFile.absolutePath.substringBeforeLast(".") + "_config.toml"
-        val tomlMap = Toml().parse(File(confname))
+        val tomlMap = Toml().read(File(confname))
 
         val conf = tomlMap.getTable("SWAGGER") ?: return null;
         if (conf.isEmpty) return null;
