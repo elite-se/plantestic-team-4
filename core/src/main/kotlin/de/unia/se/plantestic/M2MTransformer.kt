@@ -19,6 +19,9 @@ object M2MTransformer {
 
     private val QVT_REQRES2RESTASSURED_TRANSFORMATION_URI =
         URI.createURI(Resources.getResource("qvt/reqres2restassured.qvto").toExternalForm())
+	
+	private val QVT_REQRES2REQRES_TRANSFORMATION_URI =
+        URI.createURI(Resources.getResource("qvt/reqres2reqres.qvto").toExternalForm())
 
     /**
      * Transforms a UmlDiagram EObject to a Request Response Pair EObject.
@@ -28,6 +31,10 @@ object M2MTransformer {
     fun transformPuml2ReqRes(inputModel: EObject): EObject {
         require(inputModel is UmlDiagram) { "Puml transformation input wasn't a puml object!" }
         return doQvtoTransformation(inputModel, QVT_PUML2REQRES_TRANSFORMATION_URI)
+    }
+	
+	fun transformReqRes2ReqRes(inputModel: EObject, configList: EObject): EObject {
+        return mergeQVTModels(inputModel, configList, QVT_REQRES2REQRES_TRANSFORMATION_URI)
     }
 
     /**
@@ -63,6 +70,40 @@ object M2MTransformer {
         context.log = log
 
         val result = executor.execute(context, input, output)
+
+        if (result.severity == Diagnostic.OK) {
+            require(!output.contents.isNullOrEmpty()) { "No transformation result!" }
+            return output.contents[0]
+        } else {
+            throw IllegalArgumentException(result.toString())
+        }
+    }
+	
+	private fun mergeQVTModels(inputModel1: EObject, inputModel2: EObject, transformationUri: URI): EObject {
+        // Sources:
+        // - https://github.com/mrcalvin/qvto-cli/blob/master/qvto-app/src/main/java/at/ac/wu/nm/qvto/App.java
+        // - https://wiki.eclipse.org/QVTOML/Examples/InvokeInJava
+
+        val executor = TransformationExecutor(transformationUri)
+        val validationDiagnostic = executor.loadTransformation()
+        require(validationDiagnostic.message == "OK") {
+            validationDiagnostic.children.fold(StringBuilder("\n"), { sb, child -> sb.appendln(child) })
+        }
+
+        val input1 = BasicModelExtent(listOf(inputModel1))
+		val input2 = BasicModelExtent(listOf(inputModel2))
+        val output = BasicModelExtent()
+
+        val context = ExecutionContextImpl()
+        context.setConfigProperty("keepModeling", true)
+        context.setConfigProperty("diagramName", EcoreUtil.getURI(inputModel1).trimFileExtension().lastSegment())
+
+        require(System.out != null) { "System.out was null!" }
+        val outStream = OutputStreamWriter(System.out!!)
+        val log = WriterLog(outStream)
+        context.log = log
+
+        val result = executor.execute(context, input1, input2, output)
 
         if (result.severity == Diagnostic.OK) {
             require(!output.contents.isNullOrEmpty()) { "No transformation result!" }

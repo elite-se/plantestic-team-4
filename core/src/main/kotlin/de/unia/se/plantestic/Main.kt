@@ -8,6 +8,7 @@ import java.io.File
 import com.moandjiezana.toml.Toml
 import org.eclipse.emf.ecore.*
 import de.unia.se.plantestic.generated.*
+import de.unia.se.plantestic.generated.impl.*
 
 object Main {
 
@@ -108,22 +109,39 @@ object Main {
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
-		addAsyncRequestInformationFromConfig(requestResponsePairsModel, configFile);
-        val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModel)
+		val configModel = loadConfig(configFile);
+		val requestResponsePairsModelWithAsync = M2MTransformer.transformReqRes2ReqRes(requestResponsePairsModel, configModel)
+        val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModelWithAsync)
 
         println("Generating code into $outputFolder")
         AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
     }
 	
-	fun addAsyncRequestInformationFromConfig(requestResponsePairsModel: EObject, configFile: File?) {
+	fun loadConfig(configFile: File?): EObject {
 		
 		// TODO assert that config File is null only if there are no async requests
 		
 		if (configFile != null) {
-			var tomlMap = unnestTomlMap("", Toml().read(String(configFile.readBytes())).toMap())
-			addAsyncRequestInformation(requestResponsePairsModel, tomlMap)
+			var tomlMap = Toml().read(String(configFile.readBytes())).toMap()
+			
+			for(key in tomlMap.keys) {
+				println(key)
+			}
 		}
 		
+		var factory = ConfigmetamodelFactoryImpl()
+		
+		var asyncConfig : AsyncRequestConfig = factory.createAsyncRequestConfig()
+		asyncConfig.setId("testid")
+		asyncConfig.setTimeout(100)
+		asyncConfig.setRequestMethod("GET")
+		asyncConfig.setRequestURL("/test")
+		asyncConfig.setResponseStatusCode(200)
+		
+		var configList : ConfigList = factory.createConfigList()
+		configList.getAsyncConfig().add(asyncConfig)
+		
+		return configList
 	}
 	
 	fun unnestTomlMap(prefix: String, tree:Map<String, Any>):Map<String, Any> {

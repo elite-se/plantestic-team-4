@@ -1,0 +1,12 @@
+modeltype config "strict" uses configmetamodel('http://www.example.org/configmetamodel');
+modeltype reqres "strict" uses RequestResponsePairs('http://www.example.org/RequestResponsePairs');
+
+configuration property diagramName : String;
+
+transformation mergeQVTModels(in input: reqres, in configInput: config, out output: reqres);
+
+main() {
+    log('Started transforming RequestResponsePairs to RequestResponse pairs with async requests');
+
+    
+}
