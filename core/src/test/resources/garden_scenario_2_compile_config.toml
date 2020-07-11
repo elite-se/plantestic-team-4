@@ -11,3 +11,6 @@
 	requestURL = '/farmer/hasplant/${plantId2}'
 	responseStatus = 200
 	responseParameter = []
+
+[SWAGGER]
+    url = 'http://localhost:8080/swagger.json'

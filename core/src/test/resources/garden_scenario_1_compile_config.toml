@@ -1,0 +1,9 @@
+[1]
+	timeout = 500
+	requestMethod = 'GET'
+	requestURL = '/farmer/hasplant/${plantId}'
+	responseStatus = 200
+	responseParameter = []
+
+[SWAGGER]
+    url = 'http://localhost:8080/swagger.json'

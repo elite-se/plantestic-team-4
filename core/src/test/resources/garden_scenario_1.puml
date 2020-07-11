@@ -5,7 +5,7 @@ participant GA
 participant PL
 
 
-FA -> GA : POST "/garden/plant/${plantType}"
+FA -> GA : ["1"] POST "/garden/plant/${plantType}"
 activate GA
 GA -> FA : 200 - (plantId : "plantId")
 
@@ -21,7 +21,7 @@ GA -> PL : GET "/plant/timetogrow/${plantType}"
 PL -> GA : 200
 deactivate PL
 
-GA -> FA : POST "/farmer/grown" (plantID : "${plantId}")
+GA -> FA : ? POST "/farmer/grown" (plantID : "${plantId}")
 FA -> GA : 200
 
 deactivate GA

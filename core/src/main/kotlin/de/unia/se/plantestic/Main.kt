@@ -91,7 +91,9 @@ object Main {
 			var configFile: File? = null
 			if (config != null) {
 				configFile = File(config).normalize()
-			}
+			} else if (File(inputFile.absolutePath.substringBeforeLast('.') + "_compile_config.toml").exists()) {
+                configFile = File(inputFile.absolutePath.substringBeforeLast('.') + "_compile_config.toml");
+            }
 
             if (!inputFile.exists()) {
                 echo("Input file ${inputFile.absolutePath} does not exist.")
@@ -107,7 +109,7 @@ object Main {
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
         val runtimeConfigFile = File(inputFile.absolutePath.substringBeforeLast(".") + "_config.toml")
-        val openAPI = OpenAPIParser(runtimeConfigFile).generateModel()
+        val openAPI = OpenAPIParser(configFile).generateModel()
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
 		val configModel = ConfigFileParser.loadConfig(configFile);
