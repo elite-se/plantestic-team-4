@@ -102,14 +102,18 @@ object Main {
         MetaModelSetup.doSetup()
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
-        val openAPI = OpenAPIParser.generateModel(File.createTempFile("empty", "txt"))
+        val openAPI = OpenAPIParser(inputFile).generateModel()
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
         val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModel)
-        val popRestAssuredModel = M2MTransformer.mergeRestAssuredOpenApi(restAssuredModel, openAPI)
-
-        println("Generating code into $outputFolder")
-        AcceleoCodeGenerator.generateCode(popRestAssuredModel, outputFolder)
+        if (openAPI != null) {
+            val popRestAssuredModel = M2MTransformer.mergeRestAssuredOpenApi(restAssuredModel, openAPI)
+            println("Generating code into $outputFolder")
+            AcceleoCodeGenerator.generateCode(popRestAssuredModel, outputFolder)
+        } else {
+            println("Generating code into $outputFolder")
+            AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
+        }
     }
 
     @JvmStatic

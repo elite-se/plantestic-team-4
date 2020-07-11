@@ -1,6 +1,9 @@
 id = '123'
 testCondition = '"SomeValue"'
 
+[SWAGGER]
+    url = "http://localhost:8080/swagger.json"
+
 [GA]
     username = 'Garden'
     password = 'password'
