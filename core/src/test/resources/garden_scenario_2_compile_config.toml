@@ -1,0 +1,5 @@
+[1]
+	timeout = 500
+	requestMethod = 'GET'
+	requestURL = '/farmer/storage/${plantType}'
+	responseStatus = 200
