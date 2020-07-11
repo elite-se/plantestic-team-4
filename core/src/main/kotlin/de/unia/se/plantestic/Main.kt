@@ -106,8 +106,8 @@ object Main {
         MetaModelSetup.doSetup()
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
-        val configFile = File(inputFile.absolutePath.substringBeforeLast(".") + "_config.toml")
-        val openAPI = OpenAPIParser(configFile).generateModel()
+        val runtimeConfigFile = File(inputFile.absolutePath.substringBeforeLast(".") + "_config.toml")
+        val openAPI = OpenAPIParser(runtimeConfigFile).generateModel()
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
 		val configModel = ConfigFileParser.loadConfig(configFile);
@@ -121,7 +121,7 @@ object Main {
             println("Generating code into $outputFolder")
             AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
         }
-        Files.copy(configFile, outputFolder.resolve(configFile.name));
+        Files.copy(runtimeConfigFile, outputFolder.resolve(runtimeConfigFile.name));
     }
 
     @JvmStatic

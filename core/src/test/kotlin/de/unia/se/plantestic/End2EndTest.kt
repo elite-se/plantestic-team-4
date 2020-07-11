@@ -22,7 +22,7 @@ class End2EndTest : StringSpec({
             get(urlEqualTo("/testB/hello"))
                 .willReturn(WireMock.aResponse().withStatus(200)))
 
-        runTransformationPipeline(MINIMAL_EXAMPLE_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(MINIMAL_EXAMPLE_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testminimal_hello_puml.java" }.first()
@@ -49,7 +49,7 @@ class End2EndTest : StringSpec({
                 .get(WireMock.urlPathMatching("/testB/test/123"))
                 .willReturn(WireMock.aResponse().withStatus(200).withBody(body)))
 
-        runTransformationPipeline(COMPLEX_HELLO_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(COMPLEX_HELLO_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testcomplex_hello_puml.java" }.first()
@@ -90,7 +90,7 @@ class End2EndTest : StringSpec({
                     .withStatus(200)
                     .withBody(body_CCC_Voicemanager_voiceenabled)))
 
-        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testrerouting_puml.java" }.first()
@@ -133,7 +133,7 @@ class End2EndTest : StringSpec({
                     .withStatus(400))
         )
 
-        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testrerouting_puml.java" }.first()
@@ -169,7 +169,7 @@ class End2EndTest : StringSpec({
                 .willReturn(WireMock.aResponse()
                     .withStatus(404)))
 
-        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testrerouting_puml.java" }.first()
@@ -210,7 +210,7 @@ class End2EndTest : StringSpec({
                 .willReturn(WireMock.aResponse()
                     .withStatus(500)))
 
-        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(REROUTE_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testrerouting_puml.java" }.first()
@@ -231,7 +231,7 @@ class End2EndTest : StringSpec({
     "End2End test receives request on mock server for the xcall example".config(enabled = false) {
         wireMockServer.stubFor(get(urlEqualTo("/hello/123")).willReturn(aResponse().withBody("test")))
 
-        runTransformationPipeline(XCALL_INPUT_FILE, OUTPUT_FOLDER)
+        runTransformationPipeline(XCALL_INPUT_FILE, OUTPUT_FOLDER, null)
 
         // Now compile the resulting code to check for syntax errors
         val generatedSourceFile = OUTPUT_FOLDER.listFiles().filter { f -> f.name == "Testxcall_puml.java" }.first()

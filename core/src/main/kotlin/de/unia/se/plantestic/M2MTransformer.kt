@@ -50,34 +50,7 @@ object M2MTransformer {
     }
 
     fun mergeRestAssuredOpenApi(inputModel: EObject, apiModel: EObject) : EObject {
-
-        val executor = TransformationExecutor(QVT_MERGERAOPENAPI_TRANSFORMATION_URI)
-        val validationDiagnostic = executor.loadTransformation()
-        require(validationDiagnostic.message == "OK") {
-            validationDiagnostic.children.fold(StringBuilder("\n"), { sb, child -> sb.appendln(child) })
-        }
-
-        val input = BasicModelExtent(listOf(inputModel))
-        val inputApi = BasicModelExtent(listOf(apiModel))
-        val output = BasicModelExtent()
-
-        val context = ExecutionContextImpl()
-        context.setConfigProperty("keepModeling", true)
-        context.setConfigProperty("diagramName", EcoreUtil.getURI(inputModel).trimFileExtension().lastSegment())
-
-        require(System.out != null) { "System.out was null!" }
-        val outStream = OutputStreamWriter(System.out!!)
-        val log = WriterLog(outStream)
-        context.log = log
-
-        val result = executor.execute(context, input, inputApi, output)
-
-        if (result.severity == Diagnostic.OK) {
-            require(!output.contents.isNullOrEmpty()) { "No transformation result!" }
-            return output.contents[0]
-        } else {
-            throw IllegalArgumentException(result.toString())
-        }
+        return mergeQVTModels(inputModel, apiModel, QVT_MERGERAOPENAPI_TRANSFORMATION_URI);
     }
 
     private fun doQvtoTransformation(inputModel: EObject, transformationUri: URI): EObject {

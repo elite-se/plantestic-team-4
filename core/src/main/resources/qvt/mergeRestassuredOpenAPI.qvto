@@ -58,7 +58,12 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
 
      requestspecification := self.requestspecification;
      responsespecification := self.responsespecification .map populateresponseSpecification(response);
+     id := self.id;
+     timeout := self.timeout;
 
+     if (self.id != null) {
+        asyncTestRoundtrip := self.asyncTestRoundtrip .map roundtrip2testRoundtrip(rootApi)
+     };
 }
 
 helper getXPaths(basePath: String, schema: Schema): Set(String) {
