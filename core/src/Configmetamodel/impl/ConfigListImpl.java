@@ -1,10 +1,8 @@
 /**
  */
-package de.unia.se.plantestic.generated.impl;
+package Configmetamodel.impl;
 
-import de.unia.se.plantestic.generated.AsyncRequestConfig;
-import de.unia.se.plantestic.generated.ConfigList;
-import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
+import Configmetamodel.ConfigmetamodelPackage;
 
 import java.util.Collection;
 
@@ -36,7 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ConfigListImpl extends MinimalEObjectImpl.Container implements ConfigList {
+public class ConfigListImpl extends MinimalEObjectImpl.Container implements ConfigListImpl {
 	/**
 	 * The cached value of the '{@link #getAsyncConfig() <em>Async Config</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -45,7 +43,7 @@ public class ConfigListImpl extends MinimalEObjectImpl.Container implements Conf
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AsyncRequestConfig> asyncConfig;
+	protected EList<AsyncRequestConfigImpl> asyncConfig;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -92,9 +90,9 @@ public class ConfigListImpl extends MinimalEObjectImpl.Container implements Conf
 	 * @generated
 	 */
 	@Override
-	public EList<AsyncRequestConfig> getAsyncConfig() {
+	public EList<AsyncRequestConfigImpl> getAsyncConfig() {
 		if (asyncConfig == null) {
-			asyncConfig = new EObjectContainmentEList<AsyncRequestConfig>(AsyncRequestConfig.class, this, ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG);
+			asyncConfig = new EObjectContainmentEList<AsyncRequestConfigImpl>(Object.class, this, ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG);
 		}
 		return asyncConfig;
 	}
@@ -163,7 +161,7 @@ public class ConfigListImpl extends MinimalEObjectImpl.Container implements Conf
 		switch (featureID) {
 			case ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG:
 				getAsyncConfig().clear();
-				getAsyncConfig().addAll((Collection<? extends AsyncRequestConfig>)newValue);
+				getAsyncConfig().addAll((Collection<? extends AsyncRequestConfigImpl>)newValue);
 				return;
 			case ConfigmetamodelPackage.CONFIG_LIST__NAME:
 				setName((String)newValue);

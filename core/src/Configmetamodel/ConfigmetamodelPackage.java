@@ -1,6 +1,6 @@
 /**
  */
-package de.unia.se.plantestic.generated;
+package Configmetamodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see de.unia.se.plantestic.generated.ConfigmetamodelFactory
+ * @see Configmetamodel.ConfigmetamodelFactory
  * @model kind="package"
  * @generated
  */
@@ -54,7 +54,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ConfigmetamodelPackage eINSTANCE = de.unia.se.plantestic.generated.impl.ConfigmetamodelPackageImpl.init();
+	ConfigmetamodelPackage eINSTANCE = Configmetamodel.impl.ConfigmetamodelPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link Configmetamodel.impl.ConfigListImpl <em>Config List</em>}' class.
@@ -158,7 +158,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Request Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Request Parameter</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -167,7 +167,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER = 5;
 
 	/**
-	 * The feature id for the '<em><b>Response Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Response Parameter</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -287,183 +287,187 @@ public interface ConfigmetamodelPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link Configmetamodel.ConfigList <em>Config List</em>}'.
+	 * Returns the meta object for class '{@link java.lang.Object <em>Config List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Config List</em>'.
-	 * @see Configmetamodel.ConfigList
+	 * @see java.lang.Object
+	 * @model instanceClass="ConfigListImpl"
 	 * @generated
 	 */
 	EClass getConfigList();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Configmetamodel.ConfigList#getAsyncConfig <em>Async Config</em>}'.
+	 * Returns the meta object for the containment reference list '{@link java.lang.Object#getAsyncConfig <em>Async Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Async Config</em>'.
-	 * @see Configmetamodel.ConfigList#getAsyncConfig()
+	 * @see java.lang.Object#getAsyncConfig()
 	 * @see #getConfigList()
 	 * @generated
 	 */
 	EReference getConfigList_AsyncConfig();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.ConfigList#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see Configmetamodel.ConfigList#getName()
+	 * @see java.lang.Object#getName()
 	 * @see #getConfigList()
 	 * @generated
 	 */
 	EAttribute getConfigList_Name();
 
 	/**
-	 * Returns the meta object for class '{@link Configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
+	 * Returns the meta object for class '{@link java.lang.Object <em>Async Request Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Async Request Config</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig
+	 * @see java.lang.Object
+	 * @model instanceClass="AsyncRequestConfigImpl"
 	 * @generated
 	 */
 	EClass getAsyncRequestConfig();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.AsyncRequestConfig#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getId()
+	 * @see java.lang.Object#getId()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getTimeout <em>Timeout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Timeout</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getTimeout()
+	 * @see java.lang.Object#getTimeout()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_Timeout();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getRequestMethod <em>Request Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request Method</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getRequestMethod()
+	 * @see java.lang.Object#getRequestMethod()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_RequestMethod();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getRequestURL <em>Request URL</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request URL</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getRequestURL()
+	 * @see java.lang.Object#getRequestURL()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_RequestURL();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getResponseStatusCode <em>Response Status Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Response Status Code</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getResponseStatusCode()
+	 * @see java.lang.Object#getResponseStatusCode()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_ResponseStatusCode();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}'.
+	 * Returns the meta object for the reference list '{@link java.lang.Object#getRequestParameter <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Request Parameter</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getRequestParameter()
+	 * @return the meta object for the reference list '<em>Request Parameter</em>'.
+	 * @see java.lang.Object#getRequestParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EReference getAsyncRequestConfig_RequestParameter();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}'.
+	 * Returns the meta object for the reference list '{@link java.lang.Object#getResponseParameter <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Response Parameter</em>'.
-	 * @see Configmetamodel.AsyncRequestConfig#getResponseParameter()
+	 * @return the meta object for the reference list '<em>Response Parameter</em>'.
+	 * @see java.lang.Object#getResponseParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EReference getAsyncRequestConfig_ResponseParameter();
 
 	/**
-	 * Returns the meta object for class '{@link Configmetamodel.RequestParameter <em>Request Parameter</em>}'.
+	 * Returns the meta object for class '{@link java.lang.Object <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Request Parameter</em>'.
-	 * @see Configmetamodel.RequestParameter
+	 * @see java.lang.Object
+	 * @model instanceClass="RequestParameterImpl"
 	 * @generated
 	 */
 	EClass getRequestParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.RequestParameter#getRequestVariableName <em>Request Variable Name</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getRequestVariableName <em>Request Variable Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request Variable Name</em>'.
-	 * @see Configmetamodel.RequestParameter#getRequestVariableName()
+	 * @see java.lang.Object#getRequestVariableName()
 	 * @see #getRequestParameter()
 	 * @generated
 	 */
 	EAttribute getRequestParameter_RequestVariableName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.RequestParameter#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see Configmetamodel.RequestParameter#getValue()
+	 * @see java.lang.Object#getValue()
 	 * @see #getRequestParameter()
 	 * @generated
 	 */
 	EAttribute getRequestParameter_Value();
 
 	/**
-	 * Returns the meta object for class '{@link Configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
+	 * Returns the meta object for class '{@link java.lang.Object <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Response Parameter</em>'.
-	 * @see Configmetamodel.ResponseParameter
+	 * @see java.lang.Object
+	 * @model instanceClass="ResponseParameterImpl"
 	 * @generated
 	 */
 	EClass getResponseParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.ResponseParameter#getResponseVariableName <em>Response Variable Name</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getResponseVariableName <em>Response Variable Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Response Variable Name</em>'.
-	 * @see Configmetamodel.ResponseParameter#getResponseVariableName()
+	 * @see java.lang.Object#getResponseVariableName()
 	 * @see #getResponseParameter()
 	 * @generated
 	 */
 	EAttribute getResponseParameter_ResponseVariableName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Configmetamodel.ResponseParameter#getXPath <em>XPath</em>}'.
+	 * Returns the meta object for the attribute '{@link java.lang.Object#getXPath <em>XPath</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>XPath</em>'.
-	 * @see Configmetamodel.ResponseParameter#getXPath()
+	 * @see java.lang.Object#getXPath()
 	 * @see #getResponseParameter()
 	 * @generated
 	 */
@@ -569,7 +573,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EAttribute ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE = eINSTANCE.getAsyncRequestConfig_ResponseStatusCode();
 
 		/**
-		 * The meta object literal for the '<em><b>Request Parameter</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Request Parameter</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -577,7 +581,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EReference ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER = eINSTANCE.getAsyncRequestConfig_RequestParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Response Parameter</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Response Parameter</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

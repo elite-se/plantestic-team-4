@@ -8,13 +8,9 @@ transformation merge(in input: reqres, in configInput: config, out output: reqre
 main() {
     log('Started transforming RequestResponsePairs to RequestResponse pairs with async requests');
     
-	var configList := configInput.rootObjects()->asSequence()->first();
-	var configRoot := configList.oclAsType(ConfigList);
-	log(configInput.toString());
-	log(configRoot.toString());
-	log(configList.toString());
+	var configList := configInput.rootObjects()[ConfigList]->asSequence()->first();
 	
-	input.rootObjects()[Scenario].map scenario2Scenario(configRoot);
+	input.rootObjects()[Scenario].map scenario2Scenario(configList);
 }
 
 mapping Scenario::scenario2Scenario(configList: ConfigList): Scenario {
@@ -56,6 +52,7 @@ helper generateAsyncRoundtrip(asyncRoundtrip: Roundtrip, configList: ConfigList)
 }
 
 helper getConfigForId(configList: ConfigList, id: String): AsyncRequestConfig {
+	log(configList.toString());
 	var configs : Collection(AsyncRequestConfig) := configList.asyncConfig->select(c: AsyncRequestConfig | c.id = id);
 	
 	assert fatal (not configs->isEmpty())

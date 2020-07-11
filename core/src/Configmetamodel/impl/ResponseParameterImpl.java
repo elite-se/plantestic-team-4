@@ -1,10 +1,9 @@
 /**
  */
-package de.unia.se.plantestic.generated.impl;
+package Configmetamodel.impl;
 
-import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
+import Configmetamodel.ConfigmetamodelPackage;
 
-import de.unia.se.plantestic.generated.ResponseParameter;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -26,7 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class ResponseParameterImpl extends MinimalEObjectImpl.Container implements ResponseParameter {
+public class ResponseParameterImpl extends MinimalEObjectImpl.Container implements ResponseParameterImpl {
 	/**
 	 * The default value of the '{@link #getResponseVariableName() <em>Response Variable Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

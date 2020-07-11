@@ -1,8 +1,8 @@
 /**
  */
-package de.unia.se.plantestic.generated.util;
+package Configmetamodel.util;
 
-import de.unia.se.plantestic.generated.*;
+import Configmetamodel.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -68,19 +68,19 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	protected ConfigmetamodelSwitch<Adapter> modelSwitch =
 		new ConfigmetamodelSwitch<Adapter>() {
 			@Override
-			public Adapter caseConfigList(ConfigList object) {
+			public Adapter caseConfigList(ConfigListImpl object) {
 				return createConfigListAdapter();
 			}
 			@Override
-			public Adapter caseAsyncRequestConfig(AsyncRequestConfig object) {
+			public Adapter caseAsyncRequestConfig(AsyncRequestConfigImpl object) {
 				return createAsyncRequestConfigAdapter();
 			}
 			@Override
-			public Adapter caseRequestParameter(RequestParameter object) {
+			public Adapter caseRequestParameter(RequestParameterImpl object) {
 				return createRequestParameterAdapter();
 			}
 			@Override
-			public Adapter caseResponseParameter(ResponseParameter object) {
+			public Adapter caseResponseParameter(ResponseParameterImpl object) {
 				return createResponseParameterAdapter();
 			}
 			@Override
@@ -104,13 +104,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Configmetamodel.ConfigList <em>Config List</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.lang.Object <em>Config List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see Configmetamodel.ConfigList
+	 * @see java.lang.Object
 	 * @generated
 	 */
 	public Adapter createConfigListAdapter() {
@@ -118,13 +118,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.lang.Object <em>Async Request Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see Configmetamodel.AsyncRequestConfig
+	 * @see java.lang.Object
 	 * @generated
 	 */
 	public Adapter createAsyncRequestConfigAdapter() {
@@ -132,13 +132,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Configmetamodel.RequestParameter <em>Request Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.lang.Object <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see Configmetamodel.RequestParameter
+	 * @see java.lang.Object
 	 * @generated
 	 */
 	public Adapter createRequestParameterAdapter() {
@@ -146,13 +146,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.lang.Object <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see Configmetamodel.ResponseParameter
+	 * @see java.lang.Object
 	 * @generated
 	 */
 	public Adapter createResponseParameterAdapter() {

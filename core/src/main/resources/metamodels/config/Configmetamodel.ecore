@@ -2,26 +2,28 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Configmetamodel" nsURI="http://www.example.org/Configmetamodel"
     nsPrefix="Configmetamodel">
-  <eClassifiers xsi:type="ecore:EClass" name="ConfigList">
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigList" instanceTypeName="ConfigListImpl">
     <eStructuralFeatures xsi:type="ecore:EReference" name="asyncConfig" upperBound="-1"
         eType="#//AsyncRequestConfig" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="name"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AsyncRequestConfig">
+  <eClassifiers xsi:type="ecore:EClass" name="AsyncRequestConfig" instanceTypeName="AsyncRequestConfigImpl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestURL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseStatusCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requestParameter" upperBound="-1"
-        eType="#//RequestParameter" containment="true"/>
+        eType="#//RequestParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="responseParameter" upperBound="-1"
-        eType="#//ResponseParameter" containment="true"/>
+        eType="#//ResponseParameter"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RequestParameter">
+  <eClassifiers xsi:type="ecore:EClass" name="RequestParameter" instanceTypeName="RequestParameterImpl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestVariableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResponseParameter">
+  <eClassifiers xsi:type="ecore:EClass" name="ResponseParameter" instanceTypeName="ResponseParameterImpl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseVariableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

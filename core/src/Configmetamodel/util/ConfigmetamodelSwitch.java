@@ -1,8 +1,8 @@
 /**
  */
-package de.unia.se.plantestic.generated.util;
+package Configmetamodel.util;
 
-import de.unia.se.plantestic.generated.*;
+import Configmetamodel.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -67,25 +67,25 @@ public class ConfigmetamodelSwitch<T> extends Switch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case ConfigmetamodelPackage.CONFIG_LIST: {
-				ConfigList configList = (ConfigList)theEObject;
+				ConfigListImpl configList = (ConfigListImpl)theEObject;
 				T result = caseConfigList(configList);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG: {
-				AsyncRequestConfig asyncRequestConfig = (AsyncRequestConfig)theEObject;
+				AsyncRequestConfigImpl asyncRequestConfig = (AsyncRequestConfigImpl)theEObject;
 				T result = caseAsyncRequestConfig(asyncRequestConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ConfigmetamodelPackage.REQUEST_PARAMETER: {
-				RequestParameter requestParameter = (RequestParameter)theEObject;
+				RequestParameterImpl requestParameter = (RequestParameterImpl)theEObject;
 				T result = caseRequestParameter(requestParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ConfigmetamodelPackage.RESPONSE_PARAMETER: {
-				ResponseParameter responseParameter = (ResponseParameter)theEObject;
+				ResponseParameterImpl responseParameter = (ResponseParameterImpl)theEObject;
 				T result = caseResponseParameter(responseParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -105,7 +105,7 @@ public class ConfigmetamodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConfigList(ConfigList object) {
+	public T caseConfigList(ConfigListImpl object) {
 		return null;
 	}
 
@@ -120,7 +120,7 @@ public class ConfigmetamodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAsyncRequestConfig(AsyncRequestConfig object) {
+	public T caseAsyncRequestConfig(AsyncRequestConfigImpl object) {
 		return null;
 	}
 
@@ -135,7 +135,7 @@ public class ConfigmetamodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRequestParameter(RequestParameter object) {
+	public T caseRequestParameter(RequestParameterImpl object) {
 		return null;
 	}
 
@@ -150,7 +150,7 @@ public class ConfigmetamodelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResponseParameter(ResponseParameter object) {
+	public T caseResponseParameter(ResponseParameterImpl object) {
 		return null;
 	}
 

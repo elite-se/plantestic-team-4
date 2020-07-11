@@ -1,27 +1,21 @@
 /**
  */
-package de.unia.se.plantestic.generated.impl;
+package Configmetamodel.impl;
 
-import de.unia.se.plantestic.generated.AsyncRequestConfig;
-import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
+import Configmetamodel.ConfigmetamodelPackage;
 
-import de.unia.se.plantestic.generated.RequestParameter;
-import de.unia.se.plantestic.generated.ResponseParameter;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container implements AsyncRequestConfig {
+public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container implements AsyncRequestConfigImpl {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -144,24 +138,24 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	protected String responseStatusCode = RESPONSE_STATUS_CODE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRequestParameter() <em>Request Parameter</em>}' containment reference list.
+	 * The cached value of the '{@link #getRequestParameter() <em>Request Parameter</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRequestParameter()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RequestParameter> requestParameter;
+	protected EList<RequestParameterImpl> requestParameter;
 
 	/**
-	 * The cached value of the '{@link #getResponseParameter() <em>Response Parameter</em>}' containment reference list.
+	 * The cached value of the '{@link #getResponseParameter() <em>Response Parameter</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getResponseParameter()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ResponseParameter> responseParameter;
+	protected EList<ResponseParameterImpl> responseParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,9 +297,9 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<RequestParameter> getRequestParameter() {
+	public EList<RequestParameterImpl> getRequestParameter() {
 		if (requestParameter == null) {
-			requestParameter = new EObjectContainmentEList<RequestParameter>(RequestParameter.class, this, ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER);
+			requestParameter = new EObjectResolvingEList<RequestParameterImpl>(Object.class, this, ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER);
 		}
 		return requestParameter;
 	}
@@ -316,27 +310,11 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<ResponseParameter> getResponseParameter() {
+	public EList<ResponseParameterImpl> getResponseParameter() {
 		if (responseParameter == null) {
-			responseParameter = new EObjectContainmentEList<ResponseParameter>(ResponseParameter.class, this, ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER);
+			responseParameter = new EObjectResolvingEList<ResponseParameterImpl>(Object.class, this, ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER);
 		}
 		return responseParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER:
-				return ((InternalEList<?>)getRequestParameter()).basicRemove(otherEnd, msgs);
-			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER:
-				return ((InternalEList<?>)getResponseParameter()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -391,11 +369,11 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 				return;
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER:
 				getRequestParameter().clear();
-				getRequestParameter().addAll((Collection<? extends RequestParameter>)newValue);
+				getRequestParameter().addAll((Collection<? extends RequestParameterImpl>)newValue);
 				return;
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER:
 				getResponseParameter().clear();
-				getResponseParameter().addAll((Collection<? extends ResponseParameter>)newValue);
+				getResponseParameter().addAll((Collection<? extends ResponseParameterImpl>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

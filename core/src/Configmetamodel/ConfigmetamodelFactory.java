@@ -1,6 +1,6 @@
 /**
  */
-package de.unia.se.plantestic.generated;
+package Configmetamodel;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -19,7 +19,7 @@ public interface ConfigmetamodelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ConfigmetamodelFactory eINSTANCE = de.unia.se.plantestic.generated.impl.ConfigmetamodelFactoryImpl.init();
+	ConfigmetamodelFactory eINSTANCE = Configmetamodel.impl.ConfigmetamodelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Config List</em>'.
@@ -28,7 +28,7 @@ public interface ConfigmetamodelFactory extends EFactory {
 	 * @return a new object of class '<em>Config List</em>'.
 	 * @generated
 	 */
-	ConfigList createConfigList();
+	ConfigListImpl createConfigList();
 
 	/**
 	 * Returns a new object of class '<em>Async Request Config</em>'.
@@ -37,7 +37,7 @@ public interface ConfigmetamodelFactory extends EFactory {
 	 * @return a new object of class '<em>Async Request Config</em>'.
 	 * @generated
 	 */
-	AsyncRequestConfig createAsyncRequestConfig();
+	AsyncRequestConfigImpl createAsyncRequestConfig();
 
 	/**
 	 * Returns a new object of class '<em>Request Parameter</em>'.
@@ -46,7 +46,7 @@ public interface ConfigmetamodelFactory extends EFactory {
 	 * @return a new object of class '<em>Request Parameter</em>'.
 	 * @generated
 	 */
-	RequestParameter createRequestParameter();
+	RequestParameterImpl createRequestParameter();
 
 	/**
 	 * Returns a new object of class '<em>Response Parameter</em>'.
@@ -55,7 +55,7 @@ public interface ConfigmetamodelFactory extends EFactory {
 	 * @return a new object of class '<em>Response Parameter</em>'.
 	 * @generated
 	 */
-	ResponseParameter createResponseParameter();
+	ResponseParameterImpl createResponseParameter();
 
 	/**
 	 * Returns the package supported by this factory.

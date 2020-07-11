@@ -1,10 +1,9 @@
 /**
  */
-package de.unia.se.plantestic.generated.impl;
+package Configmetamodel.impl;
 
-import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
+import Configmetamodel.ConfigmetamodelPackage;
 
-import de.unia.se.plantestic.generated.RequestParameter;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -26,7 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class RequestParameterImpl extends MinimalEObjectImpl.Container implements RequestParameter {
+public class RequestParameterImpl extends MinimalEObjectImpl.Container implements RequestParameterImpl {
 	/**
 	 * The default value of the '{@link #getRequestVariableName() <em>Request Variable Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

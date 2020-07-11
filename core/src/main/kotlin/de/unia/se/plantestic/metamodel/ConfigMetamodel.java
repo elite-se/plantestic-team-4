@@ -16,8 +16,8 @@ public class ConfigMetamodel {
 		
 		EPackage aPackage = ecoreFactory.createEPackage();
 		aPackage.setName("configmetamodel");
-		aPackage.setNsPrefix("pkg");
-		aPackage.setNsURI("urn:www.pst.ifi.lmu.de/knapp/pkg");
+		aPackage.setNsPrefix("Configmetamodel");
+		aPackage.setNsURI("http://www.example.org/Configmetamodel");
 		
 		EClass listClass = ecoreFactory.createEClass();
 		listClass.setName("ConfigList");

@@ -1,14 +1,10 @@
 /**
  */
-package de.unia.se.plantestic.generated.impl;
+package Configmetamodel.impl;
 
-import de.unia.se.plantestic.generated.AsyncRequestConfig;
-import de.unia.se.plantestic.generated.ConfigList;
-import de.unia.se.plantestic.generated.ConfigmetamodelFactory;
-import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
+import Configmetamodel.ConfigmetamodelFactory;
+import Configmetamodel.ConfigmetamodelPackage;
 
-import de.unia.se.plantestic.generated.RequestParameter;
-import de.unia.se.plantestic.generated.ResponseParameter;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -363,26 +359,26 @@ public class ConfigmetamodelPackageImpl extends EPackageImpl implements Configme
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(configListEClass, ConfigList.class, "ConfigList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConfigList_AsyncConfig(), this.getAsyncRequestConfig(), null, "asyncConfig", null, 0, -1, ConfigList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConfigList_Name(), ecorePackage.getEString(), "name", "name", 0, 1, ConfigList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(configListEClass, Object.class, "ConfigList", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConfigList_AsyncConfig(), this.getAsyncRequestConfig(), null, "asyncConfig", null, 0, -1, ConfigListImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConfigList_Name(), ecorePackage.getEString(), "name", "name", 0, 1, ConfigListImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(asyncRequestConfigEClass, AsyncRequestConfig.class, "AsyncRequestConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAsyncRequestConfig_Id(), ecorePackage.getEString(), "id", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsyncRequestConfig_Timeout(), ecorePackage.getEInt(), "timeout", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsyncRequestConfig_RequestMethod(), ecorePackage.getEString(), "requestMethod", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsyncRequestConfig_RequestURL(), ecorePackage.getEString(), "requestURL", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsyncRequestConfig_ResponseStatusCode(), ecorePackage.getEString(), "responseStatusCode", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAsyncRequestConfig_RequestParameter(), this.getRequestParameter(), null, "requestParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAsyncRequestConfig_ResponseParameter(), this.getResponseParameter(), null, "responseParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(asyncRequestConfigEClass, Object.class, "AsyncRequestConfig", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAsyncRequestConfig_Id(), ecorePackage.getEString(), "id", null, 0, 1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsyncRequestConfig_Timeout(), ecorePackage.getEInt(), "timeout", null, 0, 1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsyncRequestConfig_RequestMethod(), ecorePackage.getEString(), "requestMethod", null, 0, 1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsyncRequestConfig_RequestURL(), ecorePackage.getEString(), "requestURL", null, 0, 1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsyncRequestConfig_ResponseStatusCode(), ecorePackage.getEString(), "responseStatusCode", null, 0, 1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAsyncRequestConfig_RequestParameter(), this.getRequestParameter(), null, "requestParameter", null, 0, -1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAsyncRequestConfig_ResponseParameter(), this.getResponseParameter(), null, "responseParameter", null, 0, -1, AsyncRequestConfigImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(requestParameterEClass, RequestParameter.class, "RequestParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRequestParameter_RequestVariableName(), ecorePackage.getEString(), "requestVariableName", null, 0, 1, RequestParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRequestParameter_Value(), ecorePackage.getEString(), "value", null, 0, 1, RequestParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(requestParameterEClass, Object.class, "RequestParameter", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRequestParameter_RequestVariableName(), ecorePackage.getEString(), "requestVariableName", null, 0, 1, RequestParameterImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRequestParameter_Value(), ecorePackage.getEString(), "value", null, 0, 1, RequestParameterImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(responseParameterEClass, ResponseParameter.class, "ResponseParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResponseParameter_ResponseVariableName(), ecorePackage.getEString(), "responseVariableName", null, 0, 1, ResponseParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResponseParameter_XPath(), ecorePackage.getEString(), "xPath", null, 0, 1, ResponseParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(responseParameterEClass, Object.class, "ResponseParameter", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResponseParameter_ResponseVariableName(), ecorePackage.getEString(), "responseVariableName", null, 0, 1, ResponseParameterImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResponseParameter_XPath(), ecorePackage.getEString(), "xPath", null, 0, 1, ResponseParameterImpl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
