@@ -29,10 +29,7 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
      log('Transforming Roundtrip to TestRoundtrip');
 
      testRoundtripName := self.testRoundtripName;
-
-     if(self.precondition != null) then {
-             precondition := self.precondition;
-     } endif;
+     precondition := self.precondition;
 
      var paths: Collection(Path) := rootApi.paths->select(p|matchesRelative(self.requestspecification.url, p.relativePath));
      var operations: Collection(Operation) := paths.getOperationByHTTPMethod(self.requestspecification.method);

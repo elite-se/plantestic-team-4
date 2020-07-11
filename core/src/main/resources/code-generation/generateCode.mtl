@@ -43,7 +43,7 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 	[for (testRoundtrip : TestRoundtrip | testScenario.testroundtrip) separator('\n\n') ]
 		[if (testRoundtrip.precondition->isEmpty())][testRoundtrip.generateTestRoundtrip()/][/if]
 		[if (testRoundtrip.precondition->notEmpty())]
-		if(eval("[testRoundtrip.precondition/]")) {
+		if(eval(subst("[testRoundtrip.precondition/]"))) {
 			[testRoundtrip.generateTestRoundtrip()/]
 		}
 		[/if]
@@ -55,7 +55,7 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 						
 						[if (testRoundtrip.asyncTestRoundtrip.precondition->isEmpty())][testRoundtrip.asyncTestRoundtrip.generateTestRoundtrip()/][/if]
 						[if (testRoundtrip.asyncTestRoundtrip.precondition->notEmpty())]
-						if(eval("[testRoundtrip.asyncTestRoundtrip.precondition/]")) {
+						if(eval(subst("[testRoundtrip.asyncTestRoundtrip.precondition/]"))) {
 							[testRoundtrip.asyncTestRoundtrip.generateTestRoundtrip()/]
 						}
 						[/if]
