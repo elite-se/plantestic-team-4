@@ -27,6 +27,7 @@ class PlantLookUp:
         return self.data.get(key)
 
 pl = PlantLookUp()
+pl[3] = 5
 pl[2] = 25
 pl[1] = 1
 
