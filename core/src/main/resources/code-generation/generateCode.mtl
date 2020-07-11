@@ -39,7 +39,7 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 	private Throwable error;
 
     @Test
-	public void test() {
+	public void test() throws Throwable {
 	[for (testRoundtrip : TestRoundtrip | testScenario.testroundtrip) separator('\n\n') ]
 		[if (testRoundtrip.precondition->isEmpty())][testRoundtrip.generateTestRoundtrip()/][/if]
 		[if (testRoundtrip.precondition->notEmpty())]
