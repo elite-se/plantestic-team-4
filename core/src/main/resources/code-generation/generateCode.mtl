@@ -48,7 +48,7 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 		}
 		[/if]
 		[if (not testRoundtrip.asyncTestRoundtrip.oclIsUndefined())]
-		Thread [testRoundtrip.asyncTestRoundtrip.testRoundtripName/] = new Thread(
+		Thread thread_[testRoundtrip.asyncTestRoundtrip.testRoundtripName/] = new Thread(
 				() -> {
 					try {
 						Thread.sleep([testRoundtrip.asyncTestRoundtrip.timeout/]);
@@ -66,9 +66,9 @@ public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 					}
 				}
 				);
-		[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].start();
+		thread_[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].start();
 
-		[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].join();
+		thread_[testRoundtrip.asyncTestRoundtrip.testRoundtripName/].join();
 
 		if (error != null) {
 			throw error;
