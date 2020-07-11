@@ -34,10 +34,6 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
              precondition := self.precondition;
      } endif;
 
-     rootApi.paths->forEach(path) {
-    	log(path.relativePath);
-     };
-
      var paths: Collection(Path) := rootApi.paths->select(p|matchesRelative(self.requestspecification.url, p.relativePath));
      var operations: Collection(Operation) := paths.getOperationByHTTPMethod(self.requestspecification.method);
 
@@ -48,16 +44,6 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
 
 	 var operation: Operation = operations->asSequence()->first();
 
-     operation.responses->forEach (resp) {
-     	log("Response Key: " + resp.key);
-     	log("Response Key: " + resp.value.schema.type.toString());
-     	resp.value.schema.properties->forEach (prop) {
-     		log("   PropName: " + prop.name);
-     		log("   PropType: " + prop.schema.type.toString())
-     	};
-     };
-
-
      var statusMatcher = self.responsespecification.statusmatcher;
      assert fatal ( statusMatcher != null )
      			with log("There is no status matcher assigned to " + self.requestspecification.url + ".");
@@ -66,7 +52,7 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
 
      var responses = operation.responses->select(r| isIn.value->includes(r.key));
      assert fatal (responses->size() = 1)
-     		with log("The response choice is ambiguous or not present.");
+     		with log("The response choice for " + self.requestspecification.url + " with status " + isIn.value->asSequence()->first()  + " is ambiguous or not present.");
 
      var response : ResponseEntry = responses->asSequence()->first();
 
@@ -76,14 +62,12 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
 }
 
 helper getXPaths(basePath: String, schema: Schema): Set(String) {
-
 	// Happens eg. for respones that just have a description
 	if (schema = null) {
 		return OrderedSet{};
 	};
 
 	if (schema.type.toString() != "object") {
-		log("Returning: " + basePath);
 		return basePath->asSet()
 	};
 
@@ -102,13 +86,7 @@ helper getXPaths(basePath: String, schema: Schema): Set(String) {
 
 helper matchesRelative(url: String, relativePath: String): Boolean {
 	var partsUrl : Sequence(String) := url.tokenize("/");
-	partsUrl->forEach (v) {
-		log("Parts URL " + v);
-	};
 	var partsPath : Sequence(String) := relativePath.tokenize("/")[String];
-	partsPath->forEach (v) {
-		log("Parts Path " + v);
-	};
 
 	var indices := Sequence{1..partsPath->size()}[Integer];
 	if (partsUrl->size() != partsPath->size()) {
@@ -144,13 +122,8 @@ mapping ResponseSpecification::populateresponseSpecification(resp: ResponseEntry
         xPathMatchers := xPathMatchers->append(bodyMatcher);
 	 };
 
-	 var bmg = object BodyMatcherGroup {
+	 var bmg := object BodyMatcherGroup {
 	  	bodymatcher := otherMatchers->union(xPathMatchers);
 	 };
      bodymatchergroup := bmg;
-
-
-	 bodymatchergroup.bodymatcher->forEach(bm) {
-	 	log("In Bodymatchers: " + bm.matcher.oclAsType(HasXPath).xPath)
-	 };
 }
