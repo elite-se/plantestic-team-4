@@ -7,54 +7,55 @@ import de.unia.se.plantestic.generated.*
 import de.unia.se.plantestic.generated.impl.*
 
 object ConfigFileParser {
-	
+
 	@Suppress("UNCHECKED_CAST")
 	fun loadConfig(configFile: File?): EObject {
-		
+
 		ConfigmetamodelPackageImpl.init()
 		ConfigmetamodelFactoryImpl.init()
-		var factory = ConfigmetamodelFactoryImpl()
-		var configList : ConfigList = factory.createConfigList()
-		
+		val factory = ConfigmetamodelFactoryImpl()
+		val configList : ConfigList = factory.createConfigList()
+
 		if (configFile != null) {
-			var tomlMap = Toml().read(String(configFile.readBytes())).toMap()
-			
+			val tomlMap = Toml().read(String(configFile.readBytes())).toMap()
+
 			for(key in tomlMap.keys) {
-				
-				var valueMap = tomlMap.get(key) as Map<String, Any>
-				
-				var asyncConfig : AsyncRequestConfig = factory.createAsyncRequestConfig()
-				
+				if (key == "SWAGGER") continue;
+
+				val valueMap = tomlMap.get(key) as Map<String, Any>
+
+				val asyncConfig : AsyncRequestConfig = factory.createAsyncRequestConfig()
+
 				setAsyncParameters(asyncConfig, valueMap, key)
-				
+
 				if (valueMap.containsKey("requestParameter")) {
-					var requestParameterList = valueMap.get("requestParameter") as List<List<String>>
+					val requestParameterList = valueMap.get("requestParameter") as List<List<String>>
 					for(paramPair in requestParameterList) {
-						var requestParameter = factory.createRequestParameter()
+						val requestParameter = factory.createRequestParameter()
 						requestParameter.setRequestVariableName(paramPair[0])
 						requestParameter.setValue(paramPair[1])
-						
+
 						asyncConfig.getRequestParameter().add(requestParameter)
 					}
 				}
-				
+
 				if (valueMap.containsKey("responseParameter")) {
-					var responseParameterList = valueMap.get("responseParameter") as List<List<String>>
+					val responseParameterList = valueMap.get("responseParameter") as List<List<String>>
 					for(paramPair in responseParameterList) {
-						var responseParameter = factory.createResponseParameter()
+						val responseParameter = factory.createResponseParameter()
 						responseParameter.setResponseVariableName(paramPair[0])
 						responseParameter.setXPath(paramPair[1])
-						
+
 						asyncConfig.getResponseParameter().add(responseParameter)
 					}
 				}
-				
+
 				configList.getAsyncConfig().add(asyncConfig)
 			}
 		}
 		return configList
 	}
-	
+
 	fun setAsyncParameters(asyncConfig: AsyncRequestConfig, valueMap: Map<String, Any>, key: String) {
 		asyncConfig.setId(key)
 		asyncConfig.setTimeout((valueMap.get("timeout") as Long).toInt())

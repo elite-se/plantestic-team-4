@@ -1,9 +1,6 @@
 plantType1 = '1'
 plantType2 = '2'
 
-[SWAGGER]
-    url = 'http://localhost:8080/swagger.json'
-
 [FA]
     username = 'Test'
     password = 'password'

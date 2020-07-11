@@ -1,0 +1,2 @@
+[SWAGGER]
+    url = "http://localhost:8080/swagger.json"
