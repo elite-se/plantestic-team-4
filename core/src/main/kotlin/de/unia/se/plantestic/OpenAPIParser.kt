@@ -7,11 +7,10 @@ import java.io.File
 import com.moandjiezana.toml.Toml
 import java.lang.Exception
 
-class OpenAPIParser constructor(private val inputFile: File) {
+class OpenAPIParser constructor(private val configFile: File) {
 
     fun generateModel() : EObject? {
-        val confname = inputFile.absolutePath.substringBeforeLast(".") + "_config.toml"
-        val tomlMap = Toml().read(File(confname))
+        val tomlMap = Toml().read(configFile)
 
         val conf = tomlMap.getTable("SWAGGER") ?: return null;
         if (conf.isEmpty) return null;
