@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see configmetamodel.ConfigmetamodelPackage
+ * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage
  * @generated
  */
 public class ConfigmetamodelSwitch<T> extends Switch<T> {

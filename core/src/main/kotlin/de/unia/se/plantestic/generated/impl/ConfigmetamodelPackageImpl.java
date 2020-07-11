@@ -62,7 +62,7 @@ public class ConfigmetamodelPackageImpl extends EPackageImpl implements Configme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see configmetamodel.ConfigmetamodelPackage#eNS_URI
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -360,7 +360,7 @@ public class ConfigmetamodelPackageImpl extends EPackageImpl implements Configme
 		initEAttribute(getAsyncRequestConfig_Timeout(), ecorePackage.getEInt(), "timeout", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsyncRequestConfig_RequestMethod(), ecorePackage.getEString(), "requestMethod", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsyncRequestConfig_RequestURL(), ecorePackage.getEString(), "requestURL", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsyncRequestConfig_ResponseStatusCode(), ecorePackage.getEInt(), "responseStatusCode", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsyncRequestConfig_ResponseStatusCode(), ecorePackage.getEString(), "responseStatusCode", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsyncRequestConfig_RequestParameter(), this.getRequestParameter(), null, "requestParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAsyncRequestConfig_ResponseParameter(), this.getResponseParameter(), null, "responseParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

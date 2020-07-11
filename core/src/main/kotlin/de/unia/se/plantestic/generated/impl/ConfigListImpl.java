@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link configmetamodel.impl.ConfigListImpl#getAsyncConfig <em>Async Config</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.ConfigListImpl#getAsyncConfig <em>Async Config</em>}</li>
  * </ul>
  *
  * @generated

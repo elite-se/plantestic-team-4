@@ -9,8 +9,8 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated configmetamodel -->
       <package
-            uri="urn:www.pst.ifi.lmu.de/knapp/pkg"
-            class="configmetamodel.ConfigmetamodelPackage"
+            uri="http://www.example.org/configmetamodel"
+            class="de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage"
             genModel="src/main/resources/metamodels/config/configmetamodel.genmodel"/>
    </extension>
 

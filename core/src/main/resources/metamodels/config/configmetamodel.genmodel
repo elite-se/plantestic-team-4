@@ -4,7 +4,8 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>configmetamodel.ecore</foreignModel>
-  <genPackages prefix="Configmetamodel" disposableProviderFactory="true" ecorePackage="configmetamodel.ecore#/">
+  <genPackages prefix="Configmetamodel" basePackage="de.unia.se.plantestic.generated"
+      disposableProviderFactory="true" ecorePackage="configmetamodel.ecore#/">
     <genClasses ecoreClass="configmetamodel.ecore#//ConfigList">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configmetamodel.ecore#//ConfigList/asyncConfig"/>
     </genClasses>

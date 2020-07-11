@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link configmetamodel.impl.ResponseParameterImpl#getResponseVariableName <em>Response Variable Name</em>}</li>
- *   <li>{@link configmetamodel.impl.ResponseParameterImpl#getXPath <em>XPath</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl#getResponseVariableName <em>Response Variable Name</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl#getXPath <em>XPath</em>}</li>
  * </ul>
  *
  * @generated

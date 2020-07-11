@@ -28,13 +28,13 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getId <em>Id</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getTimeout <em>Timeout</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getRequestMethod <em>Request Method</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getRequestURL <em>Request URL</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getResponseStatusCode <em>Response Status Code</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getRequestParameter <em>Request Parameter</em>}</li>
- *   <li>{@link configmetamodel.impl.AsyncRequestConfigImpl#getResponseParameter <em>Response Parameter</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getId <em>Id</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getTimeout <em>Timeout</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getRequestMethod <em>Request Method</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getRequestURL <em>Request URL</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getResponseStatusCode <em>Response Status Code</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getRequestParameter <em>Request Parameter</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl#getResponseParameter <em>Response Parameter</em>}</li>
  * </ul>
  *
  * @generated
@@ -128,7 +128,7 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int RESPONSE_STATUS_CODE_EDEFAULT = 0;
+	protected static final String RESPONSE_STATUS_CODE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getResponseStatusCode() <em>Response Status Code</em>}' attribute.
@@ -138,7 +138,7 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected int responseStatusCode = RESPONSE_STATUS_CODE_EDEFAULT;
+	protected String responseStatusCode = RESPONSE_STATUS_CODE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRequestParameter() <em>Request Parameter</em>}' reference list.
@@ -277,7 +277,7 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public int getResponseStatusCode() {
+	public String getResponseStatusCode() {
 		return responseStatusCode;
 	}
 
@@ -287,8 +287,8 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public void setResponseStatusCode(int newResponseStatusCode) {
-		int oldResponseStatusCode = responseStatusCode;
+	public void setResponseStatusCode(String newResponseStatusCode) {
+		String oldResponseStatusCode = responseStatusCode;
 		responseStatusCode = newResponseStatusCode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE, oldResponseStatusCode, responseStatusCode));
@@ -368,7 +368,7 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 				setRequestURL((String)newValue);
 				return;
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE:
-				setResponseStatusCode((Integer)newValue);
+				setResponseStatusCode((String)newValue);
 				return;
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER:
 				getRequestParameter().clear();
@@ -432,7 +432,7 @@ public class AsyncRequestConfigImpl extends MinimalEObjectImpl.Container impleme
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_URL:
 				return REQUEST_URL_EDEFAULT == null ? requestURL != null : !REQUEST_URL_EDEFAULT.equals(requestURL);
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE:
-				return responseStatusCode != RESPONSE_STATUS_CODE_EDEFAULT;
+				return RESPONSE_STATUS_CODE_EDEFAULT == null ? responseStatusCode != null : !RESPONSE_STATUS_CODE_EDEFAULT.equals(responseStatusCode);
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER:
 				return requestParameter != null && !requestParameter.isEmpty();
 			case ConfigmetamodelPackage.ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER:

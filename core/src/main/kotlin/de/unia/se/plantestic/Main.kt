@@ -120,46 +120,35 @@ object Main {
 	fun loadConfig(configFile: File?): EObject {
 		
 		// TODO assert that config File is null only if there are no async requests
+		var factory = ConfigmetamodelFactoryImpl()
+		var configList : ConfigList = factory.createConfigList()
 		
 		if (configFile != null) {
 			var tomlMap = Toml().read(String(configFile.readBytes())).toMap()
 			
 			for(key in tomlMap.keys) {
-				println(key)
+				var valueMap = tomlMap.get(key) as Map<String, Any>
+				
+				var asyncConfig : AsyncRequestConfig = factory.createAsyncRequestConfig()
+				
+				asyncConfig.setId(key)
+				asyncConfig.setTimeout(valueMap.get("timeout") as Int)
+				asyncConfig.setRequestMethod(valueMap.get("requestMethod") as String)
+				asyncConfig.setRequestURL(valueMap.get("requestURL") as String)
+				asyncConfig.setResponseStatusCode(valueMap.get("responseStatus").toString())
+				
+				// TODO response parameter
+				// TODO request parameter
+				
+				
+				
+				configList.getAsyncConfig().add(asyncConfig)
 			}
 		}
 		
-		var factory = ConfigmetamodelFactoryImpl()
 		
-		var asyncConfig : AsyncRequestConfig = factory.createAsyncRequestConfig()
-		asyncConfig.setId("testid")
-		asyncConfig.setTimeout(100)
-		asyncConfig.setRequestMethod("GET")
-		asyncConfig.setRequestURL("/test")
-		asyncConfig.setResponseStatusCode(200)
-		
-		var configList : ConfigList = factory.createConfigList()
-		configList.getAsyncConfig().add(asyncConfig)
-		
+		println(configList)
 		return configList
-	}
-	
-	fun unnestTomlMap(prefix: String, tree:Map<String, Any>):Map<String, Any> {
-        var resultMap: MutableMap<String, Any> = HashMap<String, Any>()
-        for (entry: Map.Entry<String, Any> in tree.entries) {
-            var identifierPath: String = prefix + entry.key
-            if(entry.value is Map<*, *>){
-                resultMap.putAll(unnestTomlMap(identifierPath + ".", entry.value as (Map<String, Any>)))
-            } else {
-                resultMap.put(identifierPath, entry.value)
-            }
-        }
-        return resultMap
-	}
-	
-	fun addAsyncRequestInformation(requestResponsePairsModel: EObject, tomlMap: Map<String, Any>) {
-		
-		
 	}
 
     @JvmStatic

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see configmetamodel.ConfigmetamodelFactory
+ * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelFactory
  * @model kind="package"
  * @generated
  */
@@ -38,7 +38,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "urn:www.pst.ifi.lmu.de/knapp/pkg";
+	String eNS_URI = "http://www.example.org/configmetamodel";
 
 	/**
 	 * The package namespace name.
@@ -46,7 +46,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pkg";
+	String eNS_PREFIX = "configmetamodel";
 
 	/**
 	 * The singleton instance of the package.
@@ -57,11 +57,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 	ConfigmetamodelPackage eINSTANCE = de.unia.se.plantestic.generated.impl.ConfigmetamodelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link configmetamodel.impl.ConfigListImpl <em>Config List</em>}' class.
+	 * The meta object id for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.ConfigListImpl <em>Config List</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see configmetamodel.impl.ConfigListImpl
-	 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getConfigList()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigListImpl
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getConfigList()
 	 * @generated
 	 */
 	int CONFIG_LIST = 0;
@@ -94,11 +94,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int CONFIG_LIST_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link configmetamodel.impl.AsyncRequestConfigImpl <em>Async Request Config</em>}' class.
+	 * The meta object id for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl <em>Async Request Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see configmetamodel.impl.AsyncRequestConfigImpl
-	 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getAsyncRequestConfig()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getAsyncRequestConfig()
 	 * @generated
 	 */
 	int ASYNC_REQUEST_CONFIG = 1;
@@ -185,11 +185,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int ASYNC_REQUEST_CONFIG_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link configmetamodel.impl.RequestParameterImpl <em>Request Parameter</em>}' class.
+	 * The meta object id for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl <em>Request Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see configmetamodel.impl.RequestParameterImpl
-	 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getRequestParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getRequestParameter()
 	 * @generated
 	 */
 	int REQUEST_PARAMETER = 2;
@@ -231,11 +231,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int REQUEST_PARAMETER_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link configmetamodel.impl.ResponseParameterImpl <em>Response Parameter</em>}' class.
+	 * The meta object id for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl <em>Response Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see configmetamodel.impl.ResponseParameterImpl
-	 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getResponseParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl
+	 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getResponseParameter()
 	 * @generated
 	 */
 	int RESPONSE_PARAMETER = 3;
@@ -278,172 +278,172 @@ public interface ConfigmetamodelPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link configmetamodel.ConfigList <em>Config List</em>}'.
+	 * Returns the meta object for class '{@link de.unia.se.plantestic.generated.configmetamodel.ConfigList <em>Config List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Config List</em>'.
-	 * @see configmetamodel.ConfigList
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigList
 	 * @generated
 	 */
 	EClass getConfigList();
 
 	/**
-	 * Returns the meta object for the reference list '{@link configmetamodel.ConfigList#getAsyncConfig <em>Async Config</em>}'.
+	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.ConfigList#getAsyncConfig <em>Async Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Async Config</em>'.
-	 * @see configmetamodel.ConfigList#getAsyncConfig()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigList#getAsyncConfig()
 	 * @see #getConfigList()
 	 * @generated
 	 */
 	EReference getConfigList_AsyncConfig();
 
 	/**
-	 * Returns the meta object for class '{@link configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
+	 * Returns the meta object for class '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Async Request Config</em>'.
-	 * @see configmetamodel.AsyncRequestConfig
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig
 	 * @generated
 	 */
 	EClass getAsyncRequestConfig();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.AsyncRequestConfig#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getId()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getId()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Timeout</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getTimeout()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getTimeout()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_Timeout();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request Method</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getRequestMethod()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestMethod()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_RequestMethod();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request URL</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getRequestURL()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestURL()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_RequestURL();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Response Status Code</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getResponseStatusCode()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseStatusCode()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EAttribute getAsyncRequestConfig_ResponseStatusCode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}'.
+	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Request Parameter</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getRequestParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EReference getAsyncRequestConfig_RequestParameter();
 
 	/**
-	 * Returns the meta object for the reference list '{@link configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}'.
+	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Response Parameter</em>'.
-	 * @see configmetamodel.AsyncRequestConfig#getResponseParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
 	 */
 	EReference getAsyncRequestConfig_ResponseParameter();
 
 	/**
-	 * Returns the meta object for class '{@link configmetamodel.RequestParameter <em>Request Parameter</em>}'.
+	 * Returns the meta object for class '{@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Request Parameter</em>'.
-	 * @see configmetamodel.RequestParameter
+	 * @see de.unia.se.plantestic.generated.configmetamodel.RequestParameter
 	 * @generated
 	 */
 	EClass getRequestParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.RequestParameter#getRequestVariableName <em>Request Variable Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter#getRequestVariableName <em>Request Variable Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Request Variable Name</em>'.
-	 * @see configmetamodel.RequestParameter#getRequestVariableName()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.RequestParameter#getRequestVariableName()
 	 * @see #getRequestParameter()
 	 * @generated
 	 */
 	EAttribute getRequestParameter_RequestVariableName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.RequestParameter#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see configmetamodel.RequestParameter#getValue()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.RequestParameter#getValue()
 	 * @see #getRequestParameter()
 	 * @generated
 	 */
 	EAttribute getRequestParameter_Value();
 
 	/**
-	 * Returns the meta object for class '{@link configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
+	 * Returns the meta object for class '{@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Response Parameter</em>'.
-	 * @see configmetamodel.ResponseParameter
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ResponseParameter
 	 * @generated
 	 */
 	EClass getResponseParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.ResponseParameter#getResponseVariableName <em>Response Variable Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter#getResponseVariableName <em>Response Variable Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Response Variable Name</em>'.
-	 * @see configmetamodel.ResponseParameter#getResponseVariableName()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ResponseParameter#getResponseVariableName()
 	 * @see #getResponseParameter()
 	 * @generated
 	 */
 	EAttribute getResponseParameter_ResponseVariableName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link configmetamodel.ResponseParameter#getXPath <em>XPath</em>}'.
+	 * Returns the meta object for the attribute '{@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter#getXPath <em>XPath</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>XPath</em>'.
-	 * @see configmetamodel.ResponseParameter#getXPath()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ResponseParameter#getXPath()
 	 * @see #getResponseParameter()
 	 * @generated
 	 */
@@ -473,11 +473,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link configmetamodel.impl.ConfigListImpl <em>Config List</em>}' class.
+		 * The meta object literal for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.ConfigListImpl <em>Config List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see configmetamodel.impl.ConfigListImpl
-		 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getConfigList()
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigListImpl
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getConfigList()
 		 * @generated
 		 */
 		EClass CONFIG_LIST = eINSTANCE.getConfigList();
@@ -491,11 +491,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EReference CONFIG_LIST__ASYNC_CONFIG = eINSTANCE.getConfigList_AsyncConfig();
 
 		/**
-		 * The meta object literal for the '{@link configmetamodel.impl.AsyncRequestConfigImpl <em>Async Request Config</em>}' class.
+		 * The meta object literal for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl <em>Async Request Config</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see configmetamodel.impl.AsyncRequestConfigImpl
-		 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getAsyncRequestConfig()
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.AsyncRequestConfigImpl
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getAsyncRequestConfig()
 		 * @generated
 		 */
 		EClass ASYNC_REQUEST_CONFIG = eINSTANCE.getAsyncRequestConfig();
@@ -557,11 +557,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EReference ASYNC_REQUEST_CONFIG__RESPONSE_PARAMETER = eINSTANCE.getAsyncRequestConfig_ResponseParameter();
 
 		/**
-		 * The meta object literal for the '{@link configmetamodel.impl.RequestParameterImpl <em>Request Parameter</em>}' class.
+		 * The meta object literal for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl <em>Request Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see configmetamodel.impl.RequestParameterImpl
-		 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getRequestParameter()
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getRequestParameter()
 		 * @generated
 		 */
 		EClass REQUEST_PARAMETER = eINSTANCE.getRequestParameter();
@@ -583,11 +583,11 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EAttribute REQUEST_PARAMETER__VALUE = eINSTANCE.getRequestParameter_Value();
 
 		/**
-		 * The meta object literal for the '{@link configmetamodel.impl.ResponseParameterImpl <em>Response Parameter</em>}' class.
+		 * The meta object literal for the '{@link de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl <em>Response Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see configmetamodel.impl.ResponseParameterImpl
-		 * @see configmetamodel.impl.ConfigmetamodelPackageImpl#getResponseParameter()
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ResponseParameterImpl
+		 * @see de.unia.se.plantestic.generated.configmetamodel.impl.ConfigmetamodelPackageImpl#getResponseParameter()
 		 * @generated
 		 */
 		EClass RESPONSE_PARAMETER = eINSTANCE.getResponseParameter();

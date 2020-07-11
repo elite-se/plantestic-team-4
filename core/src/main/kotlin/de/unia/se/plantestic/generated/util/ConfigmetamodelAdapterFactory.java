@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see configmetamodel.ConfigmetamodelPackage
+ * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage
  * @generated
  */
 public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
@@ -104,13 +104,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link configmetamodel.ConfigList <em>Config List</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.unia.se.plantestic.generated.configmetamodel.ConfigList <em>Config List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see configmetamodel.ConfigList
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigList
 	 * @generated
 	 */
 	public Adapter createConfigListAdapter() {
@@ -118,13 +118,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig <em>Async Request Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see configmetamodel.AsyncRequestConfig
+	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig
 	 * @generated
 	 */
 	public Adapter createAsyncRequestConfigAdapter() {
@@ -132,13 +132,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link configmetamodel.RequestParameter <em>Request Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see configmetamodel.RequestParameter
+	 * @see de.unia.se.plantestic.generated.configmetamodel.RequestParameter
 	 * @generated
 	 */
 	public Adapter createRequestParameterAdapter() {
@@ -146,13 +146,13 @@ public class ConfigmetamodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see configmetamodel.ResponseParameter
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ResponseParameter
 	 * @generated
 	 */
 	public Adapter createResponseParameterAdapter() {

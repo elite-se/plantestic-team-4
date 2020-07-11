@@ -15,16 +15,16 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getId <em>Id</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}</li>
- *   <li>{@link configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getId <em>Id</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}</li>
  * </ul>
  *
- * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig()
+ * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface AsyncRequestConfig extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_Id()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_Id()
 	 * @model
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link configmetamodel.AsyncRequestConfig#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -57,14 +57,14 @@ public interface AsyncRequestConfig extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Timeout</em>' attribute.
 	 * @see #setTimeout(int)
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_Timeout()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_Timeout()
 	 * @model
 	 * @generated
 	 */
 	int getTimeout();
 
 	/**
-	 * Sets the value of the '{@link configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}' attribute.
+	 * Sets the value of the '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getTimeout <em>Timeout</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Timeout</em>' attribute.
@@ -79,14 +79,14 @@ public interface AsyncRequestConfig extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Request Method</em>' attribute.
 	 * @see #setRequestMethod(String)
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestMethod()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestMethod()
 	 * @model
 	 * @generated
 	 */
 	String getRequestMethod();
 
 	/**
-	 * Sets the value of the '{@link configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}' attribute.
+	 * Sets the value of the '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestMethod <em>Request Method</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Request Method</em>' attribute.
@@ -101,14 +101,14 @@ public interface AsyncRequestConfig extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Request URL</em>' attribute.
 	 * @see #setRequestURL(String)
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestURL()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestURL()
 	 * @model
 	 * @generated
 	 */
 	String getRequestURL();
 
 	/**
-	 * Sets the value of the '{@link configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}' attribute.
+	 * Sets the value of the '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestURL <em>Request URL</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Request URL</em>' attribute.
@@ -122,30 +122,30 @@ public interface AsyncRequestConfig extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Response Status Code</em>' attribute.
-	 * @see #setResponseStatusCode(int)
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_ResponseStatusCode()
+	 * @see #setResponseStatusCode(String)
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_ResponseStatusCode()
 	 * @model
 	 * @generated
 	 */
-	int getResponseStatusCode();
+	String getResponseStatusCode();
 
 	/**
-	 * Sets the value of the '{@link configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}' attribute.
+	 * Sets the value of the '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseStatusCode <em>Response Status Code</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Response Status Code</em>' attribute.
 	 * @see #getResponseStatusCode()
 	 * @generated
 	 */
-	void setResponseStatusCode(int value);
+	void setResponseStatusCode(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Request Parameter</b></em>' reference list.
-	 * The list contents are of type {@link configmetamodel.RequestParameter}.
+	 * The list contents are of type {@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Request Parameter</em>' reference list.
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestParameter()
 	 * @model
 	 * @generated
 	 */
@@ -153,11 +153,11 @@ public interface AsyncRequestConfig extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Response Parameter</b></em>' reference list.
-	 * The list contents are of type {@link configmetamodel.ResponseParameter}.
+	 * The list contents are of type {@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Response Parameter</em>' reference list.
-	 * @see configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_ResponseParameter()
+	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_ResponseParameter()
 	 * @model
 	 * @generated
 	 */

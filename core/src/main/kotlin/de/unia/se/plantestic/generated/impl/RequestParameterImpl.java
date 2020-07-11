@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link configmetamodel.impl.RequestParameterImpl#getRequestVariableName <em>Request Variable Name</em>}</li>
- *   <li>{@link configmetamodel.impl.RequestParameterImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl#getRequestVariableName <em>Request Variable Name</em>}</li>
+ *   <li>{@link de.unia.se.plantestic.generated.configmetamodel.impl.RequestParameterImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
