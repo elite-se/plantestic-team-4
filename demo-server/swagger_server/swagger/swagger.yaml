@@ -37,7 +37,7 @@ paths:
         required: true
         type: "integer"
       responses:
-        "201":
+        "200":
           description: "created"
           schema:
             $ref: "#/definitions/Plant"
@@ -112,16 +112,16 @@ paths:
       summary: "Tells the farmer a plant is ready to reap."
       operationId: "notify_farmer"
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "plantId"
+      - name: "plantID"
+        in: "formData"
         description: "ID of plant that is ready"
-        required: false
-        schema:
-          $ref: "#/definitions/plantId"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         "200":
           description: "ok"
@@ -163,7 +163,7 @@ paths:
       responses:
         "200":
           description: "Plant is there"
-        "500":
+        "404":
           description: "No such Plant"
       x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
 definitions:
@@ -182,6 +182,8 @@ definitions:
       plant_type: 6
   inline_response_200:
     type: "object"
+    required:
+      - "seeds"
     properties:
       seeds:
         type: "integer"
@@ -215,22 +217,18 @@ definitions:
       season: "spring"
   inline_response_200_2:
     type: "object"
+    required:
+    - "ttgrow"
     properties:
       ttgrow:
         type: "integer"
         example: 42
     example:
       ttgrow: 42
-  plantId:
-    type: "object"
-    required:
-    - "plantID"
-    properties:
-      plantID:
-        type: "integer"
-        format: "int64"
   inline_response_200_3:
     type: "object"
+    required:
+    - "stored"
     properties:
       stored:
         type: "integer"

@@ -6,7 +6,6 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.inline_response2003 import InlineResponse2003  # noqa: E501
-from swagger_server.models.plant_id import PlantId  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -40,12 +39,12 @@ class TestFarmerController(BaseTestCase):
 
         Tells the farmer a plant is ready to reap.
         """
-        plantId = PlantId()
+        data = dict(plantID=789)
         response = self.client.open(
             '/mdd-team4/Garden/1.0.0/farmer/grown',
             method='POST',
-            data=json.dumps(plantId),
-            content_type='application/json')
+            data=data,
+            content_type='application/x-www-form-urlencoded')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

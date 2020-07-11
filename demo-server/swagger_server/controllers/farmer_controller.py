@@ -28,25 +28,23 @@ def get_plant_storage(plant_type):  # noqa: E501
     return InlineResponse2003(plantStorage[plant_type])
 
 
-def notify_farmer(plantId=None, isrequest=True):  # noqa: E501
+def notify_farmer(plantID=None, isrequest=True):  # noqa: E501
     """Tells the farmer a plant is ready to reap.
 
      # noqa: E501
 
     :param plantId: ID of plant that is ready
-    :type plantId: dict | bytes
+    :type plantId: int
 
     :rtype: None
     """
-    if isrequest and connexion.request.is_json:
-        plantId = PlantId.from_dict(connexion.request.get_json())  # noqa: E501
+    print(plantID)
+    if not isinstance(plantID, PlantId):
+        plantID = PlantId(plantID)
 
-    if not isinstance(plantId, PlantId):
-        plantId = PlantId(plantId)
+    collectedPIDs[plantID.plant_id] = True
 
-    collectedPIDs[plantId.plant_id] = True
-
-    ptype = db.getPlantType(plantId)
+    ptype = db.getPlantType(plantID)
     if not plantStorage.get(ptype):
         plantStorage[ptype] = 1
 

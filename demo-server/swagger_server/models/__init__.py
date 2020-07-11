@@ -9,4 +9,3 @@ from swagger_server.models.inline_response2001_foo import InlineResponse2001Foo
 from swagger_server.models.inline_response2002 import InlineResponse2002
 from swagger_server.models.inline_response2003 import InlineResponse2003
 from swagger_server.models.plant import Plant
-from swagger_server.models.plant_id import PlantId

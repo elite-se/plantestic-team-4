@@ -60,5 +60,7 @@ class InlineResponse2002(Model):
         :param ttgrow: The ttgrow of this InlineResponse2002.
         :type ttgrow: int
         """
+        if ttgrow is None:
+            raise ValueError("Invalid value for `ttgrow`, must not be `None`")  # noqa: E501
 
         self._ttgrow = ttgrow
