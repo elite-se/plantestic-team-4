@@ -3,8 +3,8 @@ import six
 
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.models.plant import Plant  # noqa: E501
-from swagger_server.models.plant_id import PlantId
 from swagger_server import util
+
 
 from swagger_server.controllers.plant_controller import get_time_to_grow_of_plant
 from swagger_server.controllers.farmer_controller import notify_farmer
@@ -40,7 +40,7 @@ def add_plant(plant_type):  # noqa: E501
         seededPlants[plant_type] = 0
     
     pid = db.addPlant(plant_type)
-    plant = Plant(id=pid, plant_type=plant_type)
+    plant = Plant(plant_id=pid, plant_type=plant_type)
     seededPlants[plant_type] += 1
 
     #clean up tasks
@@ -62,4 +62,4 @@ def get_seeds():  # noqa: E501
     """
     global seededPlants
 
-    return sum(seededPlants.values())
+    return InlineResponse200(sum(seededPlants.values()))

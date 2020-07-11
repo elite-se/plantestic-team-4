@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.inline_response2001_foo import InlineResponse2001Foo
 from swagger_server import util
 
 
@@ -15,21 +16,26 @@ class InlineResponse2001(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, season: str=None):  # noqa: E501
+    def __init__(self, season: str=None, foo: InlineResponse2001Foo=None):  # noqa: E501
         """InlineResponse2001 - a model defined in Swagger
 
         :param season: The season of this InlineResponse2001.  # noqa: E501
         :type season: str
+        :param foo: The foo of this InlineResponse2001.  # noqa: E501
+        :type foo: InlineResponse2001Foo
         """
         self.swagger_types = {
-            'season': str
+            'season': str,
+            'foo': InlineResponse2001Foo
         }
 
         self.attribute_map = {
-            'season': 'season'
+            'season': 'season',
+            'foo': 'foo'
         }
 
         self._season = season
+        self._foo = foo
 
     @classmethod
     def from_dict(cls, dikt) -> 'InlineResponse2001':
@@ -60,5 +66,30 @@ class InlineResponse2001(Model):
         :param season: The season of this InlineResponse2001.
         :type season: str
         """
+        if season is None:
+            raise ValueError("Invalid value for `season`, must not be `None`")  # noqa: E501
 
         self._season = season
+
+    @property
+    def foo(self) -> InlineResponse2001Foo:
+        """Gets the foo of this InlineResponse2001.
+
+
+        :return: The foo of this InlineResponse2001.
+        :rtype: InlineResponse2001Foo
+        """
+        return self._foo
+
+    @foo.setter
+    def foo(self, foo: InlineResponse2001Foo):
+        """Sets the foo of this InlineResponse2001.
+
+
+        :param foo: The foo of this InlineResponse2001.
+        :type foo: InlineResponse2001Foo
+        """
+        if foo is None:
+            raise ValueError("Invalid value for `foo`, must not be `None`")  # noqa: E501
+
+        self._foo = foo
