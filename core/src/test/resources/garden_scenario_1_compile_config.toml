@@ -1,5 +1,5 @@
 [1]
-	timeout = 500
+	timeout = 5000
 	requestMethod = 'GET'
 	requestURL = '/farmer/hasplant/${plantId}'
 	responseStatus = 200
