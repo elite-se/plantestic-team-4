@@ -7,15 +7,15 @@ plantType2 = '2'
 [FA]
     username = 'Test'
     password = 'password'
-    path = '/farmer'
+    path = 'http://localhost:8080'
 
 
 [GA]
     username = 'Test'
     password = 'password'
-    path = '/garden'
+    path = 'http://localhost:8080'
 
 [PL]
     username = 'Test'
     password = 'password'
-    path = '/plant'
+    path = 'http://localhost:8080'

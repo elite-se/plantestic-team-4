@@ -6,30 +6,30 @@ participant "Plant" as PL
 
 activate FA
 
-FA -> GA : POST "garden/plant/${plantType1}"
+FA -> GA : POST "/garden/plant/${plantType1}"
 activate GA
-GA -> FA : 201 - (plantId1 : "plantId", plantType1 : "plantType")
+GA -> FA : 200 - (plantId1 : "plantId")
 
-GA -> PL : GET "plant/timetogrow/${plantType1}"
+GA -> PL : GET "/plant/timetogrow/${plantType1}"
 activate PL
-PL -> GA : 200 - (timetogrow1 : "timetogrow")
+PL -> GA : 200
 deactivate PL
 
-FA -> GA :  POST "garden/plant/${plantType2}"
+FA -> GA :  POST "/garden/plant/${plantType2}"
 activate GA
-GA -> FA : 201 - (plantId2 : "plantId", plantType2 : "plantType")
+GA -> FA : 200 - (plantId2 : "plantId")
 
-GA -> PL : GET "plant/timetogrow/${plantType2}"
+GA -> PL : GET "/plant/timetogrow/${plantType2}"
 activate PL
-PL -> GA : 200 - (timetogrow2 : "timetogrow")
+PL -> GA : 200
 deactivate PL
 
 
-GA -> FA : POST "farmer/grown" (plantID : "${plantId1}")
+GA -> FA : POST "/farmer/grown" (plantID : "${plantId1}")
 FA -> GA : 200
 deactivate GA
 
-GA -> FA : POST "farmer/grown" (plantID : "${plantId2}")
+GA -> FA : POST "/farmer/grown" (plantID : "${plantId2}")
 FA -> GA : 200
 deactivate GA
 
