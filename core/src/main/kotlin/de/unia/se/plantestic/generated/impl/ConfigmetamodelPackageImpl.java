@@ -353,7 +353,7 @@ public class ConfigmetamodelPackageImpl extends EPackageImpl implements Configme
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(configListEClass, ConfigList.class, "ConfigList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConfigList_AsyncConfig(), this.getAsyncRequestConfig(), null, "asyncConfig", null, 0, -1, ConfigList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfigList_AsyncConfig(), this.getAsyncRequestConfig(), null, "asyncConfig", null, 0, -1, ConfigList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(asyncRequestConfigEClass, AsyncRequestConfig.class, "AsyncRequestConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsyncRequestConfig_Id(), ecorePackage.getEString(), "id", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -361,8 +361,8 @@ public class ConfigmetamodelPackageImpl extends EPackageImpl implements Configme
 		initEAttribute(getAsyncRequestConfig_RequestMethod(), ecorePackage.getEString(), "requestMethod", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsyncRequestConfig_RequestURL(), ecorePackage.getEString(), "requestURL", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsyncRequestConfig_ResponseStatusCode(), ecorePackage.getEString(), "responseStatusCode", null, 0, 1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAsyncRequestConfig_RequestParameter(), this.getRequestParameter(), null, "requestParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAsyncRequestConfig_ResponseParameter(), this.getResponseParameter(), null, "responseParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAsyncRequestConfig_RequestParameter(), this.getRequestParameter(), null, "requestParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAsyncRequestConfig_ResponseParameter(), this.getResponseParameter(), null, "responseParameter", null, 0, -1, AsyncRequestConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(requestParameterEClass, RequestParameter.class, "RequestParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRequestParameter_RequestVariableName(), ecorePackage.getEString(), "requestVariableName", null, 0, 1, RequestParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

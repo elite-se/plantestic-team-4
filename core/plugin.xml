@@ -11,7 +11,15 @@
       <package
             uri="http://www.example.org/configmetamodel"
             class="de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage"
-            genModel="src/main/resources/metamodels/config/configmetamodel.genmodel"/>
+            genModel="src/main/resources/metamodels/config/Configmetamodel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Configmetamodel -->
+      <package
+            uri="http://www.example.org/Configmetamodel"
+            class="Configmetamodel.ConfigmetamodelPackage"
+            genModel="src/main/resources/metamodels/config/Configmetamodel.genmodel"/>
    </extension>
 
 </plugin>

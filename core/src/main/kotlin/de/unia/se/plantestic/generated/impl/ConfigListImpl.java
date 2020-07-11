@@ -8,13 +8,17 @@ import de.unia.se.plantestic.generated.ConfigmetamodelPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +35,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class ConfigListImpl extends MinimalEObjectImpl.Container implements ConfigList {
 	/**
-	 * The cached value of the '{@link #getAsyncConfig() <em>Async Config</em>}' reference list.
+	 * The cached value of the '{@link #getAsyncConfig() <em>Async Config</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAsyncConfig()
@@ -67,9 +71,23 @@ public class ConfigListImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public EList<AsyncRequestConfig> getAsyncConfig() {
 		if (asyncConfig == null) {
-			asyncConfig = new EObjectResolvingEList<AsyncRequestConfig>(AsyncRequestConfig.class, this, ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG);
+			asyncConfig = new EObjectContainmentEList<AsyncRequestConfig>(AsyncRequestConfig.class, this, ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG);
 		}
 		return asyncConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ConfigmetamodelPackage.CONFIG_LIST__ASYNC_CONFIG:
+				return ((InternalEList<?>)getAsyncConfig()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

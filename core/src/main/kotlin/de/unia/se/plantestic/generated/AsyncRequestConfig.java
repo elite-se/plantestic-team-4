@@ -140,25 +140,25 @@ public interface AsyncRequestConfig extends EObject {
 	void setResponseStatusCode(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Request Parameter</b></em>' reference list.
+	 * Returns the value of the '<em><b>Request Parameter</b></em>' containment reference list.
 	 * The list contents are of type {@link de.unia.se.plantestic.generated.configmetamodel.RequestParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Request Parameter</em>' reference list.
+	 * @return the value of the '<em>Request Parameter</em>' containment reference list.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_RequestParameter()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<RequestParameter> getRequestParameter();
 
 	/**
-	 * Returns the value of the '<em><b>Response Parameter</b></em>' reference list.
+	 * Returns the value of the '<em><b>Response Parameter</b></em>' containment reference list.
 	 * The list contents are of type {@link de.unia.se.plantestic.generated.configmetamodel.ResponseParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Response Parameter</em>' reference list.
+	 * @return the value of the '<em>Response Parameter</em>' containment reference list.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getAsyncRequestConfig_ResponseParameter()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ResponseParameter> getResponseParameter();

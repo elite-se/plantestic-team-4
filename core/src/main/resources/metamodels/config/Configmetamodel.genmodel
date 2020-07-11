@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/core/src" modelPluginID="core" modelName="Configmetamodel"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>Configmetamodel.ecore</foreignModel>
+  <genPackages prefix="Configmetamodel" disposableProviderFactory="true" ecorePackage="Configmetamodel.ecore#/">
+    <genClasses ecoreClass="Configmetamodel.ecore#//ConfigList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Configmetamodel.ecore#//ConfigList/asyncConfig"/>
+    </genClasses>
+    <genClasses ecoreClass="Configmetamodel.ecore#//AsyncRequestConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//AsyncRequestConfig/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//AsyncRequestConfig/timeout"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//AsyncRequestConfig/requestMethod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//AsyncRequestConfig/requestURL"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//AsyncRequestConfig/responseStatusCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Configmetamodel.ecore#//AsyncRequestConfig/requestParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Configmetamodel.ecore#//AsyncRequestConfig/responseParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Configmetamodel.ecore#//RequestParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//RequestParameter/requestVariableName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//RequestParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Configmetamodel.ecore#//ResponseParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//ResponseParameter/responseVariableName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Configmetamodel.ecore#//ResponseParameter/xPath"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,19 +1,105 @@
-modeltype config "strict" uses configmetamodel('http://www.example.org/configmetamodel');
+modeltype config "strict" uses Configmetamodel('http://www.example.org/Configmetamodel');
 modeltype reqres "strict" uses RequestResponsePairs('http://www.example.org/RequestResponsePairs');
 
 configuration property diagramName : String;
 
-transformation mergeQVTModels(in input: reqres, in configInput: config, out output: reqres);
+transformation merge(in input: reqres, in configInput: config, out output: reqres);
 
 main() {
     log('Started transforming RequestResponsePairs to RequestResponse pairs with async requests');
-
-	var configList := configInput.rootObjects()[ConfigList];
-    input.rootObjects()[Scenario].map scenario2Scenario(configList);
+    
+	var configList := configInput.rootObjects()->asSequence()->first();
+	var configRoot := configList.oclAsType(ConfigList);
+	log(configInput.toString());
+	log(configRoot.toString());
+	log(configList.toString());
+	
+	input.rootObjects()[Scenario].map scenario2Scenario(configRoot);
 }
 
 mapping Scenario::scenario2Scenario(configList: ConfigList): Scenario {
     log('Populating Scenario with async request information');
 
-    
+	scenarioName := self.scenarioName;
+    roundtrip := self.roundtrip -> map roundtrip2Roundtrip(configList);
+}
+
+mapping Roundtrip::roundtrip2Roundtrip(configList: ConfigList): Roundtrip {
+	log('Populating roundtrip');
+	
+	httprequest := self.httprequest;
+	httpresponse := self.httpresponse;
+	roundtripName := self.roundtripName;
+	precondition := self.precondition;
+	id := self.id;
+	
+	if(id != null){
+		assert fatal ( configList != null ) 
+			with log (' Async request found but config is null');
+	
+		asyncRoundtrip := generateAsyncRoundtrip(self.asyncRoundtrip, configList);
+	};
+}
+
+helper generateAsyncRoundtrip(asyncRoundtrip: Roundtrip, configList: ConfigList): Roundtrip {
+	log('Adding async roundtrip information');
+	
+	var roundtrip: Roundtrip := new Roundtrip();
+	
+	var c : AsyncRequestConfig := getConfigForId(configList, asyncRoundtrip.id);
+	
+	roundtrip.httprequest := generateHttpRequest(c, asyncRoundtrip.httprequest.receiver);
+	roundtrip.httpresponse := generateHttpResponse(c);
+	roundtrip.roundtripName := asyncRoundtrip.roundtripName;
+	
+	return roundtrip;
+}
+
+helper getConfigForId(configList: ConfigList, id: String): AsyncRequestConfig {
+	var configs : Collection(AsyncRequestConfig) := configList.asyncConfig->select(c: AsyncRequestConfig | c.id = id);
+	
+	assert fatal (not configs->isEmpty())
+		with log('No configuration found for id ' + id);
+	assert fatal (configs->size() = 1)
+		with log('Multiple configurations found for id ' + id);
+	
+	var c: AsyncRequestConfig := configs->asSequence()->first();
+	
+	return c;
+}
+
+helper generateHttpRequest(c: AsyncRequestConfig, receiver: String): HttpRequest {
+	var request : HttpRequest := new HttpRequest();
+	
+	request.httpMethod := c.requestMethod;
+	request.url := c.requestURL;
+	request.receiver := receiver;
+	
+	if(not c.requestParameter->isEmpty()){
+		request.httprequestdatum := c.requestParameter->map requestParameter2httprequestdatum();
+	};
+	
+	return request;
+}
+
+mapping RequestParameter::requestParameter2httprequestdatum(): HttpRequestDatum {
+	variableName := self.requestVariableName;
+	value := self.value;
+}
+
+helper generateHttpResponse(c: AsyncRequestConfig): HttpResponse {
+	var response : HttpResponse := new HttpResponse();
+	
+	response.httpStatus := c.responseStatusCode;
+	
+	if(not c.responseParameter->isEmpty()) {
+		response.httpresponsedatum := c.responseParameter->map responseParameter2httpresponsedatum();
+	};
+	
+	return response;
+}
+
+mapping ResponseParameter::responseParameter2httpresponsedatum(): HttpResponseDatum {
+	variableName := self.responseVariableName;
+	xPath := self.xPath;
 }

@@ -51,7 +51,6 @@ object ConfigFileParser {
 				configList.getAsyncConfig().add(asyncConfig)
 			}
 		}
-		
 		return configList
 	}
 	

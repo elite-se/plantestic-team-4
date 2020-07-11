@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ConfigList extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Async Config</b></em>' reference list.
+	 * Returns the value of the '<em><b>Async Config</b></em>' containment reference list.
 	 * The list contents are of type {@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Async Config</em>' reference list.
+	 * @return the value of the '<em>Async Config</em>' containment reference list.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigmetamodelPackage#getConfigList_AsyncConfig()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<AsyncRequestConfig> getAsyncConfig();

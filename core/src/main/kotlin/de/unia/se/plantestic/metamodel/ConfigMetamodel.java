@@ -101,7 +101,7 @@ public class ConfigMetamodel {
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(URI.createFileURI("configmetamodel.ecore"));
+		Resource resource = resourceSet.createResource(URI.createFileURI("Configmetamodel.ecore"));
 		resource.getContents().add(aPackage);
 		
 		StringWriter stringWriter = new StringWriter();

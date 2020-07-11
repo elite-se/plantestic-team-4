@@ -67,7 +67,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int CONFIG_LIST = 0;
 
 	/**
-	 * The feature id for the '<em><b>Async Config</b></em>' reference list.
+	 * The feature id for the '<em><b>Async Config</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -149,7 +149,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Request Parameter</b></em>' reference list.
+	 * The feature id for the '<em><b>Request Parameter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,7 +158,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 	int ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER = 5;
 
 	/**
-	 * The feature id for the '<em><b>Response Parameter</b></em>' reference list.
+	 * The feature id for the '<em><b>Response Parameter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -288,10 +288,10 @@ public interface ConfigmetamodelPackage extends EPackage {
 	EClass getConfigList();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.ConfigList#getAsyncConfig <em>Async Config</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.unia.se.plantestic.generated.configmetamodel.ConfigList#getAsyncConfig <em>Async Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Async Config</em>'.
+	 * @return the meta object for the containment reference list '<em>Async Config</em>'.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.ConfigList#getAsyncConfig()
 	 * @see #getConfigList()
 	 * @generated
@@ -364,10 +364,10 @@ public interface ConfigmetamodelPackage extends EPackage {
 	EAttribute getAsyncRequestConfig_ResponseStatusCode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter <em>Request Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Request Parameter</em>'.
+	 * @return the meta object for the containment reference list '<em>Request Parameter</em>'.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getRequestParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
@@ -375,10 +375,10 @@ public interface ConfigmetamodelPackage extends EPackage {
 	EReference getAsyncRequestConfig_RequestParameter();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter <em>Response Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Response Parameter</em>'.
+	 * @return the meta object for the containment reference list '<em>Response Parameter</em>'.
 	 * @see de.unia.se.plantestic.generated.configmetamodel.AsyncRequestConfig#getResponseParameter()
 	 * @see #getAsyncRequestConfig()
 	 * @generated
@@ -483,7 +483,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EClass CONFIG_LIST = eINSTANCE.getConfigList();
 
 		/**
-		 * The meta object literal for the '<em><b>Async Config</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Async Config</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -541,7 +541,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EAttribute ASYNC_REQUEST_CONFIG__RESPONSE_STATUS_CODE = eINSTANCE.getAsyncRequestConfig_ResponseStatusCode();
 
 		/**
-		 * The meta object literal for the '<em><b>Request Parameter</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Request Parameter</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -549,7 +549,7 @@ public interface ConfigmetamodelPackage extends EPackage {
 		EReference ASYNC_REQUEST_CONFIG__REQUEST_PARAMETER = eINSTANCE.getAsyncRequestConfig_RequestParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Response Parameter</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Response Parameter</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

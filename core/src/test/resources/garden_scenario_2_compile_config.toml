@@ -4,3 +4,10 @@
 	requestURL = '/farmer/storage/${plantType}'
 	responseStatus = 200
 	responseParameter = [['plantId5', '/plantId']]
+	
+[2]
+	timeout = 1
+	requestMethod = 'GET'
+	requestURL = '/farmer/storage/${plantType}'
+	responseStatus = 200
+	responseParameter = [['plantId5', '/plantId']]

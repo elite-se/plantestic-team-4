@@ -13,7 +13,7 @@ object MetaModelSetup {
     private val REST_ASSURED_METAMODEL_URI =
         URI.createURI(Resources.getResource("metamodels/restassured/RestAssured.ecore").toExternalForm())
 	private val CONFIG_METAMODEL_URI =
-        URI.createURI(Resources.getResource("metamodels/config/configmetamodel.ecore").toExternalForm())
+        URI.createURI(Resources.getResource("metamodels/config/Configmetamodel.ecore").toExternalForm())
 
     fun doSetup() {
         PumlStandaloneSetup.doSetup()

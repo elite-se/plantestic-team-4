@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="configmetamodel" nsURI="http://www.example.org/configmetamodel"
-    nsPrefix="configmetamodel">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Configmetamodel" nsURI="http://www.example.org/Configmetamodel"
+    nsPrefix="Configmetamodel">
   <eClassifiers xsi:type="ecore:EClass" name="ConfigList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="asyncConfig" upperBound="-1"
-        eType="#//AsyncRequestConfig"/>
+        eType="#//AsyncRequestConfig" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AsyncRequestConfig">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -13,9 +13,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestURL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseStatusCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requestParameter" upperBound="-1"
-        eType="#//RequestParameter"/>
+        eType="#//RequestParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="responseParameter" upperBound="-1"
-        eType="#//ResponseParameter"/>
+        eType="#//ResponseParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequestParameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestVariableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
