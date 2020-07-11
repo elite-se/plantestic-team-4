@@ -117,6 +117,8 @@ Example: ```(name1 : "value.value1", name2 : "value2")```
 ### Output expectation
 The generated test cases are in `core/plantestic-test/`.
 
+Some ClassCastExceptions may be thrown during the model transformation, but they are harmless and do not impact the transformation result.
+
 ## Demo
 Take the following test case generation from a minimal sequence diagram as an example:
 
