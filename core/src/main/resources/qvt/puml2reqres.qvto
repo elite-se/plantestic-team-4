@@ -15,7 +15,7 @@ main() {
 }
 
 mapping SequenceUml::transformUmlDiagram(): Scenario {
-    scenarioName := diagramName + "_puml";
+    scenarioName := diagramName;
     var roundtripId : Integer := 1;
 
     var umlElements : OrderedSet(SequenceElement) := self.umlElements->flattenSequenceElements();

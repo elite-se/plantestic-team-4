@@ -1,0 +1,3 @@
+[submodule "openapi-metamodel"]
+	path = openapi-metamodel
+	url = https://github.com/opendata-for-all/openapi-metamodel

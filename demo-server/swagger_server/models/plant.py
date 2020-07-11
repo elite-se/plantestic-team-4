@@ -15,25 +15,25 @@ class Plant(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: int=None, plant_type: int=None):  # noqa: E501
+    def __init__(self, plant_id: int=None, plant_type: int=None):  # noqa: E501
         """Plant - a model defined in Swagger
 
-        :param id: The id of this Plant.  # noqa: E501
-        :type id: int
+        :param plant_id: The plant_id of this Plant.  # noqa: E501
+        :type plant_id: int
         :param plant_type: The plant_type of this Plant.  # noqa: E501
         :type plant_type: int
         """
         self.swagger_types = {
-            'id': int,
+            'plant_id': int,
             'plant_type': int
         }
 
         self.attribute_map = {
-            'id': 'id',
+            'plant_id': 'plantId',
             'plant_type': 'plant_type'
         }
 
-        self._id = id
+        self._plant_id = plant_id
         self._plant_type = plant_type
 
     @classmethod
@@ -48,25 +48,25 @@ class Plant(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self) -> int:
-        """Gets the id of this Plant.
+    def plant_id(self) -> int:
+        """Gets the plant_id of this Plant.
 
 
-        :return: The id of this Plant.
+        :return: The plant_id of this Plant.
         :rtype: int
         """
-        return self._id
+        return self._plant_id
 
-    @id.setter
-    def id(self, id: int):
-        """Sets the id of this Plant.
+    @plant_id.setter
+    def plant_id(self, plant_id: int):
+        """Sets the plant_id of this Plant.
 
 
-        :param id: The id of this Plant.
-        :type id: int
+        :param plant_id: The plant_id of this Plant.
+        :type plant_id: int
         """
 
-        self._id = id
+        self._plant_id = plant_id
 
     @property
     def plant_type(self) -> int:

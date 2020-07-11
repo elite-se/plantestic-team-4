@@ -1,42 +1,33 @@
 [comment encoding = UTF-8 /]
 [module generateCode('http://www.example.org/RestAssured')]
-
 [template public generateTestScenario(testScenario : TestScenario) post(trim())]
 [comment @main /]
-[file ('Test'.concat(testScenario.testScenarioName.concat('.java')), false, 'UTF-8')]
-package com.plantestic.test;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
+[file ('Test_'.concat(testScenario.testScenarioName.concat('.java')), false, 'UTF-8')]
+import com.jayway.jsonpath.matchers.JsonPathMatchers;
+import com.moandjiezana.toml.Toml;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.hamcrest.collection.IsIn;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.apache.commons.text.StringSubstitutor;
-import com.moandjiezana.toml.Toml;
+import org.hamcrest.collection.IsIn;
+import org.junit.jupiter.api.Test;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-public class [ 'Test'.concat(testScenario.testScenarioName) /] {
+public class [ 'Test_'.concat(testScenario.testScenarioName) /] {
 
-	Map<String, Object> paramsMap = new HashMap();
+	Map<String, Object> paramsMap;
 	ScriptEngine engine;
 	StringSubstitutor substitutor;
 
-	// FIXME: no IS_WINDOWS please
-	private static final boolean IS_WINDOWS = System.getProperty( "os.name" ).contains( "indow" );
-
-	public [ 'Test'.concat(testScenario.testScenarioName) /](String configFile) throws Exception {
+	public [ 'Test_'.concat(testScenario.testScenarioName) /]() {
 		try {
-			String osAppropriatePath = IS_WINDOWS ? configFile.substring(1) : configFile;
-			Path path = Paths.get(osAppropriatePath);
-
-			paramsMap = unnestTomlMap("", new Toml().read(new String(Files.readAllBytes(path))).toMap());
+			File config = new File("plantestic-test/[testScenario.testScenarioName/]_config.toml");
+			paramsMap = unnestTomlMap("", new Toml().read(config).toMap());
 			substitutor = new StringSubstitutor(paramsMap);
 			engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		} catch(Exception exception) {
@@ -46,7 +37,7 @@ public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 	}
 
     @Test
-	public void test() throws Exception {
+	public void test() {
 	[for (testRoundtrip : TestRoundtrip | testScenario.testroundtrip) separator('\n\n') ]
 		[if (testRoundtrip.precondition->isEmpty())][testRoundtrip.generateTestRoundtrip()/][/if]
 		[if (testRoundtrip.precondition->notEmpty())]
@@ -112,9 +103,6 @@ public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 [/template]
 
 [template private generateTestRoundtrip(testRoundtrip : TestRoundtrip) post(trim())]
-	[if (testRoundtrip.requestspecification.requestdatum->notEmpty())]
-[testRoundtrip.requestspecification.generadeAddRequestParams()/]
-	[/if]
 Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
         [testRoundtrip.requestspecification.generateGivenPart()/]
     .when()
@@ -131,7 +119,7 @@ Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
 [template private generadeAddRequestParams(requestSpecification : RequestSpecification)]
 	[if (requestSpecification.requestdatum->notEmpty())]
 		[for (requestDatum : RequestDatum | requestSpecification.requestdatum)]
-paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
+paramsMap.put("[requestDatum.variableName/]", subst("[requestDatum.value/]"));
 		[/for]
 	[/if]
 [/template]
@@ -140,7 +128,7 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 .auth().basic(subst("${[requestSpecification.receiver/].username}"), subst("${[requestSpecification.receiver/].password}"))
 	[if (requestSpecification.requestdatum->notEmpty())]
 		[for (requestDatum : RequestDatum | requestSpecification.requestdatum)]
-.param("[requestDatum.variableName/]", subst("${[requestDatum.variableName/]}"))
+.param("[requestDatum.variableName/]", subst("[requestDatum.value/]"))
 		[/for]
 	[/if]
 [/template]
@@ -151,9 +139,8 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 
 [template private generateThenPart(responseSpecification : ResponseSpecification) post(trim())]
 	.assertThat()
-    [responseSpecification.generateExpectStatusCode()/][if (responseSpecification.bodymatchergroup->notEmpty())]
-        [responseSpecification.generateExpectations()/]
-    [/if]
+    [responseSpecification.generateExpectStatusCode()/][if (responseSpecification.bodymatchergroup.bodymatcher->notEmpty())]
+        [responseSpecification.generateExpectations()/][/if]
 	.and().extract().response()
 [/template]
 
@@ -167,19 +154,38 @@ paramsMap.put("[requestDatum.variableName/]", "[requestDatum.value/]");
 	[/if]
 [/template]
 
-[template private generateExpectations(responseSpecification : ResponseSpecification) post(trim())]
-	[for (matcher : BodyMatcher | responseSpecification.bodymatchergroup)]
-		[if (matcher.oclIsTypeOf(HasXPath))]
-			[let bodyXPath : HasXPath = matcher.oclAsType(HasXPath)].body(hasXPath([bodyXPath.xPath/]))[/let]
+[template private generateExpectations(responseSpecification : ResponseSpecification)]
+	[for (bodyMatcher : BodyMatcher | responseSpecification.bodymatchergroup.bodymatcher) before('\n')]
+		[let matcher : Matcher = bodyMatcher.matcher]
+			[if (matcher.oclIsTypeOf(HasXPath))]
+				[let bodyXPath : HasXPath = matcher.oclAsType(HasXPath)]
+				[if bodyXPath.xPath.startsWith('/')]
+				[let xp : String = bodyXPath.xPath.substring(2).substituteAll('/', '.') ]
+		.body(JsonPathMatchers.hasJsonPath("[xp/]"))
+				[/let]
+				[else]
+				[let xp : String = bodyXPath.xPath.substituteAll('/', '.') ]
+		.body(JsonPathMatchers.hasJsonPath("[xp/]"))
+				[/let]
+				[/if]
+		[/let]
 		[/if]
 		[if (matcher.oclIsTypeOf(IsIn))]
 			[let bodyIsIn : IsIn = matcher.oclAsType(IsIn)][/let]
-		[/if]
+		[/if][/let]
 	[/for]
 [/template]
 
 [template private generateExtractions(testRoundtrip : TestRoundtrip) post(trim())]
 	[for (responseDatum : ResponseDatum | testRoundtrip.responsespecification.responsedatum)]
-paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[responseDatum.xPath/]"));
+		[if responseDatum.xPath.startsWith('/')]
+				[let xp : String = responseDatum.xPath.substring(2).substituteAll('/', '.') ]
+paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[xp/]"));
+				[/let]
+		[else]
+				[let xp : String = responseDatum.xPath.substituteAll('/', '.') ]
+paramsMap.put("[responseDatum.variableName/]", [testRoundtrip.testRoundtripName/].jsonPath().getString("[xp/]"));
+				[/let]
+		[/if]
 	[/for]
 [/template]

@@ -60,5 +60,7 @@ class InlineResponse2003(Model):
         :param stored: The stored of this InlineResponse2003.
         :type stored: int
         """
+        if stored is None:
+            raise ValueError("Invalid value for `stored`, must not be `None`")  # noqa: E501
 
         self._stored = stored

@@ -1,0 +1,129 @@
+modeltype restassured "strict" uses RestAssured('http://www.example.org/RestAssured');
+modeltype openapi "strict" uses openapi2('http://som.uoc.edu/openapi/2.0.0');
+
+transformation mergeRAOpenAPI(in input: restassured, in inputapi: openapi, out output: restassured);
+
+main() {
+log('Started populating Restassured with OpenAPI data');
+
+    assert fatal ( input.rootObjects()[TestScenario]->size() = 1 )
+                with log('Input does not contain exactly one TestScenario');
+
+    assert fatal ( inputapi.rootObjects()[API]->size() = 1 )
+                with log('Input does not contain exactly one API');
+
+    var rootApi := inputapi.rootObjects()[API]->asSequence()->first();
+
+    input.rootObjects()[TestScenario].map populate(rootApi);
+}
+
+mapping TestScenario::populate(rootApi: API) : TestScenario {
+	log('Transforming Testscenario');
+
+	testScenarioName := self.testScenarioName;
+	testroundtrip := self.testroundtrip -> map roundtrip2testRoundtrip(rootApi);
+
+}
+
+ mapping TestRoundtrip::roundtrip2testRoundtrip(rootApi: API): TestRoundtrip {
+     log('Transforming Roundtrip to TestRoundtrip');
+
+     testRoundtripName := self.testRoundtripName;
+
+     if(self.precondition != null) then {
+             precondition := self.precondition;
+     } endif;
+
+     var paths: Collection(Path) := rootApi.paths->select(p|matchesRelative(self.requestspecification.url, p.relativePath));
+     var operations: Collection(Operation) := paths.getOperationByHTTPMethod(self.requestspecification.method);
+
+     assert fatal ( not operations->isEmpty() )
+                with log('Could not find operation ' + self.requestspecification.url + ' in Swagger API.');
+	 assert fatal ( not (operations->size() > 1 ))
+				with log('Found more than one operation ' + self.requestspecification.url + ' in Swagger API.');
+
+	 var operation: Operation = operations->asSequence()->first();
+
+     var statusMatcher = self.responsespecification.statusmatcher;
+     assert fatal ( statusMatcher != null )
+     			with log("There is no status matcher assigned to " + self.requestspecification.url + ".");
+
+	 var isIn: IsIn := statusMatcher.oclAsType(IsIn);
+
+     var responses = operation.responses->select(r| isIn.value->includes(r.key));
+     assert fatal (responses->size() = 1)
+     		with log("The response choice for " + self.requestspecification.url + " with status " + isIn.value->asSequence()->first()  + " is ambiguous or not present.");
+
+     var response : ResponseEntry = responses->asSequence()->first();
+
+     requestspecification := self.requestspecification;
+     responsespecification := self.responsespecification .map populateresponseSpecification(response);
+
+}
+
+helper getXPaths(basePath: String, schema: Schema): Set(String) {
+	// Happens eg. for respones that just have a description
+	if (schema = null) {
+		return OrderedSet{};
+	};
+
+	if (schema.type.toString() != "object") {
+		return basePath->asSet()
+	};
+
+	// Is Object recurse
+	var coll: Set(String);
+	if (basePath != "") {
+		coll := basePath->asSet();
+	};
+	schema.properties->forEach (prop) {
+		if (prop.required) {
+			coll := coll->union(getXPaths(basePath + "/" + prop.name, prop.schema))
+		}
+	};
+	return coll;
+}
+
+helper matchesRelative(url: String, relativePath: String): Boolean {
+	var partsUrl : Sequence(String) := url.tokenize("/");
+	var partsPath : Sequence(String) := relativePath.tokenize("/")[String];
+
+	var indices := Sequence{1..partsPath->size()}[Integer];
+	if (partsUrl->size() != partsPath->size()) {
+		return false
+	};
+	return indices->forAll(i |
+		partsPath->at(i) = partsUrl->at(i)
+		or (partsPath->at(i).startsWith("{") and partsPath->at(i).endsWith("}"))
+	);
+}
+
+
+mapping ResponseSpecification::populateresponseSpecification(resp: ResponseEntry): ResponseSpecification {
+     log('Transforming HTTPResponse to ResponseSpecification');
+
+     responsedatum := self.responsedatum;
+	 statusmatcher := self.statusmatcher;
+
+
+	 var oldxPaths: Set(String) := self.bodymatchergroup.bodymatcher.matcher->select(m|m.oclIsKindOf(HasXPath))[HasXPath].xPath->asSet();
+	 var otherMatchers: Set(BodyMatcher) := self.bodymatchergroup.bodymatcher->select(m|not m.matcher.oclIsKindOf(HasXPath))->asSet();
+
+
+	 var xPathMatchers : OrderedSet(BodyMatcher);
+	 var xpaths = oldxPaths->union(getXPaths("", resp.value.schema));
+	 xpaths -> forEach(path) {
+	 	log("Adding xPath " + path + " to BodyMatchers!");
+	 	var bodyMatcher := object BodyMatcher {
+	 		matcher := object HasXPath {
+                                xPath := path;
+                              };
+                     	};
+        xPathMatchers := xPathMatchers->append(bodyMatcher);
+	 };
+
+	 var bmg := object BodyMatcherGroup {
+	  	bodymatcher := otherMatchers->union(xPathMatchers);
+	 };
+     bodymatchergroup := bmg;
+}

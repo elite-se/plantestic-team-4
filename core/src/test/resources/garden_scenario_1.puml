@@ -13,15 +13,15 @@ GA -> PL : GET "/plant/season/${plantType}"
 activate PL
 PL -> GA : 200 - (season : "season")
 
-FA -> GA : GET "/garden/seeds/${plantType}"
-GA -> FA : 200 - (numberOfSeeds : "numberOfSeeds")
+FA -> GA : GET "/garden/seeds"
+GA -> FA : 200
 
 GA -> PL : GET "/plant/timetogrow/${plantType}"
 
-PL -> GA : 200 - (timetogrow : "timetogrow")
+PL -> GA : 200
 deactivate PL
 
-GA -> FA : POST "/farmer/grown" (plantId : "${plantId}")
+GA -> FA : POST "/farmer/grown" (plantID : "${plantId}")
 FA -> GA : 200
 
 deactivate GA

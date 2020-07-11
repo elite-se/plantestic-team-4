@@ -3,6 +3,8 @@ import six
 
 from swagger_server.models.inline_response2001 import InlineResponse2001  # noqa: E501
 from swagger_server.models.inline_response2002 import InlineResponse2002  # noqa: E501
+from swagger_server.models.inline_response2001_foo import InlineResponse2001Foo  # noqa: E501
+
 from swagger_server import util
 
 import random
@@ -30,25 +32,21 @@ pl[1] = 1
 
 def get_season_of_plant(plant_type):  # noqa: E501
     """Find the season the plant grows in
-
      # noqa: E501
-
     :param plant_type: The plant type to query
     :type plant_type: int
-
     :rtype: InlineResponse2001
     """
-    return seasons[plant_type % len(seasons)]
+    foo = InlineResponse2001Foo(bar="bar")
+    ret = InlineResponse2001(seasons[plant_type % len(seasons)], foo)
+    return ret
 
 
 def get_time_to_grow_of_plant(plant_type):  # noqa: E501
     """Get the time (in days) the plant needs to grow
-
      # noqa: E501
-
     :param plant_type: The plant type to query
     :type plant_type: int
-
     :rtype: InlineResponse2002
     """
-    return pl[plant_type]
+    return InlineResponse2002(pl[plant_type])

@@ -37,7 +37,7 @@ paths:
         required: true
         type: "integer"
       responses:
-        "201":
+        "200":
           description: "created"
           schema:
             $ref: "#/definitions/Plant"
@@ -112,16 +112,16 @@ paths:
       summary: "Tells the farmer a plant is ready to reap."
       operationId: "notify_farmer"
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "plantId"
+      - name: "plantID"
+        in: "formData"
         description: "ID of plant that is ready"
-        required: false
-        schema:
-          $ref: "#/definitions/plantId"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         "200":
           description: "ok"
@@ -146,11 +146,31 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_3"
       x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
+  /farmer/hasplant/{plantId}:
+    get:
+      tags:
+      - "farmer"
+      summary: "Returns the numer of Plants of plant_type that were reaped."
+      operationId: "get_plant_storage_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "plantId"
+        in: "path"
+        description: "The plant type to query"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Plant is there"
+        "404":
+          description: "No such Plant"
+      x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
 definitions:
   Plant:
     type: "object"
     properties:
-      id:
+      plantId:
         type: "integer"
         format: "int64"
       plant_type:
@@ -158,42 +178,57 @@ definitions:
         format: "int64"
     description: "The Plant."
     example:
-      id: 0
+      plantId: 0
       plant_type: 6
   inline_response_200:
     type: "object"
+    required:
+      - "seeds"
     properties:
       seeds:
         type: "integer"
         example: 42
     example:
       seeds: 42
+  inline_response_200_1_foo:
+    type: "object"
+    required:
+    - "bar"
+    properties:
+      bar:
+        type: "string"
+        example: "bar"
+    example:
+      bar: "bar"
   inline_response_200_1:
     type: "object"
+    required:
+    - "foo"
+    - "season"
     properties:
       season:
         type: "string"
         example: "spring"
+      foo:
+        $ref: "#/definitions/inline_response_200_1_foo"
     example:
+      foo:
+        bar: "bar"
       season: "spring"
   inline_response_200_2:
     type: "object"
+    required:
+    - "ttgrow"
     properties:
       ttgrow:
         type: "integer"
         example: 42
     example:
       ttgrow: 42
-  plantId:
-    type: "object"
-    required:
-    - "plantID"
-    properties:
-      plantID:
-        type: "integer"
-        format: "int64"
   inline_response_200_3:
     type: "object"
+    required:
+    - "stored"
     properties:
       stored:
         type: "integer"

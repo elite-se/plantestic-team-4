@@ -1,9 +1,12 @@
+@file:Suppress("UnstableApiUsage")
+
 package de.unia.se.plantestic
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
+import com.google.common.io.Files
 import java.io.File
 
 object Main {
@@ -84,7 +87,7 @@ object Main {
         override fun run() {
             val inputFile = File(input).normalize()
             val outputFolder = File(output).normalize()
-			
+
 			var configFile: File? = null
 			if (config != null) {
 				configFile = File(config).normalize()
@@ -103,14 +106,22 @@ object Main {
         MetaModelSetup.doSetup()
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
+        val configFile = File(inputFile.absolutePath.substringBeforeLast(".") + "_config.toml")
+        val openAPI = OpenAPIParser(configFile).generateModel()
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
 		val configModel = ConfigFileParser.loadConfig(configFile);
 		val requestResponsePairsModelWithAsync = M2MTransformer.transformReqRes2ReqRes(requestResponsePairsModel, configModel)
         val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModelWithAsync)
-
-        println("Generating code into $outputFolder")
-        AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
+        if (openAPI != null) {
+            val popRestAssuredModel = M2MTransformer.mergeRestAssuredOpenApi(restAssuredModel, openAPI)
+            println("Generating code into $outputFolder")
+            AcceleoCodeGenerator.generateCode(popRestAssuredModel, outputFolder)
+        } else {
+            println("Generating code into $outputFolder")
+            AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
+        }
+        Files.copy(configFile, outputFolder.resolve(configFile.name));
     }
 
     @JvmStatic
