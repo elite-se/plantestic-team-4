@@ -20,8 +20,8 @@ tasks : List[threading.Thread] = []
 
 def grow_plant(plant: Plant):
     gt = get_time_to_grow_of_plant(plant.plant_type)
-    time.sleep(gt)
-    notify_farmer(plant.id, False)
+    time.sleep(gt.ttgrow)
+    notify_farmer(plant.plant_id, False)
 
 def add_plant(plant_type):  # noqa: E501
     """Add a new plant to the Garden

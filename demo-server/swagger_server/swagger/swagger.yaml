@@ -163,7 +163,7 @@ paths:
       responses:
         "200":
           description: "Plant is there"
-        "404":
+        "500":
           description: "No such Plant"
       x-swagger-router-controller: "swagger_server.controllers.farmer_controller"
 definitions:
