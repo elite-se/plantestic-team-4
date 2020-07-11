@@ -54,7 +54,26 @@ public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 			[testRoundtrip.generateTestRoundtrip()/]
 		}
 		[/if]
+		[if (testRoundtrip.asyncTestRoundtrip->notEmpty())]
+		new Thread(
+				() -> {
+					try {
+						Thread.sleep(-1); // TODO read from config
+						
+						[if (testRoundtrip.asyncTestRoundtrip.precondition->isEmpty())][testRoundtrip.asyncTestRoundtrip.generateAsyncTestRoundtrip()/][/if]
+						[if (testRoundtrip.asyncTestRoundtrip.precondition->notEmpty())]
+						if(eval("[testRoundtrip.asyncTestRoundtrip.precondition/]")) {
+							[testRoundtrip.asyncTestRoundtrip.generateAsyncTestRoundtrip()/]
+						}
+						[/if]
+
+					} catch (InterruptedException e) {
+					}
+				}
+				).start();
+		[/if]		
 	[/for]
+
 	}
 
     /// Helper method to make to templating in string variables above more clean.
@@ -107,6 +126,38 @@ Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
 
 	[/if]
 [/template]
+
+
+
+
+
+// TODO
+[template private generateAsyncTestRoundtrip(testRoundtrip : TestRoundtrip) post(trim())]
+	[testRoundtrip.loadFromConfig()/]
+
+	[if (testRoundtrip.requestspecification.requestdatum->notEmpty())]
+[testRoundtrip.requestspecification.generadeAddRequestParams()/]
+	[/if]
+Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
+        [testRoundtrip.requestspecification.generateGivenPart()/]
+    .when()
+        [testRoundtrip.requestspecification.generateWhenPart()/]
+    .then()
+        [testRoundtrip.responsespecification.generateThenPart()/];
+[if (testRoundtrip.responsespecification.responsedatum->notEmpty())]
+[testRoundtrip.generateExtractions()/]
+
+	[/if]
+[/template]
+
+
+
+
+
+
+
+
+
 
 [template private generadeAddRequestParams(requestSpecification : RequestSpecification)]
 	[if (requestSpecification.requestdatum->notEmpty())]

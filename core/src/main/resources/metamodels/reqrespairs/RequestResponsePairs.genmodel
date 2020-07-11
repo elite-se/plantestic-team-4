@@ -8,19 +8,22 @@
     copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>RequestResponsePairs.ecore</foreignModel>
   <testsDirectory xsi:nil="true"/>
-  <genPackages prefix="RequestResponsePairs" basePackage="request-response-pairs"
-      disposableProviderFactory="true" ecorePackage="RequestResponsePairs.ecore#/">
+  <genPackages prefix="RequestResponsePairs" basePackage="reqrespair" disposableProviderFactory="true"
+      ecorePackage="RequestResponsePairs.ecore#/">
     <genClasses ecoreClass="RequestResponsePairs.ecore#//Roundtrip">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//Roundtrip/httprequest"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//Roundtrip/httpresponse"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/roundtripName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/precondition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//Roundtrip/asyncRoundtrip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/id"/>
     </genClasses>
     <genClasses ecoreClass="RequestResponsePairs.ecore#//HttpRequest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//HttpRequest/httpMethod"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//HttpRequest/url"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//HttpRequest/receiver"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//HttpRequest/httprequestdatum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//HttpRequest/id"/>
     </genClasses>
     <genClasses ecoreClass="RequestResponsePairs.ecore#//HttpResponse">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//HttpResponse/httpresponsedatum"/>

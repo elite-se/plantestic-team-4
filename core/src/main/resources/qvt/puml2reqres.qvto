@@ -44,7 +44,7 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
                 var response : Response := useLeft.useLeft2response();
                 var httpResponseElement : HttpResponse := response.response2httpResponse();
 
-                var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement);
+                var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement, useLeft);
                 roundtrip += roundtripElement;
                 roundtripId := roundtripId + 1;
             }
@@ -60,7 +60,7 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
                 var response : Response := useLeft.useLeft2response();
                 var httpResponseElement : HttpResponse := response.response2httpResponse();
 
-                var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElementCopy, httpResponseElement);
+                var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElementCopy, httpResponseElement, useLeft);
                 roundtripElement.precondition := alternative.text;
                 roundtrip += roundtripElement;
                 roundtripId := roundtripId + 1;
@@ -70,7 +70,7 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
                 response := useLeft.useLeft2response();
                 httpResponseElement := response.response2httpResponse();
 
-                roundtripElement := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement);
+                roundtripElement := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement, useLeft);
                 roundtripElement.precondition := elseElement.text;
                 roundtrip += roundtripElement;
                 roundtripId := roundtripId + 1;
@@ -92,7 +92,7 @@ mapping SequenceUml::transformUmlDiagram(): Scenario {
             var response : Response := useLeft.useLeft2response();
             var httpResponseElement : HttpResponse := response.response2httpResponse();
 
-            var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement);
+            var roundtripElement : Roundtrip := generateRoundtrip(roundtripId, httpRequestElement, httpResponseElement, useLeft);
             roundtripElement.precondition := alternative.text;
             roundtrip += roundtripElement;
             roundtripId := roundtripId + 1;
@@ -159,18 +159,45 @@ helper UseLeft::isToBeIgnored():Boolean {
     return contentType.oclIsTypeOf(Ignore) ;
 }
 
-helper generateRoundtrip(roundtripId : Integer, httpRequest : HttpRequest, httpResponse : HttpResponse):Roundtrip {
+helper generateRoundtrip(roundtripId : Integer, httpRequest : HttpRequest, httpResponse : HttpResponse, useLeft : UseLeft):Roundtrip {
     var roundtripElement : Roundtrip := new Roundtrip();
     roundtripElement.roundtripName := "roundtrip" + roundtripId.toString();
+    roundtripElement.id := httpRequest.id;
     roundtripElement.httprequest := httpRequest;
     roundtripElement.httpresponse := httpResponse;
+    roundtripElement.asyncRoundtrip := generateEmptyAsyncRoundtrip(roundtripId, useLeft);
     return roundtripElement;
+}
+
+helper generateEmptyAsyncRoundtrip(roundtripId : Integer, useLeft : UseLeft):Roundtrip {
+	var roundtripElement : Roundtrip := new Roundtrip();
+    roundtripElement.roundtripName := "roundtrip" + "_async_" + roundtripId.toString();
+    
+    roundtripElement.httprequest := generateEmptyHTTPRequest(useLeft);
+    roundtripElement.httpresponse := generateEmptyHTTPResponse();
+    
+    return roundtripElement;
+}
+
+helper generateEmptyHTTPRequest(useLeft: UseLeft):HttpRequest {
+	var request : HttpRequest := new HttpRequest();
+	request.httpMethod := "";
+	request.url := "";
+	request.receiver := useLeft.userOne.name;
+	return request;
+}
+
+helper generateEmptyHTTPResponse():HttpResponse {
+	var response : HttpResponse := new HttpResponse();
+	response.httpStatus := "";
+	return response;
 }
 
 mapping Request::request2httpRequest():HttpRequest {
     httpMethod := self.method;
     url := self.url;
     httprequestdatum += self.requestParam->map requestParam2httpRequestDatum();
+    id := self.id;
 }
 
 mapping Response::response2httpResponse(): HttpResponse {

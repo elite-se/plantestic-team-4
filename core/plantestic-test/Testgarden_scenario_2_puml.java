@@ -85,6 +85,8 @@ public class Testgarden_scenario_2_puml {
 		            .statusCode(IsIn.isIn(Arrays.asList(200)))        
 		        	.and().extract().response();
 		paramsMap.put("timetogrow2", roundtrip4.jsonPath().getString("timetogrow"));
+
+		new Thread(() -> System.out.println("Hello World!").start();
 	}
 
     /// Helper method to make to templating in string variables above more clean.

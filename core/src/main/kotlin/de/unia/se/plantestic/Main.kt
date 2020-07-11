@@ -5,6 +5,9 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import java.io.File
+import com.moandjiezana.toml.Toml
+import org.eclipse.emf.ecore.*
+import de.unia.se.plantestic.generated.*
 
 object Main {
 
@@ -77,33 +80,69 @@ object Main {
 
         private val input: String by option(help = "Path to the PlantUML file containing the API specification.")
             .required()
+		private val config: String? by option(help = "Path to the toml config containing information on async requests.")
         private val output: String by option(help = "Output folder where the test cases should be written to. Default is './plantestic-test'")
             .default("./plantestic-test")
 
         override fun run() {
             val inputFile = File(input).normalize()
             val outputFolder = File(output).normalize()
+			
+			var configFile: File? = null
+			if (config != null) {
+				configFile = File(config).normalize()
+			}
 
             if (!inputFile.exists()) {
                 echo("Input file ${inputFile.absolutePath} does not exist.")
                 return
             }
 
-            runTransformationPipeline(inputFile, outputFolder)
+            runTransformationPipeline(inputFile, outputFolder, configFile)
         }
     }
 
-    fun runTransformationPipeline(inputFile: File, outputFolder: File) {
+    fun runTransformationPipeline(inputFile: File, outputFolder: File, configFile: File?) {
         MetaModelSetup.doSetup()
 
         val pumlDiagramModel = PumlParser.parse(inputFile.absolutePath)
 
         val requestResponsePairsModel = M2MTransformer.transformPuml2ReqRes(pumlDiagramModel)
+		addAsyncRequestInformationFromConfig(requestResponsePairsModel, configFile);
         val restAssuredModel = M2MTransformer.transformReqRes2RestAssured(requestResponsePairsModel)
 
         println("Generating code into $outputFolder")
         AcceleoCodeGenerator.generateCode(restAssuredModel, outputFolder)
     }
+	
+	fun addAsyncRequestInformationFromConfig(requestResponsePairsModel: EObject, configFile: File?) {
+		
+		// TODO assert that config File is null only if there are no async requests
+		
+		if (configFile != null) {
+			var tomlMap = unnestTomlMap("", Toml().read(String(configFile.readBytes())).toMap())
+			addAsyncRequestInformation(requestResponsePairsModel, tomlMap)
+		}
+		
+	}
+	
+	fun unnestTomlMap(prefix: String, tree:Map<String, Any>):Map<String, Any> {
+        var resultMap: MutableMap<String, Any> = HashMap<String, Any>()
+        for (entry: Map.Entry<String, Any> in tree.entries) {
+            var identifierPath: String = prefix + entry.key
+            if(entry.value is Map<*, *>){
+                resultMap.putAll(unnestTomlMap(identifierPath + ".", entry.value as (Map<String, Any>)))
+            } else {
+                resultMap.put(identifierPath, entry.value)
+            }
+        }
+        return resultMap
+	}
+	
+	fun addAsyncRequestInformation(requestResponsePairsModel: EObject, tomlMap: Map<String, Any>) {
+		
+		
+	}
 
     @JvmStatic
     fun main(args: Array<String>) = Cli().main(args)

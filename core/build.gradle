@@ -71,6 +71,7 @@ dependencies {
     implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.15.0"
     implementation "com.google.guava:guava:28.0-jre"
     implementation "com.github.ajalt:clikt:2.2.0"
+    implementation "com.moandjiezana.toml:toml4j:0.7.2"
 
     // Making qvt work without Eclipse
     implementation "org.eclipse.emf:org.eclipse.emf.common:2.15.0"
@@ -108,7 +109,6 @@ dependencies {
 
     // Needed for running the dynamically compiled test code (runtime dependencies)
     testRuntimeOnly "org.apache.commons:commons-text:1.7"
-    testRuntimeOnly "com.moandjiezana.toml:toml4j:0.7.2"
     testRuntimeOnly "io.rest-assured:rest-assured:3.0.0"
     testRuntimeOnly "javax.xml.bind:jaxb-api:2.3.1"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"

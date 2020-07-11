@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RequestResponsePairs" nsURI="http://www.example.org/RequestResponsePairs"
     nsPrefix="RequestResponsePairs">
-  <eClassifiers xsi:type="ecore:EClass" name="Roundtrip" instanceClassName="java.lang.Object">
+  <eClassifiers xsi:type="ecore:EClass" name="Roundtrip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="httprequest" lowerBound="1"
         eType="#//HttpRequest" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="httpresponse" lowerBound="1"
@@ -10,6 +10,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="roundtripName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="precondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="asyncRoundtrip" eType="#//Roundtrip"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HttpRequest">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="httpMethod" ordered="false"
@@ -20,8 +22,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="httprequestdatum" upperBound="-1"
         eType="#//HttpRequestDatum" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HttpResponse" instanceTypeName="HttpResponse">
+  <eClassifiers xsi:type="ecore:EClass" name="HttpResponse">
     <eStructuralFeatures xsi:type="ecore:EReference" name="httpresponsedatum" upperBound="-1"
         eType="#//HttpResponseDatum" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="httpStatus" upperBound="-1"
@@ -33,12 +36,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scenarioName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HttpResponseDatum" instanceTypeName="ResponseDatum">
+  <eClassifiers xsi:type="ecore:EClass" name="HttpResponseDatum">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPath" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HttpRequestDatum" instanceTypeName="HttpRequestDatum">
+  <eClassifiers xsi:type="ecore:EClass" name="HttpRequestDatum">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

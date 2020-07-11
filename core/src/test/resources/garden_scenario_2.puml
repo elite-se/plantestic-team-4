@@ -6,7 +6,7 @@ participant "Plant" as PL
 
 activate FA
 
-FA -> GA : POST#1 "garden/plant/0"
+FA -> GA : [1] POST "garden/plant/0"
 activate GA
 GA -> FA : 200 - (plantId1 : "plantId", plantType1 : "plantType")
 
