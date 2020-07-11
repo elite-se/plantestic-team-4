@@ -165,7 +165,11 @@ helper generateRoundtrip(roundtripId : Integer, httpRequest : HttpRequest, httpR
     roundtripElement.id := httpRequest.id;
     roundtripElement.httprequest := httpRequest;
     roundtripElement.httpresponse := httpResponse;
-    roundtripElement.asyncRoundtrip := generateEmptyAsyncRoundtrip(roundtripId, useLeft);
+    
+    if(roundtripElement.id != null) {
+ 		roundtripElement.asyncRoundtrip := generateEmptyAsyncRoundtrip(roundtripId, useLeft);
+    };
+ 	
     return roundtripElement;
 }
 

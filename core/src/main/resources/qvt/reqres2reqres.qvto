@@ -8,5 +8,12 @@ transformation mergeQVTModels(in input: reqres, in configInput: config, out outp
 main() {
     log('Started transforming RequestResponsePairs to RequestResponse pairs with async requests');
 
+	var configList := configInput.rootObjects()[ConfigList];
+    input.rootObjects()[Scenario].map scenario2Scenario(configList);
+}
+
+mapping Scenario::scenario2Scenario(configList: ConfigList): Scenario {
+    log('Populating Scenario with async request information');
+
     
 }

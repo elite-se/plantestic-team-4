@@ -89,7 +89,7 @@ RequestResponse returns RelevantMessage:
 
 Request returns RequestResponse:
     {Request}
-    ('['id=INT']')* method=RequestMethod url=STRING ('(' requestParam+=RequestParam (',' requestParam+=RequestParam)* ')')?;
+    ('['id=STRING']')* method=RequestMethod url=STRING ('(' requestParam+=RequestParam (',' requestParam+=RequestParam)* ')')?;
 
 RequestParam:
     {RequestParam}
