@@ -57,18 +57,22 @@ mapping TestScenario::populate(rootApi: API) : TestScenario {
      	};
      };
 
-     var xp : Sequence(String);
 
-     operation.responses->forEach (resp) {
-     	xp := xp->union(getXPaths("", resp.value.schema));
-     };
+     var statusMatcher = self.responsespecification.statusmatcher;
+     assert fatal ( statusMatcher != null )
+     			with log("There is no status matcher assigned to " + self.requestspecification.url + ".");
 
-     xp->forEach(p) {
-     	log("Recieved: " + p)
-     };
+	 var isIn: IsIn := statusMatcher.oclAsType(IsIn);
+
+     var responses = operation.responses->select(r| isIn.value->includes(r.key));
+     assert fatal (responses->size() = 1)
+     		with log("The response choice is ambiguous or not present.");
+
+     var response : ResponseEntry = responses->asSequence()->first();
 
      requestspecification := self.requestspecification;
-     responsespecification := self.responsespecification; // .map populateresponseSpecification(self.requestspecification);
+     responsespecification := self.responsespecification .map populateresponseSpecification(response);
+
 }
 
 helper getXPaths(basePath: String, schema: Schema): Sequence(String) {
@@ -94,6 +98,7 @@ helper getXPaths(basePath: String, schema: Schema): Sequence(String) {
 		}
 	};
 
+
 	return coll;
 }
 
@@ -106,8 +111,9 @@ helper matchesRelative(url: String, relativePath: String): Boolean {
 	partsPath->forEach (v) {
 		log("Parts Path " + v);
 	};
+
 	var indices := Sequence{1..partsPath->size()}[Integer];
-	if (partsUrl.size() = partsPath.size()) {
+	if (partsUrl->size() != partsPath->size()) {
 		return false
 	};
 	return indices->forAll(i |
@@ -117,18 +123,20 @@ helper matchesRelative(url: String, relativePath: String): Boolean {
 }
 
 
-mapping ResponseSpecification::populateresponseSpecification(req: RequestSpecification): ResponseSpecification {
+mapping ResponseSpecification::populateresponseSpecification(resp: ResponseEntry): ResponseSpecification {
      log('Transforming HTTPResponse to ResponseSpecification');
 
      responsedatum := self.responsedatum;
-	 bodymatchergroup := self.bodymatchergroup .map populateBodyMatcherGroup();
-}
+	 bodymatchergroup := self.bodymatchergroup;
+	 statusmatcher := self.statusmatcher;
 
-mapping BodyMatcherGroup::populateBodyMatcherGroup() : BodyMatcherGroup {
-	self.bodymatcher->forEach(bodymatcher) {
-		bodymatcher.matcher
-	}
-}
-mapping BodyMatcher::populateBodyMatcher(): BodyMatcher {
-	
+	 var xpaths = getXPaths("", resp.value.schema);
+	 xpaths -> forEach(path) {
+	 log("Adding xPath " + path + " to BodyMatchers!");
+	 	var bodyMatcher : BodyMatcher;
+        bodyMatcher.matcher := object HasXPath {
+                                xPath := path;
+                              };
+        bodymatchergroup.bodymatcher += bodyMatcher;
+	 };
 }
