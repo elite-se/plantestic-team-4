@@ -17,6 +17,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/precondition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RequestResponsePairs.ecore#//Roundtrip/asyncRoundtrip"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//Roundtrip/timeout"/>
     </genClasses>
     <genClasses ecoreClass="RequestResponsePairs.ecore#//HttpRequest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RequestResponsePairs.ecore#//HttpRequest/httpMethod"/>

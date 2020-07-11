@@ -51,6 +51,25 @@ public class Testgarden_scenario_2_puml {
 		        	.and().extract().response();
 		paramsMap.put("plantId1", roundtrip1.jsonPath().getString("plantId"));
 		paramsMap.put("plantType1", roundtrip1.jsonPath().getString("plantType"));
+		new Thread(
+				() -> {
+					try {
+						Thread.sleep(500);
+						
+						Response roundtrip_async_1 = RestAssured.given()
+						        .auth().basic(subst("${GA.username}"), subst("${GA.password}"))
+						    .when()
+						        .get(subst("${GA.path}") + subst("/farmer/storage/${plantType}"))
+						    .then()
+						        .assertThat()
+						            .statusCode(IsIn.isIn(Arrays.asList(200)))        
+						        	.and().extract().response();
+						paramsMap.put("plantId5", roundtrip_async_1.jsonPath().getString("/plantId"));
+
+					} catch (InterruptedException e) {
+					}
+				}
+				).start();
 
 
 		Response roundtrip2 = RestAssured.given()
@@ -86,7 +105,6 @@ public class Testgarden_scenario_2_puml {
 		        	.and().extract().response();
 		paramsMap.put("timetogrow2", roundtrip4.jsonPath().getString("timetogrow"));
 
-		new Thread(() -> System.out.println("Hello World!").start();
 	}
 
     /// Helper method to make to templating in string variables above more clean.

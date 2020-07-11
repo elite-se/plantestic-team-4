@@ -17,6 +17,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RestAssured.ecore#//TestRoundtrip/precondition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RestAssured.ecore#//TestRoundtrip/id"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RestAssured.ecore#//TestRoundtrip/asyncTestRoundtrip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RestAssured.ecore#//TestRoundtrip/timeout"/>
     </genClasses>
     <genClasses ecoreClass="RestAssured.ecore#//RequestSpecification">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RestAssured.ecore#//RequestSpecification/method"/>

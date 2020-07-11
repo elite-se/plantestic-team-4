@@ -30,6 +30,7 @@ mapping Scenario::scenario2testScenario(): TestScenario {
      requestspecification :=  self.httprequest .map httprequest2requestSpecification();
      responsespecification := self.httpresponse .map httpresponse2responseSpecification();
      id := self.id;
+     timeout := self.timeout;
      
      if (id != null) {
      	asyncTestRoundtrip := self.asyncRoundtrip .map roundtrip2testRoundtrip();

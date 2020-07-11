@@ -47,6 +47,7 @@ helper generateAsyncRoundtrip(asyncRoundtrip: Roundtrip, id: String, configList:
 	roundtrip.httprequest := generateHttpRequest(c, asyncRoundtrip.httprequest.receiver);
 	roundtrip.httpresponse := generateHttpResponse(c);
 	roundtrip.roundtripName := asyncRoundtrip.roundtripName;
+	roundtrip.timeout := c.timeout;
 	
 	return roundtrip;
 }

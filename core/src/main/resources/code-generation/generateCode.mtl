@@ -54,16 +54,16 @@ public class [ 'Test'.concat(testScenario.testScenarioName) /] {
 			[testRoundtrip.generateTestRoundtrip()/]
 		}
 		[/if]
-		[if (testRoundtrip.asyncTestRoundtrip->notEmpty())]
+		[if (not testRoundtrip.asyncTestRoundtrip.oclIsUndefined())]
 		new Thread(
 				() -> {
 					try {
-						Thread.sleep(-1); // TODO read from config
+						Thread.sleep([testRoundtrip.asyncTestRoundtrip.timeout/]);
 						
-						[if (testRoundtrip.asyncTestRoundtrip.precondition->isEmpty())][testRoundtrip.asyncTestRoundtrip.generateAsyncTestRoundtrip()/][/if]
+						[if (testRoundtrip.asyncTestRoundtrip.precondition->isEmpty())][testRoundtrip.asyncTestRoundtrip.generateTestRoundtrip()/][/if]
 						[if (testRoundtrip.asyncTestRoundtrip.precondition->notEmpty())]
 						if(eval("[testRoundtrip.asyncTestRoundtrip.precondition/]")) {
-							[testRoundtrip.asyncTestRoundtrip.generateAsyncTestRoundtrip()/]
+							[testRoundtrip.asyncTestRoundtrip.generateTestRoundtrip()/]
 						}
 						[/if]
 
@@ -126,37 +126,6 @@ Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
 
 	[/if]
 [/template]
-
-
-
-
-
-// TODO
-[template private generateAsyncTestRoundtrip(testRoundtrip : TestRoundtrip) post(trim())]
-	[testRoundtrip.loadFromConfig()/]
-
-	[if (testRoundtrip.requestspecification.requestdatum->notEmpty())]
-[testRoundtrip.requestspecification.generadeAddRequestParams()/]
-	[/if]
-Response [testRoundtrip.testRoundtripName/] = RestAssured.given()
-        [testRoundtrip.requestspecification.generateGivenPart()/]
-    .when()
-        [testRoundtrip.requestspecification.generateWhenPart()/]
-    .then()
-        [testRoundtrip.responsespecification.generateThenPart()/];
-[if (testRoundtrip.responsespecification.responsedatum->notEmpty())]
-[testRoundtrip.generateExtractions()/]
-
-	[/if]
-[/template]
-
-
-
-
-
-
-
-
 
 
 [template private generadeAddRequestParams(requestSpecification : RequestSpecification)]
