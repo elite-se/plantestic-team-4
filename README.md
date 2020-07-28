@@ -42,7 +42,7 @@ Our test case generator detects deviations at an early stage:
 The test case generator derives test cases directly from the specification.
 If the implementation fulfills these test cases, then the implementation fulfills the specification.
 If the implementation does not fulfill these test cases, the implementation deviates from the specification.
-With our test case generator, developers can quickly uncover inconsistencies, fix them, and save costs.## Demo
+With our test case generator, developers can quickly uncover inconsistencies, fix them, and save costs.
 
 ## Features
 Plantestic is universal in that it can run in any IDE.
@@ -65,18 +65,18 @@ Plantestic evaluates the parameters using templating.
 
 ### Swagger based demo Server
 
-To run the Examples we included a demo server. It can be found in the `demo-server` folder.  
+To run our custom examples we included a swagger based demo server that offers a description of the example routes. It can be found in the `demo-server` folder.  
 
 ### Ignore Requests
 
 It is now Possible to ignore a Request-Response Pair. This is done by adding a `?` before the `GET/POST`.  
 This is shown in the example `garden_scenario_2.puml`
 
-For this to work we extended the xtext grammer such that those Pairs get parsed differently.
+For this to work we extended the xtext grammar such that those Pairs get parsed differently.
 
 ### Asynchronous Request Response Pairs
 
-It is now possible to have Asynchronous Request-Response Pairs as answer to a Request-Response pair.
+It is now possible to have Asynchronous Request-Response Pairs as an answer to a Request-Response pair, that is an additional Request-Response pair will be executed after a customisable time interval after the original pair.
 To illustrate this imagine the Following:
 
 We have a Request
@@ -89,13 +89,13 @@ A -> B 200 ok
 ```
 
 We now want to test that A actually recieved the asynchronous update from B triggered by the initial POST.
-To do this properly some domain knowledge is required.
+To do this properly some domain knowledge is required by specifiying which calls should be executed via the new config file (see below).
 
 **FOR THIS TO WORK YOU NEED TO HAVE TESTROUTES THAT CAN CHECK WHETHER AN UPDATE ARRIVED OR NOT.**
 
 Lets say we have a route `A/check_update` that returns 200 if and only if the asynchronous update
 has arrived. 
-We will now provide a compile time configuartion (default name: "test_case_name_compile_config.toml") that
+We will now provide a compile time configuration (default name: "test_case_name_compile_config.toml") that
 looks like this:
 ```toml
 [1] # Has to be the same as the id assigned in the puml (but without the `"`) 
@@ -110,8 +110,8 @@ If this file has the default name and resides in the same directory as the `.pum
 automatically detected. If not you have to provide the argument `"--config=<path-to-config>"` in the gradlew run args
 (`./gradlew run --args="--input=<path-to-input> --config=<path-to-config>`).
 
-This is achieved by a *very awesome* QVTo Model to Model Transformation that merges the additional Async Pairs with the existing ones.
-Also the xtext grammer was once again extended to include parsing of the Pair ids
+The config file will be parsed during our model transformations and its content will be included in our generated models. This is achieved by a QVTo Model to Model Transformation that merges the additional asynchronous Request-Response Pairs with the existing ones.
+Also the xtext grammar was once again extended to include parsing of the Pair ids (e.g. ["1"] in the example above). The new asynchronous pairs are then also included in the swagger integration (see below).
 
 ### Fixed: JSON Body Paths now get tested!
 
@@ -122,7 +122,7 @@ A Note to take here: **The `/` in the JSON xPath in the Diagramm will be replace
 
 ### Swagger Integration
 
-It is now possible to include a swagger API time into the Model. To do this just provide the path or url in the 
+It is now possible to include a swagger API into the Model in order to enable some automated checks of the request and response parameters and variables. To do this just provide the path or url in the 
 compile config:
 
 ```toml
@@ -135,16 +135,16 @@ compile config:
     yaml-path= "path/to/swagger.yaml"
 ```
 
-If multiple options are available than the order in the example above corresponds to the priority which option will be taken.
+If multiple options are available then the order in the example above corresponds to the priority which option will be taken.
 Again, the config file with the Swagger info will automatically be loaded if it follows the default naming convention and resides
 in the same directory.
 
-This integration is achieved by a *really cool* QVTo Model Merge, that integrates sources of the openapi Model into the 
+This integration is achieved by a QVTo Model Merge, that integrates sources of the openapi Model into the 
 RestAssured model.
  
 ### Misc
 
-+ The Puml xtext grammer is now trimmed to only parse Sequence Diagrams.
++ The Puml xtext grammar is now trimmed to only parse Sequence Diagrams.
 + There are new examples all under our **brand new** garden model. If you like plants at all be sure to check them out.
 
 
