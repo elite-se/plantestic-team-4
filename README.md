@@ -42,7 +42,7 @@ Our test case generator detects deviations at an early stage:
 The test case generator derives test cases directly from the specification.
 If the implementation fulfills these test cases, then the implementation fulfills the specification.
 If the implementation does not fulfill these test cases, the implementation deviates from the specification.
-With our test case generator, developers can quickly uncover inconsistencies, fix them, and save costs.## Demo
+With our test case generator, developers can quickly uncover inconsistencies, fix them, and save costs.
 
 ## Features
 Plantestic is universal in that it can run in any IDE.
@@ -65,64 +65,65 @@ Plantestic evaluates the parameters using templating.
 
 ### Swagger based demo Server
 
-To run the Examples we included a demo server. It can be found in the `demo-server` folder.  
+To run our custom examples we included a Swagger based demo server that offers a description of the example routes. It can be found in the `demo-server` folder.  
 
 ### Ignore Requests
 
-It is now Possible to ignore a Request-Response Pair. This is done by adding a `?` before the `GET/POST`.  
-This is shown in the example `garden_scenario_2.puml`
+It is now possible to ignore a Request-Response Pair. This is done by adding a `?` before the `GET/POST`. This is shown in the example `garden_scenario_2.puml`.
 
-For this to work we extended the xtext grammer such that those Pairs get parsed differently.
+For this to work we extended the Xtext grammar such that those pairs get parsed differently.
 
-### Asynchronous Request Response Pairs
+### Asynchronous Request-Response Pairs
 
-It is now possible to have Asynchronous Request-Response Pairs as answer to a Request-Response pair.
-To illustrate this imagine the Following:
+It is now possible to have Asynchronous Request-Response Pairs as an answer to a Request-Response pair. The Asynchronous Request-Response Pair is an additional Request-Response pair, which will be executed after a customisable time interval after the original pair.
+To illustrate this imagine the following:
 
-We have a Request
+We have a request
 ```puml
-A -> B : ["1"] POST /kickoff
-B -> A 200 ok
-... // Some time passes 
-B -> A ? POST /update (result: "async_update")
-A -> B 200 ok
+A -> B : ["1"] POST "/kickoff"
+B -> A : 200
+
+... // Some time passes
+ 
+B -> A : ? POST "/update" (result : "async_update")
+A -> B : 200
 ```
 
-We now want to test that A actually recieved the asynchronous update from B triggered by the initial POST.
-To do this properly some domain knowledge is required.
+We now want to test that A actually received the asynchronous update from B triggered by the initial `POST`.
+To do this properly it is required to specify some domain knowledge on which calls should be executed via a separate config file (see below).
 
-**FOR THIS TO WORK YOU NEED TO HAVE TESTROUTES THAT CAN CHECK WHETHER AN UPDATE ARRIVED OR NOT.**
+**FOR THIS TO WORK YOU NEED TO HAVE TEST ROUTES THAT CAN CHECK WHETHER AN UPDATE ARRIVED OR NOT.**
 
-Lets say we have a route `A/check_update` that returns 200 if and only if the asynchronous update
+Let's say we have a route `A/check_update` that returns 200 if and only if the asynchronous update
 has arrived. 
-We will now provide a compile time configuartion (default name: "test_case_name_compile_config.toml") that
+We will now provide a compile time configuration (default name: "`<test_case_name>_compile_config.toml`") that
 looks like this:
 ```toml
-[1] # Has to be the same as the id assigned in the puml (but without the `"`) 
-    timeout = 500 #This configures how long we will wait for the call
+[1] #Has to be the same as the id assigned in the puml (but without the `"`) 
+    timeout = 500 #Set how long we will wait for the call
     requestMethod = 'GET'
     requestURL = '/check_update'
-    requestParameters = [] # You can configure request parameters here (like the response Parameters)
+    requestParameters = [] #Set request parameters here (like the response Parameters)
     responseStatus = 200
-    responseParameter = [['usefulLater', 'result']] # If the call returns some parameters you can collect them here
+    responseParameter = [['usefulLater', 'result']] #Collect parameters if call returns some
 ```  
 If this file has the default name and resides in the same directory as the `.puml` file it will be 
 automatically detected. If not you have to provide the argument `"--config=<path-to-config>"` in the gradlew run args
 (`./gradlew run --args="--input=<path-to-input> --config=<path-to-config>`).
 
-This is achieved by a *very awesome* QVTo Model to Model Transformation that merges the additional Async Pairs with the existing ones.
-Also the xtext grammer was once again extended to include parsing of the Pair ids
+The config file will be parsed during our model transformations and its content will be included in our generated models. This is achieved by a QVTo Model to Model Transformation that merges the additional asynchronous Request-Response Pairs with the existing ones.
+Furthermore, the Xtext grammar was once again extended to include parsing of the pair ids (e.g. ["1"] in the example above). The new asynchronous pairs are then also included in the Swagger integration (see below).
 
 ### Fixed: JSON Body Paths now get tested!
 
-During the integration of new Features we encountered an issue with the check of the existens of certain json paths:
+During the integration of new features we encountered an issue with the check of the existence of certain json paths:
 There were none.
-We fixed this by adapting adding a new Matcher to the test, that will check for the Path in the JSON.
-A Note to take here: **The `/` in the JSON xPath in the Diagramm will be replaced by `.`**. The first Leading `/` will be trimmed.
+We fixed this by adapting adding a new matcher to the test, that will check for the path in the `json`.
+A note to take here: **The `/` in the JSON xPath in the Diagramm will be replaced by `.`**. The first leading `/` will be trimmed.
 
 ### Swagger Integration
 
-It is now possible to include a swagger API time into the Model. To do this just provide the path or url in the 
+It is now possible to include a Swagger API into the model in order to enable some automated checks of the request and response parameters and variables. To do this just provide the path or url in the 
 compile config:
 
 ```toml
@@ -135,25 +136,25 @@ compile config:
     yaml-path= "path/to/swagger.yaml"
 ```
 
-If multiple options are available than the order in the example above corresponds to the priority which option will be taken.
+If multiple options are available then the order in the example above corresponds to the priority which option will be taken.
 Again, the config file with the Swagger info will automatically be loaded if it follows the default naming convention and resides
 in the same directory.
 
-This integration is achieved by a *really cool* QVTo Model Merge, that integrates sources of the openapi Model into the 
+This integration is achieved by a QVTo Model Merge, that integrates sources of the openapi model into the 
 RestAssured model.
  
 ### Misc
 
-+ The Puml xtext grammer is now trimmed to only parse Sequence Diagrams.
++ The Puml Xtext grammar is now trimmed to only parse Sequence Diagrams.
 + There are new examples all under our **brand new** garden model. If you like plants at all be sure to check them out.
 
 
 ## Installation
-1. Install Java SE Development Kit 8 or higher. (It was tested with JDK11 and JDK8)
+1. Install Java SE Development Kit 8 or higher (it has been tested with JDK11 and JDK8).
 You can find Java SE Development Kit 8 under the website [https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 2. Clone the Plantestic repository.
-3. Run `git submodule init` and `git submodule update`
-4. Install maven (if not already installed)
+3. Run `git submodule init` and `git submodule update`.
+4. Install maven (if not already installed).
 5. Go to `openapi-metamodel/openapi2` and run `mvn install`.
 6. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.io` and run `mvn install`.
 7. Go to `openapi-metamodel/openapi2/plugins/edu.uoc.som.openapi2.mm` and run `mvn install`.
@@ -163,7 +164,7 @@ You can find Java SE Development Kit 8 under the website [https://www.oracle.com
 ### Input requirements
 The input is a PlantUML sequence diagram.
 This sequence diagram contains several participants and interactions between the participants.
-One participiant is the client who calls the test cases. The other participants are services of the implementation.
+One participant is the client who calls the test cases. The other participants are services of the implementation.
 In the example diagram, the client is `CCC` and the services are `CRS` and `Voicemanager`.
 
 An interaction contains a request from the client and a response from a service.
@@ -326,7 +327,7 @@ public class Test_minimal_hello {
 
 #### openapi-metamodel
 This repository is contained as a submodule. It provides the ecore Metamodel as well as an import function 
-that allows for parsing the swagger file into an UML Model.
+that allows for parsing the Swagger file into an UML Model.
 
 #### plantuml-eclipse-xtext
 The repository [plantuml-eclipse-xtext](https://github.com/Cooperate-Project/plantuml-eclipse-xtext) defines the grammar of PlantUML.
